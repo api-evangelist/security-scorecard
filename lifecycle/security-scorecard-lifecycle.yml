@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: searched
+source: https://securityscorecard.readme.io/reference/backwards-compatibility
+versioning:
+  scheme: uri-path-major
+  minor_versioning_header: Accepts-Version
+  minor_scheme: semver
+  docs: https://securityscorecard.readme.io/reference/backwards-compatibility
+  backward_compatible_changes:
+    - new endpoints
+    - new optional request parameters
+    - new response fields
+    - reordered response fields
+  breaking_changes_require: new major version in URL path
+deprecation:
+  policy_url: https://securityscorecard.readme.io/reference/backwards-compatibility
+  announcement_notice: at least 6 months in advance (email, dashboard, documentation)
+  support_after_announcement: at least 6 months with deprecation warnings
+  total_min_notice: at least 12 months
+  sunset_header: false
+sla:
+  url: null
+status_page: https://securityscorecard.statuspage.io/
+deprecated_operations: []

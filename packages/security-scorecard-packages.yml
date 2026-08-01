@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.npmjs.com/org/securityscorecard
+packages:
+  - language: javascript
+    registry: npm
+    name: "@securityscorecard/sdk"
+    version: 0.8.0
+    url: https://www.npmjs.com/package/@securityscorecard/sdk
+    install: npm install @securityscorecard/sdk
+    description: SecurityScorecard Public SDK
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@securityscorecard/cli"
+    version: 0.8.0
+    url: https://www.npmjs.com/package/@securityscorecard/cli
+    install: npm install -g @securityscorecard/cli
+    description: SecurityScorecard CLI
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@securityscorecard/design-system"
+    url: https://www.npmjs.com/package/@securityscorecard/design-system
+    install: npm install @securityscorecard/design-system
+    description: SSC shared React component library and design system
+    official: true
+notes: >-
+  All three packages are published under the first-party @securityscorecard npm
+  organization (publisher securityscorecard-npmbot). The former node-sdk GitHub
+  repo is archived; the maintained client surface is the @securityscorecard/sdk
+  and @securityscorecard/cli npm packages. No first-party PyPI, Maven, NuGet,
+  Go-module, RubyGems, Packagist, or crates.io client library was found.

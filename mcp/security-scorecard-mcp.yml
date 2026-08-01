@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+status: published
+official: false
+source: https://github.com/CallMarcus/security-scorecard-mcp
+server:
+  name: securityscorecard-mcp
+  package: "@callmarcus/securityscorecard-mcp"
+  version: 1.1.1
+  transport: stdio
+  install: npx -y @callmarcus/securityscorecard-mcp
+  repository: https://github.com/CallMarcus/security-scorecard-mcp
+description: >-
+  A community-built MCP server that wraps the SecurityScorecard API. It is NOT
+  affiliated with or published by SecurityScorecard, Inc. No first-party
+  SecurityScorecard-hosted or -published MCP server was found; this is the only
+  MCP server exposing the SecurityScorecard API surface.
+notes: >-
+  Because it is community-maintained, treat tool coverage and freshness as
+  best-effort. Authentication is the standard SecurityScorecard API token passed
+  through the server's environment.

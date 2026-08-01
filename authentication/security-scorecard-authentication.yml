@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: searched
+source: https://securityscorecard.readme.io/docs/getting-started
+docs: https://securityscorecard.readme.io/docs/getting-started
+summary:
+  types: [apiKey]
+  api_key_in: [header]
+  oauth2_flows: []
+  notes: >-
+    SecurityScorecard uses a static API-token scheme. Requests carry an
+    Authorization header whose value is the literal prefix "Token" followed by a
+    space and the API key. API keys do not expire and are as powerful as a
+    password, so they must be stored only in application secrets. Keys are
+    generated in the platform under My Settings > API; administrators can also
+    create bot (service-account) users that own keys scoped to an application.
+schemes:
+  - name: ApiTokenAuth
+    type: apiKey
+    in: header
+    parameter_name: Authorization
+    format: 'Token <api_key>'
+    example: 'Authorization: Token 1a1a1a1a1a1a1a1a'
+    token_generation: https://platform.securityscorecard.io/#/my-settings/api
+    expires: false
+    sources: [docs]
+service_accounts:
+  supported: true
+  name: Bot user
+  docs: https://securityscorecard.readme.io/docs/create-bot-servicew-account-with-api-token

@@ -1,9 +1,31 @@
 aid: security-scorecard
-name: Security​Scorecard
-description: 'Security​Scorecard is a company surfaced as a portfolio company of gv and added to the API
-  Evangelist network as a stub for enrichment. Sector: enterprise. This profile is a lead awaiting the
-  enrichment pipeline.'
+name: SecurityScorecard
+description: >-
+  SecurityScorecard is a cybersecurity ratings and third-party risk management
+  platform that continuously rates the security posture of any company from the
+  outside in, producing an A-F security score across ten risk factors. Its REST
+  API (base https://api.securityscorecard.io) lets customers manage portfolios
+  of monitored companies, pull scorecards, factor scores, historical trends,
+  issues/findings, industry benchmarks, and generate reports, and react to
+  changes through webhook-driven Rules. Authentication is a static API token
+  ("Authorization: Token <key>"), and first-party npm SDK and CLI packages are
+  published under the @securityscorecard organization. Originally surfaced as a
+  GV (Google Ventures) portfolio company, this profile has been enriched from
+  SecurityScorecard's public developer documentation.
 url: https://raw.githubusercontent.com/api-evangelist/security-scorecard/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://securityscorecard.com/wp-content/uploads/2023/01/ssc-logo.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -12,11 +34,40 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Enterprise
-apis: []
+- Cybersecurity
+- Security Ratings
+- Third-Party Risk
+- Risk Management
+- Attack Surface
+- Compliance
+apis:
+- name: SecurityScorecard API
+  description: >-
+    REST API for security ratings, portfolios, scorecards, factor and issue
+    data, historical scores, industry benchmarks, reporting, and webhook Rules.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  properties:
+  - type: Documentation
+    url: https://securityscorecard.readme.io/reference/introduction
+  - type: APIReference
+    url: https://securityscorecard.readme.io/reference/introduction
+  - type: GettingStarted
+    url: https://securityscorecard.readme.io/docs/getting-started
+  - type: Authentication
+    url: authentication/security-scorecard-authentication.yml
+  - type: Conventions
+    url: conventions/security-scorecard-conventions.yml
+  - type: ErrorCatalog
+    url: errors/security-scorecard-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/security-scorecard-lifecycle.yml
+  - type: Webhooks
+    url: asyncapi/security-scorecard-webhooks.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -24,4 +75,63 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: http://securityscorecard.com
+  url: https://securityscorecard.com
+- type: DeveloperPortal
+  url: https://securityscorecard.readme.io
+- type: Documentation
+  url: https://securityscorecard.readme.io/reference/introduction
+- type: APIReference
+  url: https://securityscorecard.readme.io/reference/introduction
+- type: GettingStarted
+  url: https://securityscorecard.readme.io/docs/getting-started
+- type: Blog
+  url: https://securityscorecard.com/blog/
+- type: Pricing
+  url: https://securityscorecard.com/pricing/
+- type: SignUp
+  url: https://securityscorecard.com/free-account-trial/
+- type: Login
+  url: https://platform.securityscorecard.io/
+- type: TermsOfService
+  url: https://securityscorecard.com/eusa/
+- type: PrivacyPolicy
+  url: https://securityscorecard.com/privacy-policy/
+- type: GitHubOrganization
+  url: https://github.com/securityscorecard
+- type: StatusPage
+  url: https://securityscorecard.statuspage.io/
+- type: Deprecation
+  url: https://securityscorecard.readme.io/reference/backwards-compatibility
+- type: LLMsTxt
+  url: llms/security-scorecard-llms.txt
+- type: Authentication
+  url: authentication/security-scorecard-authentication.yml
+- type: Conventions
+  url: conventions/security-scorecard-conventions.yml
+- type: ErrorCatalog
+  url: errors/security-scorecard-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/security-scorecard-lifecycle.yml
+- type: Webhooks
+  url: asyncapi/security-scorecard-webhooks.yml
+- type: WellKnown
+  url: well-known/security-scorecard-well-known.yml
+- type: Packages
+  url: packages/security-scorecard-packages.yml
+- type: SDKs
+  url: packages/security-scorecard-packages.yml
+- type: CLI
+  url: cli/security-scorecard-cli.yml
+- type: MCPServer
+  url: mcp/security-scorecard-mcp.yml
+- type: TrustCenter
+  url: security/security-scorecard-trust-center.yml
+- type: Compliance
+  url: security/security-scorecard-trust-center.yml
+- type: DomainSecurity
+  url: security/security-scorecard-domain-security.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 12
+  pass: local-v1

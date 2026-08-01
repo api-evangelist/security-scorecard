@@ -1,0 +1,57 @@
+generated: '2026-07-21'
+method: searched
+source: https://securityscorecard.readme.io/reference/core-resources
+docs:
+  errors: https://securityscorecard.readme.io/reference/errors
+  pagination: https://securityscorecard.readme.io/reference/pagination
+  rate_limits: https://securityscorecard.readme.io/reference/rate-limits
+  http_requirements: https://securityscorecard.readme.io/reference/http-api-requirements
+  versioning: https://securityscorecard.readme.io/reference/backwards-compatibility
+authentication:
+  style: apiKey
+  header: 'Authorization: Token <api_key>'
+  see: authentication/security-scorecard-authentication.yml
+base_url: https://api.securityscorecard.io
+media_type: application/json
+idempotency:
+  supported: false
+  notes: No idempotency-key header is documented in the SecurityScorecard API reference.
+pagination:
+  styles:
+    - name: page-based
+      params: {page: page, size: size}
+      defaults: {size: 50, max_size: 50}
+      response_fields: [entries, total, size, page]
+    - name: cursor-based
+      params: {limit: limit, cursor: cursor}
+      response_fields: [entries, next_cursor]
+  link_header: true
+  bulk_export: >-
+    For very large collections the API offers an asynchronous report/dump
+    instead of paginating.
+rate_limiting:
+  global_limit: 5000
+  window: hour
+  window_note: rolling 60-minute window
+  status_code: 429
+  retry_header: Retry-After
+  endpoint_specific:
+    - endpoint: POST /reports/detailed
+      note: stricter than the global limit; avoid high-frequency automated calls
+  see: null
+error_envelope:
+  format: json
+  documented_status_codes: [400, 401, 403, 404, 405, 409, 413, 422, 429, 500, 502, 503, 504]
+  see: errors/security-scorecard-problem-types.yml
+versioning:
+  scheme: uri-path-major
+  minor_header: Accepts-Version
+  see: lifecycle/security-scorecard-lifecycle.yml
+webhooks:
+  supported: true
+  see: asyncapi/security-scorecard-webhooks.yml
+cross_links:
+  - authentication/security-scorecard-authentication.yml
+  - lifecycle/security-scorecard-lifecycle.yml
+  - errors/security-scorecard-problem-types.yml
+  - asyncapi/security-scorecard-webhooks.yml

@@ -1,0 +1,23 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.npmjs.com/package/@securityscorecard/cli
+name: securityscorecard
+package: "@securityscorecard/cli"
+version: 0.8.0
+official: true
+install:
+  - method: npm
+    command: npm install -g @securityscorecard/cli
+runtime: node
+purpose: >-
+  First-party CLI for the SecurityScorecard platform, used alongside the
+  @securityscorecard/sdk to script the API and to build, package, and publish
+  SecurityScorecard apps (a cli-manifest companion package,
+  @securityscorecard/cli-manifest, is also published under the org).
+notes: >-
+  The command surface is not published as static documentation; run
+  `securityscorecard --help` after install to enumerate commands. The binary is
+  catalogued in packages/security-scorecard-packages.yml.
+related_packages:
+  - "@securityscorecard/cli-manifest"
+  - "@securityscorecard/sdk"

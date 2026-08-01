@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: searched
+type: Webhooks
+source: https://securityscorecard.readme.io/docs/receive-event-notifications-with-webhooks
+transport: http-post
+delivery: >-
+  Webhooks are configured through SecurityScorecard "Rules" (My Settings >
+  Rules). When a rule's triggering event occurs, an HTTP POST is sent to the
+  configured endpoint with a JSON body describing the event.
+config_ui: https://platform.securityscorecard.io/#/my-settings/rules
+payload_envelope:
+  fields:
+    - {name: trigger, description: Container for all contextual information about the event}
+    - {name: trigger.type, description: Type of the event, mapping to the related rule}
+    - {name: trigger.selected, description: The event that triggered the rule}
+    - {name: trigger.severity, description: Logic to compare in the event occurrence}
+    - {name: context.issues, description: Container with the specific details of the event (issues list)}
+    - {name: scorecard_id, description: UUID of the scorecard related to the event}
+    - {name: domain, description: Domain of the scorecard related to the event}
+events:
+  - type: grade_drop
+    category: score-change
+    description: Emitted whenever a scorecard score rises or falls (includes the new score).
+  - type: new_issues
+    category: issues
+    description: >-
+      Emitted when new issues are found in a scorecard, or when existing issues
+      change status (for example an active issue becoming resolved or decayed).
+  - type: security_breach
+    category: breach
+    description: Emitted for a security breach event affecting a monitored scorecard.
+signature_verification:
+  documented: false
+notes: >-
+  SecurityScorecard documents webhooks via Rules but does not publish a machine
+  readable AsyncAPI document, so this artifact captures the webhook catalog
+  rather than a verbatim AsyncAPI spec.
