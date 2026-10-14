@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-get-asi-asset-port-response-schema.json",
+  "title": "getAsiAssetPortResponse",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/getAsiAssetPortResponse",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "UI Title"
+    },
+    "port": {
+      "type": "number",
+      "description": "Port number"
+    },
+    "service": {
+      "type": "string",
+      "description": "Service found on this port"
+    },
+    "product": {
+      "type": "string",
+      "description": "Product detected on this port"
+    },
+    "version": {
+      "type": "string",
+      "description": "Product version detected"
+    },
+    "scripts": {
+      "type": "string",
+      "description": "Output of the scripts scanning this port"
+    },
+    "firstSeen": {
+      "type": "string",
+      "description": "First time this port was detected"
+    },
+    "lastSeen": {
+      "type": "string",
+      "description": "Last time the port seen opened"
+    },
+    "device": {
+      "type": "string",
+      "description": "Device type detected"
+    },
+    "os": {
+      "type": "string",
+      "description": "Operating system detected"
+    },
+    "cpe": {
+      "type": "array",
+      "description": "CPEs strings associated with this port",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

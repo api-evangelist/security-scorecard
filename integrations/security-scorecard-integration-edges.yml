@@ -1,8 +1,20 @@
-generated: '2026-10-13'
+generated: '2026-10-14'
 method: searched
+source:
+- https://zapier.com/apps/security-scorecard/integrations
+- https://zapier.com/apps/securityscorecard/integrations
+- https://n8n.io/integrations/security-scorecard/
+- https://composio.dev/toolkits/security-scorecard
+- https://monid.ai/tools/security-scorecard
 checked:
 - https://aws.amazon.com/marketplace/
 - https://azuremarketplace.microsoft.com/
+- https://composio.dev/toolkits/security-scorecard
+- https://monid.ai/tools/security-scorecard
+- https://n8n.io/integrations/security-scorecard/
+- https://zapier.com/apps/security-scorecard/integrations
+- https://zapier.com/apps/securityscorecard/integrations
+summary: null
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -37,3 +49,4 @@ edges:
   seller_name: Securityscorecard, Inc.
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+templates: []

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-asi-search-request-schema.json",
+  "title": "asiSearchRequest",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/asiSearchRequest",
+  "type": "object",
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "search query"
+    },
+    "sort": {
+      "type": "string",
+      "description": "values for ipv4 are:",
+      "enum": [
+        "scan_date",
+        "max_cvss_score",
+        "min_scorecard_grade",
+        "_score",
+        "avd_grade",
+        "city",
+        "cloud_provider",
+        "cloud_region",
+        "country_name",
+        "has_cve",
+        "has_cve_been_exploited",
+        "has_infection",
+        "has_malhash",
+        "has_malrep",
+        "has_ransomware",
+        "has_scorecard",
+        "has_screenshot",
+        "has_ssl_cert",
+        "has_threatactor",
+        "hostname",
+        "max_cvss_score",
+        "min_scorecard_grade",
+        "postal",
+        "scan_time",
+        "ssl_is_certificate_chain_valid",
+        "state",
+        "_score",
+        "has_ransomware"
+      ]
+    },
+    "sortDir": {
+      "type": "string",
+      "description": "asc or desc",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "x-enumDescriptions": {
+        "asc": "Ascending",
+        "desc": "Descending"
+      }
+    },
+    "page": {
+      "type": "number",
+      "default": 0,
+      "description": "Search result page number"
+    },
+    "index": {
+      "type": "string",
+      "default": "ipv4",
+      "description": "Search index to query"
+    },
+    "parser": {
+      "type": "string",
+      "default": "structured",
+      "description": "Search query parser. Options are: simple, structured, lucence, dismax",
+      "enum": [
+        "simple",
+        "structured",
+        "lucence",
+        "dismax"
+      ]
+    },
+    "size": {
+      "type": "number",
+      "default": 10,
+      "description": "Size of the search resultset page"
+    },
+    "cursor": {
+      "type": "string",
+      "description": "Cursor identifier (or \"initial\" for first request) needed to paginate over more than 10K results"
+    }
+  },
+  "additionalProperties": false
+}

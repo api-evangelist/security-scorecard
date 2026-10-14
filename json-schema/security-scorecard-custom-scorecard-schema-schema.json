@@ -1,0 +1,357 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-custom-scorecard-schema-schema.json",
+  "title": "customScorecardSchema",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/customScorecardSchema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+      "description": "custom scorecard id",
+      "type": "string"
+    },
+    "uuid": {
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+      "description": "uuid to identify custom scorecard, same to id",
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "name of the custom scorecard"
+    },
+    "description": {
+      "type": "string",
+      "description": "description of the custom scorecard"
+    },
+    "managed_by": {
+      "type": "string",
+      "description": "specify edit access levels of private (me only), team, or company"
+    },
+    "share_with": {
+      "type": "string",
+      "description": "specify who can access this scorecard, if company wide or public to anyone in the platform"
+    },
+    "visibility_level": {
+      "type": "string",
+      "description": "specify who can see this scorecard, if private, company or public in the platform"
+    },
+    "owned_by": {
+      "type": "string",
+      "description": "specify who owns the custom scorecard, only when managedBy value is private"
+    },
+    "is_entity": {
+      "type": "boolean"
+    },
+    "customer_id": {
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+      "description": "the organization id of the user who created the custom scorecard",
+      "type": "string"
+    },
+    "base": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "domain of the custom scorecard"
+          },
+          "name": {
+            "type": "string",
+            "description": "name of the custom scorecard"
+          },
+          "grade": {
+            "type": "string",
+            "description": "grade of the custom scorecard"
+          },
+          "score": {
+            "type": "integer",
+            "description": "score of the custom scorecard"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "collection of parent scorecards whose digital footprints were\n      \n      filtered in order to create a custom scorecard"
+    },
+    "filter": {
+      "type": "object",
+      "properties": {
+        "ips": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "collection of footprint ip filters"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "collection of footprint domain filters"
+        },
+        "countries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "collection of footprint country filters"
+        },
+        "filter_toggle_setting": {
+          "type": "string",
+          "description": "filter toggle setting"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "ips",
+        "domains"
+      ],
+      "description": "base footprint filters that make up a custom scorecard"
+    },
+    "bulk": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "filename": {
+            "type": "string",
+            "description": "name of the file used to load this bulk"
+          },
+          "excludes": {
+            "type": "boolean",
+            "description": "true to exclude assets matching bulk filters (defaults to false, meaning, to include)"
+          },
+          "ips": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "collection of footprint ip filters"
+          },
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "collection of footprint domain filters"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "filename"
+        ]
+      },
+      "description": "optional footprint filters loaded in bulk from a file (CSV)"
+    },
+    "created": {
+      "format": "date-time",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}[T ]\\d{2}:\\d{2}:\\d{2}\\.{0,1}[0-9]*Z$",
+      "description": "created date"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "user who created the object"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}[T ]\\d{2}:\\d{2}:\\d{2}\\.{0,1}[0-9]*Z$",
+      "description": "created date"
+    },
+    "updated_by": {
+      "type": "string",
+      "description": "user who updated the object"
+    },
+    "version": {
+      "type": "number",
+      "description": "Version number of Recipe field"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Source Scorecards list"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "includes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "number",
+                "description": "index of the filter"
+              },
+              "include": {
+                "type": "array",
+                "description": "list of footprint filters to include, only one filter type is allowed, ips or domains or countries or footprint tags, over a condition (no more than one)",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "index": {
+                      "type": "number",
+                      "description": "index of the filter"
+                    },
+                    "condition": {
+                      "type": "string",
+                      "enum": [
+                        "is",
+                        "is not",
+                        "not",
+                        "includes_all"
+                      ],
+                      "description": "condition to apply to the filter"
+                    },
+                    "ip": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint ips filters to add. "
+                    },
+                    "domain": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint domains filters to add"
+                    },
+                    "country": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint countries filters to add"
+                    },
+                    "footprint_tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint tags filters to add"
+                    },
+                    "associated_assets": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "condition to apply to the filter"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "custom scorecard filter condition"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "list of include filters to include"
+        },
+        "excludes": {
+          "type": "array",
+          "description": "list of footprint filters to exclude, only one filter type is allowed, ips or domains or countries or footprint tags, over a condition (no more than one)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "number",
+                "description": "index of the filter"
+              },
+              "condition": {
+                "type": "string",
+                "enum": [
+                  "is",
+                  "is not",
+                  "not",
+                  "includes_all"
+                ],
+                "description": "condition to apply to the filter"
+              },
+              "ip": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint ips filters to add. "
+              },
+              "domain": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint domains filters to add"
+              },
+              "country": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint countries filters to add"
+              },
+              "footprint_tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint tags filters to add"
+              },
+              "associated_assets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "condition to apply to the filter"
+              }
+            },
+            "additionalProperties": false,
+            "description": "custom scorecard filter condition"
+          }
+        },
+        "issues": {
+          "type": "object",
+          "properties": {
+            "include": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "list of issues to filter"
+            },
+            "exclude": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "list of issues to filter"
+            }
+          },
+          "additionalProperties": false,
+          "description": "list of issues to filter"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "uuid",
+    "name",
+    "customer_id",
+    "base",
+    "filter",
+    "created",
+    "created_by",
+    "version",
+    "sources",
+    "filters"
+  ]
+}

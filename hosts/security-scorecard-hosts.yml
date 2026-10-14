@@ -1,0 +1,83 @@
+generated: '2026-10-14'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 6
+  own: 1
+  other_domain: 4
+  platform: 1
+  roles:
+  - api
+  - identity
+  - portal
+  - source
+  - status
+  - website
+hosts:
+- host: api.securityscorecard.io
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: securityscorecard.io
+  role: api
+  relation: other-domain
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: platform.securityscorecard.io
+  found_by:
+  - pointer
+  types:
+  - Login
+  serves: []
+  registrable_domain: securityscorecard.io
+  role: identity
+  relation: other-domain
+- host: securityscorecard.com
+  found_by:
+  - pointer
+  types:
+  - BlogRSS
+  - Website
+  - Blog
+  - Pricing
+  - SignUp
+  - TermsOfService
+  - PrivacyPolicy
+  serves: []
+  registrable_domain: securityscorecard.com
+  role: website
+  relation: own
+- host: securityscorecard.readme.io
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - DeveloperPortal
+  - Documentation
+  - APIReference
+  - GettingStarted
+  - Deprecation
+  serves:
+  - docs
+  registrable_domain: readme.io
+  role: portal
+  relation: other-domain
+- host: securityscorecard.statuspage.io
+  found_by:
+  - pointer
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: statuspage.io
+  role: status
+  relation: other-domain

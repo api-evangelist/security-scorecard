@@ -1,0 +1,421 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml
+- openapi/security-scorecard-asi-internal-service-openapi.yml
+- openapi/security-scorecard-multiscores-api-openapi.yml
+- openapi/security-scorecard-securityscorecard-api-openapi.yml
+- openapi/security-scorecard-securityscorecard-openapi.yml
+vocabulary:
+  name: SecurityScorecard Domain Vocabulary
+  description: 'Terms declared by SecurityScorecard''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-14'
+  terms:
+  - term: scorecard-tags
+    definition: Operations about scorecard tags
+    tags:
+    - Resource Group
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml
+  - term: all-companies
+    definition: Operations about all followed companies
+    tags:
+    - Resource Group
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml
+  - term: scorecard-notes
+    definition: Operations about scorecard notes
+    tags:
+    - Resource Group
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml
+  - term: search
+    definition: Search endpoint
+    tags:
+    - Resource Group
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml
+  - term: asset
+    definition: asset behind the IP address
+    tags:
+    - Resource Group
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml
+  - term: cve
+    definition: Vulnerabilities
+    tags:
+    - Resource Group
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml
+  - term: threat-actors
+    definition: Threat-actors
+    tags:
+    - Resource Group
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml
+  - term: ransomware
+    definition: Ransomware
+    tags:
+    - Resource Group
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml
+  - term: active-infections
+    definition: Active Infections
+    tags:
+    - Resource Group
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml
+  - term: AllCompaniesResponse
+    definition: 'Object declared by the contract with fields: entries, size, page, total.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/AllCompaniesResponse
+  - term: ErrorUnauthorized
+    definition: 'Object declared by the contract with fields: error.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/ErrorUnauthorized
+  - term: CompanyByDomainResponse
+    definition: 'Object declared by the contract with fields: id, domain, name, added_date, last_logged_in, tags, portfolios, monitored, business_impact,
+      lifecycle_status, data_types_shared, risk. (6 more)'
+    tags:
+    - Object
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/CompanyByDomainResponse
+  - term: ErrorNotFound
+    definition: 'Object declared by the contract with fields: error.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/ErrorNotFound
+  - term: ErrorBadRequest
+    definition: 'Object declared by the contract with fields: error.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/ErrorBadRequest
+  - term: updateCompanyFields
+    definition: 'Object declared by the contract with fields: business_impact, lifecycle_status, data_types_shared, risk, business_unit, contract_end_date,
+      vendor_id, external_vendor_id, internal_contact.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/updateCompanyFields
+  - term: updateCompanyFieldsByDomain
+    definition: 'Object declared by the contract with fields: business_impact, lifecycle_status, data_types_shared, risk, business_unit, contract_end_date,
+      vendor_id, internal_contact, external_vendor_id.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/updateCompanyFieldsByDomain
+  - term: AllCompaniesBulkUpdateResponse
+    definition: 'Object declared by the contract with fields: count.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/AllCompaniesBulkUpdateResponse
+  - term: ErrorForbidden
+    definition: 'Object declared by the contract with fields: error.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/ErrorForbidden
+  - term: AllCompaniesBulkDeleteResponse
+    definition: 'Object declared by the contract with fields: count.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/AllCompaniesBulkDeleteResponse
+  - term: Note
+    definition: 'Object declared by the contract with fields: id, note, created_at, updated_at, created_by, updated_by.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/Note
+  - term: asiSearchRequest
+    definition: 'Object declared by the contract with fields: query, sort, sortDir, page, index, parser, size, cursor.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/asiSearchRequest
+  - term: asiSearchResponse
+    definition: 'Object declared by the contract with fields: facets, hits, found, isError, errorType, errorMessage, errorCode, cursor.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/asiSearchResponse
+  - term: asiFacetsRequest
+    definition: 'Object declared by the contract with fields: names, index, size.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/asiFacetsRequest
+  - term: asiFacetsResponse
+    definition: 'Object declared by the contract with fields: facets.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/asiFacetsResponse
+  - term: getAsiAssetIpResponse
+    definition: 'Object declared by the contract with fields: location, attribution, malrep, ports, ransomware, threat_actors, certs, cves, infections.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/getAsiAssetIpResponse
+  - term: getAsiAssetPortResponse
+    definition: 'Object declared by the contract with fields: title, port, service, product, version, scripts, firstSeen, lastSeen, device, os,
+      cpe.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/getAsiAssetPortResponse
+  - term: getCveResponse
+    definition: 'Object declared by the contract with fields: title, threatActors, weaponized, description, cvss3, cwe, published, modified.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/getCveResponse
+  - term: getAsiThreatActorsResponse
+    definition: 'Object declared by the contract with fields: title, origin, description, aka, insights, industries, entities, iocs.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/getAsiThreatActorsResponse
+  - term: getAsiRansomwareResponse
+    definition: 'Object declared by the contract with fields: ransomware, victims, victimsNumber, globalCases, lastSeen, title.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/getAsiRansomwareResponse
+  - term: getAsiActiveInfectionFamilyResponse
+    definition: 'Object declared by the contract with fields: domains, quantityOfRequests, family, title, category, observed.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/getAsiActiveInfectionFamilyResponse
+  - term: MultiscoreEntry
+    definition: 'Object declared by the contract with fields: scorecardId, multiscoreType, score, effectiveDate, riskLevel, metadata.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-multiscores-api-openapi.yml#/components/schemas/MultiscoreEntry
+  - term: PortfolioBatchRequest
+    definition: 'Object declared by the contract with fields: portfolioIds, multiscoreType, scoreMin, scoreMax, offset, limit, sortBy, sortOrder.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-multiscores-api-openapi.yml#/components/schemas/PortfolioBatchRequest
+  - term: PortfolioBatchResponse
+    definition: 'Object declared by the contract with fields: totalCount, hasMore, offset, limit, count, entries.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-multiscores-api-openapi.yml#/components/schemas/PortfolioBatchResponse
+  - term: MultiscorePaginatedResponse
+    definition: 'Object declared by the contract with fields: entries, size, page, total.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-multiscores-api-openapi.yml#/components/schemas/MultiscorePaginatedResponse
+  - term: Multiscore
+    definition: 'Object declared by the contract with fields: multiscoreType, score, effectiveDate, riskLevel, metadata.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-multiscores-api-openapi.yml#/components/schemas/Multiscore
+  - term: ScorecardMultiscoresResponse
+    definition: 'Object declared by the contract with fields: scorecardId, multiscores.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-multiscores-api-openapi.yml#/components/schemas/ScorecardMultiscoresResponse
+  - term: getPortfolio
+    definition: 'Object declared by the contract with fields: entries, total, size.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/getPortfolio
+  - term: PortfolioCreate
+    definition: 'Object declared by the contract with fields: name, description, privacy, team_id.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/PortfolioCreate
+  - term: Portfolio
+    definition: 'Object declared by the contract with fields: id, name, description, privacy, tag_type.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/Portfolio
+  - term: PortfolioEdit
+    definition: 'Object declared by the contract with fields: name, description, privacy.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/PortfolioEdit
+  - term: GetPortfolioCompanies
+    definition: 'Object declared by the contract with fields: entries, total.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/GetPortfolioCompanies
+  - term: ErrorLevelData
+    definition: 'Object declared by the contract with fields: error.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ErrorLevelData
+  - term: ErrorRateLimit
+    definition: 'Object declared by the contract with fields: error.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ErrorRateLimit
+  - term: PortfolioCompany
+    definition: 'Object declared by the contract with fields: name, domain, grade, grade_url, score, industry, size, last30days_score_change.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/PortfolioCompany
+  - term: AddCompaniesBulk
+    definition: 'Object declared by the contract with fields: portfolios, companies, bulkInvite, tagType.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/AddCompaniesBulk
+  - term: AddCompaniesBulkResponse
+    definition: 'Object declared by the contract with fields: errors, size, no_of_added_companies, added_companies, no_of_new_added_companies,
+      new_added_companies, companies_already_using_slot, available_slots, not_found_report_data.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/AddCompaniesBulkResponse
+  - term: ScorecardTagsResponse
+    definition: 'Object declared by the contract with fields: entries, total.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScorecardTagsResponse
+  - term: ScorecardTagRequest
+    definition: a scorecard tag to create
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScorecardTagRequest
+  - term: ScorecardTagResponse
+    definition: the created scorecard tag
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScorecardTagResponse
+  - term: ScorecardUpdateTagResponse
+    definition: Updated scorecard tag
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScorecardUpdateTagResponse
+  - term: BulkDeleteScorecardTagsRequest
+    definition: ids of tags
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/BulkDeleteScorecardTagsRequest
+  - term: CompaniesInScorecardTag
+    definition: 'Object declared by the contract with fields: entries, total.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/CompaniesInScorecardTag
+  - term: EmptyEntriesWithTotalSchema
+    definition: Empty entries array
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/EmptyEntriesWithTotalSchema
+  - term: addScorecardTagToCompanySchemaResponse
+    definition: 'Object declared by the contract with fields: name, domain, grade, grade_url, score, industry, size, last30days_score_change.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/addScorecardTagToCompanySchemaResponse
+  - term: ScorecardTagGroupsResponse
+    definition: 'Object declared by the contract with fields: entries.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScorecardTagGroupsResponse
+  - term: ScorecardTagGroupRequest
+    definition: Payload for creating a scorecard tag group
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScorecardTagGroupRequest
+  - term: ScorecardTagGroupResponse
+    definition: Scorecard Tag Group
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScorecardTagGroupResponse
+  - term: BulkSearchResultsSchema
+    definition: bulk searches results
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/BulkSearchResultsSchema
+  - term: SearchCompaniesInBulkRequestSchema
+    definition: Search companies in bulk
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/SearchCompaniesInBulkRequestSchema
+  - term: CompanySummary
+    definition: 'Object declared by the contract with fields: name, domain, grade, grade_url, score, industry, size, uuid, last30day_score_change,
+      is_custom, is_entity, is_un_published. (5 more)'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/CompanySummary
+  - term: CompanyFactors
+    definition: 'Object declared by the contract with fields: entries, total.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/CompanyFactors
+  - term: CompanyHistoricalScoresSchema
+    definition: 'Object declared by the contract with fields: entries.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/CompanyHistoricalScoresSchema
+  - term: HistoricalFactorScoresByCompanySchema
+    definition: 'Object declared by the contract with fields: entries.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/HistoricalFactorScoresByCompanySchema
+  - term: ExpandedRiskSchema
+    definition: 'Object declared by the contract with fields: entries, size, total.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ExpandedRiskSchema
+  - term: ScorePlanItem
+    definition: issue that require remediation
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScorePlanItem
+  - term: ScorePlan
+    definition: 'Object declared by the contract with fields: entries, size, projected_total_score.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScorePlan
+  - term: ScoreEntry
+    definition: 'Object declared by the contract with fields: effective_date, value.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScoreEntry
+  - term: ScoreValue
+    definition: 'Object declared by the contract with fields: score, score_type, risk_level, score_metadata.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScoreValue
+  - term: ScoreMetadata
+    definition: 'Object declared by the contract with fields: enough_data.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScoreMetadata
+  - term: ScoreByIndustrySchema
+    definition: 'Object declared by the contract with fields: industry, avg_score, avg_grade.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/ScoreByIndustrySchema
+  - term: HistoricalScoreByIndustrySchema
+    definition: 'Object declared by the contract with fields: entries.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/HistoricalScoreByIndustrySchema
+  - term: FactorScoresByIndustrySchema
+    definition: 'Object declared by the contract with fields: entries.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/FactorScoresByIndustrySchema
+  - term: HistoricalFactorScoresByIndustrySchema
+    definition: 'Object declared by the contract with fields: entries.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/HistoricalFactorScoresByIndustrySchema
+  - term: CompanyHistoricalEventsSchema
+    definition: 'Object declared by the contract with fields: entries.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/CompanyHistoricalEventsSchema
+  - term: CompanyHistoricalBreachesEventsSchema
+    definition: 'Object declared by the contract with fields: entries.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/CompanyHistoricalBreachesEventsSchema
+  - term: IssueContext
+    definition: 'Object declared by the contract with fields: company_incidence_percentage, findings_count_average.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/IssueContext
+  - term: getNotificationsLatest7daysSchemaResponse
+    definition: Scorecard Tag Group
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/getNotificationsLatest7daysSchemaResponse
+  - term: feedbackValidationRequestRequest
+    definition: 'Object declared by the contract with fields: issue_ids, feedback_type, comment.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/feedbackValidationRequestRequest
+  - term: feedbackValidationRequestRequestResponse
+    definition: 'Object declared by the contract with fields: id.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/feedbackValidationRequestRequestResponse
+  - term: complianceResponseSchema
+    definition: 'Object declared by the contract with fields: entries.'
+    tags:
+    - Object
+    source: openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/complianceResponseSchema

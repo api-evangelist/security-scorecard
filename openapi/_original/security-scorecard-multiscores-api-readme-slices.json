@@ -1,0 +1,1524 @@
+[
+ {
+  "page": "https://securityscorecard.readme.io/reference/post_multiscores-portfolio-batch.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "info": {
+    "title": "Multiscores API",
+    "version": "1.0.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.securityscorecard.io",
+     "description": "Production server"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "Token": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "SecurityScorecard API endpoints require an authentication token to be passed\nin an authorization header in order to return data. If you do not already\nhave a token, you can create one by going to the API Access area in your\n[Settings page](https://platform.securityscorecard.io/#/settings/api) and then\nclicking Generate New Token. Please note this tokens have no expiration\nso they can be used until manually revoked. If you have a token and generate\na new one, the previous token will be revoked and can no longer be used.\n\nAdministrators can also revoke API tokens for any user in their account.\n\nOnce you have your token you can pass it in using the `Authorization` http header like this:\n\n```\ncurl -X GET \\\n  https://api.securityscorecard.io/portfolios \\\n  -H 'authorization: Token <your token>'\n```"
+     }
+    },
+    "schemas": {
+     "MultiscoreEntry": {
+      "type": "object",
+      "properties": {
+       "scorecardId": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Scorecard ID (uuid_company_id_key)"
+       },
+       "multiscoreType": {
+        "type": "string",
+        "description": "The type of multiscore"
+       },
+       "score": {
+        "type": "number",
+        "description": "The multiscore value"
+       },
+       "effectiveDate": {
+        "type": "string",
+        "format": "date",
+        "description": "The date when this score became effective"
+       },
+       "riskLevel": {
+        "type": "string",
+        "description": "The risk level associated with the score"
+       },
+       "metadata": {
+        "type": "object",
+        "properties": {
+         "enoughData": {
+          "type": "boolean",
+          "description": "Indicates whether there is enough data for the score calculation"
+         }
+        },
+        "description": "Additional metadata about the multiscore"
+       }
+      },
+      "required": [
+       "scorecardId",
+       "multiscoreType",
+       "score",
+       "effectiveDate",
+       "riskLevel",
+       "metadata"
+      ],
+      "title": "MultiscoreEntry"
+     },
+     "PortfolioBatchRequest": {
+      "type": "object",
+      "properties": {
+       "portfolioIds": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "Array of portfolio IDs to retrieve multiscores for"
+       },
+       "multiscoreType": {
+        "type": "string",
+        "description": "Filter by specific multi-score type. Valid values: breach_likelihood, ransomware, scoring_v3"
+       },
+       "scoreMin": {
+        "type": "number",
+        "description": "Minimum score filter"
+       },
+       "scoreMax": {
+        "type": "number",
+        "description": "Maximum score filter"
+       },
+       "offset": {
+        "type": "number",
+        "description": "Offset for pagination"
+       },
+       "limit": {
+        "type": "number",
+        "description": "Limit for pagination"
+       },
+       "sortBy": {
+        "type": "string",
+        "description": "Field to sort by. Valid values: scorecard_id, score"
+       },
+       "sortOrder": {
+        "type": "string",
+        "description": "Sort order. Valid values: asc, desc"
+       }
+      },
+      "required": [
+       "portfolioIds"
+      ],
+      "title": "PortfolioBatchRequest"
+     },
+     "PortfolioBatchResponse": {
+      "type": "object",
+      "properties": {
+       "totalCount": {
+        "type": "number",
+        "description": "Total number of entries"
+       },
+       "hasMore": {
+        "type": "boolean",
+        "description": "Whether there are more entries available"
+       },
+       "offset": {
+        "type": "number",
+        "description": "Offset used for pagination"
+       },
+       "limit": {
+        "type": "number",
+        "description": "Limit used for pagination"
+       },
+       "count": {
+        "type": "number",
+        "description": "Number of entries in this response"
+       },
+       "entries": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/MultiscoreEntry"
+        }
+       }
+      },
+      "required": [
+       "totalCount",
+       "hasMore",
+       "offset",
+       "limit",
+       "count",
+       "entries"
+      ],
+      "title": "PortfolioBatchResponse"
+     },
+     "BadRequest": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           400
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Bad Request"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "BadRequest"
+     },
+     "Unauthorized": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           401
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Unauthorized"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "Unauthorized"
+     },
+     "Forbidden": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           403
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Forbidden"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "Forbidden"
+     },
+     "NotFound": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           404
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Not Found"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "NotFound"
+     }
+    }
+   },
+   "paths": {
+    "/multiscores/portfolio/batch": {
+     "post": {
+      "tags": [
+       "Multiscores"
+      ],
+      "description": "Batch retrieve multiscores for multiple portfolios. Supports filtering by multiscore type, score range, pagination, and sorting",
+      "requestBody": {
+       "required": true,
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/PortfolioBatchRequest"
+         }
+        }
+       }
+      },
+      "responses": {
+       "200": {
+        "description": "Successfully retrieved multiscores",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/PortfolioBatchResponse"
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "Bad Request",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/BadRequest"
+          }
+         }
+        }
+       },
+       "401": {
+        "description": "Unauthorized",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/Unauthorized"
+          }
+         }
+        }
+       },
+       "403": {
+        "description": "Forbidden",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/Forbidden"
+          }
+         }
+        }
+       },
+       "404": {
+        "description": "Not Found",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/NotFound"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "security": [
+    {
+     "Token": []
+    }
+   ]
+  }
+ },
+ {
+  "page": "https://securityscorecard.readme.io/reference/get_multiscores-portfolio-portfolio-id.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "info": {
+    "title": "Multiscores API",
+    "version": "1.0.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.securityscorecard.io",
+     "description": "Production server"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "Token": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "SecurityScorecard API endpoints require an authentication token to be passed\nin an authorization header in order to return data. If you do not already\nhave a token, you can create one by going to the API Access area in your\n[Settings page](https://platform.securityscorecard.io/#/settings/api) and then\nclicking Generate New Token. Please note this tokens have no expiration\nso they can be used until manually revoked. If you have a token and generate\na new one, the previous token will be revoked and can no longer be used.\n\nAdministrators can also revoke API tokens for any user in their account.\n\nOnce you have your token you can pass it in using the `Authorization` http header like this:\n\n```\ncurl -X GET \\\n  https://api.securityscorecard.io/portfolios \\\n  -H 'authorization: Token <your token>'\n```"
+     }
+    },
+    "schemas": {
+     "MultiscoreEntry": {
+      "type": "object",
+      "properties": {
+       "scorecardId": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Scorecard ID (uuid_company_id_key)"
+       },
+       "multiscoreType": {
+        "type": "string",
+        "description": "The type of multiscore"
+       },
+       "score": {
+        "type": "number",
+        "description": "The multiscore value"
+       },
+       "effectiveDate": {
+        "type": "string",
+        "format": "date",
+        "description": "The date when this score became effective"
+       },
+       "riskLevel": {
+        "type": "string",
+        "description": "The risk level associated with the score"
+       },
+       "metadata": {
+        "type": "object",
+        "properties": {
+         "enoughData": {
+          "type": "boolean",
+          "description": "Indicates whether there is enough data for the score calculation"
+         }
+        },
+        "description": "Additional metadata about the multiscore"
+       }
+      },
+      "required": [
+       "scorecardId",
+       "multiscoreType",
+       "score",
+       "effectiveDate",
+       "riskLevel",
+       "metadata"
+      ],
+      "title": "MultiscoreEntry"
+     },
+     "MultiscorePaginatedResponse": {
+      "type": "object",
+      "properties": {
+       "entries": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/MultiscoreEntry"
+        }
+       },
+       "size": {
+        "default": 20,
+        "minimum": 20,
+        "maximum": 100,
+        "description": "Number of entries per page",
+        "type": "number"
+       },
+       "page": {
+        "default": 1,
+        "minimum": 1,
+        "description": "Page number, starting from 1",
+        "type": "number"
+       },
+       "total": {
+        "default": 0,
+        "minimum": 0,
+        "description": "Total number of entries",
+        "type": "number"
+       }
+      },
+      "required": [
+       "entries",
+       "size",
+       "page",
+       "total"
+      ],
+      "title": "MultiscorePaginatedResponse"
+     },
+     "BadRequest": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           400
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Bad Request"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "BadRequest"
+     },
+     "Unauthorized": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           401
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Unauthorized"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "Unauthorized"
+     },
+     "Forbidden": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           403
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Forbidden"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "Forbidden"
+     },
+     "NotFound": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           404
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Not Found"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "NotFound"
+     }
+    }
+   },
+   "paths": {
+    "/multiscores/portfolio/{portfolio_id}": {
+     "get": {
+      "tags": [
+       "Multiscores"
+      ],
+      "description": "Get multiscores for all scorecards in a portfolio",
+      "parameters": [
+       {
+        "schema": {
+         "type": "string"
+        },
+        "in": "path",
+        "name": "portfolio_id",
+        "required": true,
+        "description": "The unique identifier for the portfolio"
+       },
+       {
+        "schema": {
+         "type": "string"
+        },
+        "in": "query",
+        "name": "multiscore-type",
+        "required": false,
+        "description": "Filter by specific multi-score type. Valid values: breach_likelihood, ransomware, scoring_v3"
+       },
+       {
+        "schema": {
+         "type": "number",
+         "minimum": 0
+        },
+        "in": "query",
+        "name": "score-min",
+        "required": false,
+        "description": "Minimum score filter"
+       },
+       {
+        "schema": {
+         "type": "number",
+         "minimum": 0
+        },
+        "in": "query",
+        "name": "score-max",
+        "required": false,
+        "description": "Maximum score filter"
+       },
+       {
+        "schema": {
+         "type": "number",
+         "default": 1,
+         "minimum": 1
+        },
+        "in": "query",
+        "name": "page",
+        "required": false,
+        "description": "Page number, starting from 1"
+       },
+       {
+        "schema": {
+         "type": "number",
+         "minimum": 20,
+         "maximum": 100,
+         "default": 50
+        },
+        "in": "query",
+        "name": "size",
+        "required": false,
+        "description": "Number of entries per page"
+       },
+       {
+        "schema": {
+         "type": "string"
+        },
+        "in": "query",
+        "name": "sort-by",
+        "required": false,
+        "description": "Field to sort by. Valid values: scorecard_id, score"
+       },
+       {
+        "schema": {
+         "type": "string"
+        },
+        "in": "query",
+        "name": "sort-order",
+        "required": false,
+        "description": "Sort order. Valid values: asc, desc"
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "Successfully retrieved portfolio multiscores",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/MultiscorePaginatedResponse"
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "Bad Request",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/BadRequest"
+          }
+         }
+        }
+       },
+       "401": {
+        "description": "Unauthorized",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/Unauthorized"
+          }
+         }
+        }
+       },
+       "403": {
+        "description": "Forbidden",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/Forbidden"
+          }
+         }
+        }
+       },
+       "404": {
+        "description": "Not Found",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/NotFound"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "security": [
+    {
+     "Token": []
+    }
+   ]
+  }
+ },
+ {
+  "page": "https://securityscorecard.readme.io/reference/get_multiscores-scorecard-id-history.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "info": {
+    "title": "Multiscores API",
+    "version": "1.0.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.securityscorecard.io",
+     "description": "Production server"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "Token": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "SecurityScorecard API endpoints require an authentication token to be passed\nin an authorization header in order to return data. If you do not already\nhave a token, you can create one by going to the API Access area in your\n[Settings page](https://platform.securityscorecard.io/#/settings/api) and then\nclicking Generate New Token. Please note this tokens have no expiration\nso they can be used until manually revoked. If you have a token and generate\na new one, the previous token will be revoked and can no longer be used.\n\nAdministrators can also revoke API tokens for any user in their account.\n\nOnce you have your token you can pass it in using the `Authorization` http header like this:\n\n```\ncurl -X GET \\\n  https://api.securityscorecard.io/portfolios \\\n  -H 'authorization: Token <your token>'\n```"
+     }
+    },
+    "schemas": {
+     "MultiscoreEntry": {
+      "type": "object",
+      "properties": {
+       "scorecardId": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Scorecard ID (uuid_company_id_key)"
+       },
+       "multiscoreType": {
+        "type": "string",
+        "description": "The type of multiscore"
+       },
+       "score": {
+        "type": "number",
+        "description": "The multiscore value"
+       },
+       "effectiveDate": {
+        "type": "string",
+        "format": "date",
+        "description": "The date when this score became effective"
+       },
+       "riskLevel": {
+        "type": "string",
+        "description": "The risk level associated with the score"
+       },
+       "metadata": {
+        "type": "object",
+        "properties": {
+         "enoughData": {
+          "type": "boolean",
+          "description": "Indicates whether there is enough data for the score calculation"
+         }
+        },
+        "description": "Additional metadata about the multiscore"
+       }
+      },
+      "required": [
+       "scorecardId",
+       "multiscoreType",
+       "score",
+       "effectiveDate",
+       "riskLevel",
+       "metadata"
+      ],
+      "title": "MultiscoreEntry"
+     },
+     "MultiscorePaginatedResponse": {
+      "type": "object",
+      "properties": {
+       "entries": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/MultiscoreEntry"
+        }
+       },
+       "size": {
+        "default": 20,
+        "minimum": 20,
+        "maximum": 100,
+        "description": "Number of entries per page",
+        "type": "number"
+       },
+       "page": {
+        "default": 1,
+        "minimum": 1,
+        "description": "Page number, starting from 1",
+        "type": "number"
+       },
+       "total": {
+        "default": 0,
+        "minimum": 0,
+        "description": "Total number of entries",
+        "type": "number"
+       }
+      },
+      "required": [
+       "entries",
+       "size",
+       "page",
+       "total"
+      ],
+      "title": "MultiscorePaginatedResponse"
+     },
+     "BadRequest": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           400
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Bad Request"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "BadRequest"
+     },
+     "Unauthorized": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           401
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Unauthorized"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "Unauthorized"
+     },
+     "Forbidden": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           403
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Forbidden"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "Forbidden"
+     },
+     "NotFound": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           404
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Not Found"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "NotFound"
+     }
+    }
+   },
+   "paths": {
+    "/multiscores/{scorecard_id}/history": {
+     "get": {
+      "tags": [
+       "Multiscores"
+      ],
+      "description": "Get historical multiscores for a specific scorecard",
+      "parameters": [
+       {
+        "schema": {
+         "type": "string",
+         "format": "uuid"
+        },
+        "in": "path",
+        "name": "scorecard_id",
+        "required": true,
+        "description": "Scorecard ID (uuid_company_id_key)"
+       },
+       {
+        "schema": {
+         "type": "string"
+        },
+        "in": "query",
+        "name": "multiscore-type",
+        "required": false,
+        "description": "Filter multiscores by typeFilter by specific multi-score type. Valid values: breach_likelihood, ransomware, scoring_v3"
+       },
+       {
+        "schema": {
+         "type": "string",
+         "format": "date"
+        },
+        "in": "query",
+        "name": "date-from",
+        "required": false,
+        "description": "The start of the date range for the query"
+       },
+       {
+        "schema": {
+         "type": "string",
+         "format": "date"
+        },
+        "in": "query",
+        "name": "date-to",
+        "required": false,
+        "description": "The end of the date range for the query"
+       },
+       {
+        "schema": {
+         "type": "number",
+         "default": 1,
+         "minimum": 1
+        },
+        "in": "query",
+        "name": "page",
+        "required": false,
+        "description": "Page number, starting from 1"
+       },
+       {
+        "schema": {
+         "type": "number",
+         "minimum": 20,
+         "maximum": 100,
+         "default": 50
+        },
+        "in": "query",
+        "name": "size",
+        "required": false,
+        "description": "Number of entries per page"
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "Successfully retrieved scorecard multiscore history",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/MultiscorePaginatedResponse"
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "Bad Request",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/BadRequest"
+          }
+         }
+        }
+       },
+       "401": {
+        "description": "Unauthorized",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/Unauthorized"
+          }
+         }
+        }
+       },
+       "403": {
+        "description": "Forbidden",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/Forbidden"
+          }
+         }
+        }
+       },
+       "404": {
+        "description": "Not Found",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/NotFound"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "security": [
+    {
+     "Token": []
+    }
+   ]
+  }
+ },
+ {
+  "page": "https://securityscorecard.readme.io/reference/get_multiscores-scorecard-id.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "info": {
+    "title": "Multiscores API",
+    "version": "1.0.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.securityscorecard.io",
+     "description": "Production server"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "Token": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "SecurityScorecard API endpoints require an authentication token to be passed\nin an authorization header in order to return data. If you do not already\nhave a token, you can create one by going to the API Access area in your\n[Settings page](https://platform.securityscorecard.io/#/settings/api) and then\nclicking Generate New Token. Please note this tokens have no expiration\nso they can be used until manually revoked. If you have a token and generate\na new one, the previous token will be revoked and can no longer be used.\n\nAdministrators can also revoke API tokens for any user in their account.\n\nOnce you have your token you can pass it in using the `Authorization` http header like this:\n\n```\ncurl -X GET \\\n  https://api.securityscorecard.io/portfolios \\\n  -H 'authorization: Token <your token>'\n```"
+     }
+    },
+    "schemas": {
+     "Multiscore": {
+      "type": "object",
+      "properties": {
+       "multiscoreType": {
+        "type": "string",
+        "description": "The type of multiscore"
+       },
+       "score": {
+        "type": "number",
+        "description": "The multiscore value"
+       },
+       "effectiveDate": {
+        "type": "string",
+        "format": "date",
+        "description": "The date when this score became effective"
+       },
+       "riskLevel": {
+        "type": "string",
+        "description": "The risk level associated with the score"
+       },
+       "metadata": {
+        "type": "object",
+        "properties": {
+         "enoughData": {
+          "type": "boolean",
+          "description": "Indicates whether there is enough data for the score calculation"
+         }
+        },
+        "description": "Additional metadata about the multiscore"
+       }
+      },
+      "required": [
+       "multiscoreType",
+       "score",
+       "effectiveDate",
+       "riskLevel",
+       "metadata"
+      ],
+      "title": "Multiscore"
+     },
+     "ScorecardMultiscoresResponse": {
+      "type": "object",
+      "properties": {
+       "scorecardId": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Scorecard ID (uuid_company_id_key)"
+       },
+       "multiscores": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/Multiscore"
+        },
+        "description": "Array of multiscores for this scorecard"
+       }
+      },
+      "required": [
+       "scorecardId",
+       "multiscores"
+      ],
+      "title": "ScorecardMultiscoresResponse"
+     },
+     "BadRequest": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           400
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Bad Request"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "BadRequest"
+     },
+     "Unauthorized": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           401
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Unauthorized"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "Unauthorized"
+     },
+     "Forbidden": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           403
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Forbidden"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "Forbidden"
+     },
+     "NotFound": {
+      "type": "object",
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "message": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "message"
+        ]
+       },
+       {
+        "type": "object",
+        "properties": {
+         "statusCode": {
+          "type": "number",
+          "enum": [
+           404
+          ]
+         },
+         "error": {
+          "type": "string",
+          "enum": [
+           "Not Found"
+          ]
+         }
+        },
+        "required": [
+         "statusCode",
+         "error"
+        ]
+       }
+      ],
+      "title": "NotFound"
+     }
+    }
+   },
+   "paths": {
+    "/multiscores/{scorecard_id}": {
+     "get": {
+      "tags": [
+       "Multiscores"
+      ],
+      "description": "Get current multiscores for a specific scorecard",
+      "parameters": [
+       {
+        "schema": {
+         "type": "string",
+         "format": "uuid"
+        },
+        "in": "path",
+        "name": "scorecard_id",
+        "required": true,
+        "description": "Scorecard ID (uuid_company_id_key)"
+       },
+       {
+        "schema": {
+         "type": "string"
+        },
+        "in": "query",
+        "name": "multiscore-type",
+        "required": false,
+        "description": "Filter multiscores by typeFilter by specific multi-score type. Valid values: breach_likelihood, ransomware, scoring_v3"
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "Successfully retrieved scorecard multiscores",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/ScorecardMultiscoresResponse"
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "Bad Request",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/BadRequest"
+          }
+         }
+        }
+       },
+       "401": {
+        "description": "Unauthorized",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/Unauthorized"
+          }
+         }
+        }
+       },
+       "403": {
+        "description": "Forbidden",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/Forbidden"
+          }
+         }
+        }
+       },
+       "404": {
+        "description": "Not Found",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/NotFound"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "security": [
+    {
+     "Token": []
+    }
+   ]
+  }
+ }
+]

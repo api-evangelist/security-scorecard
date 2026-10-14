@@ -1,0 +1,351 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-asi-search-response-schema.json",
+  "title": "asiSearchResponse",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/asiSearchResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "facets": {
+      "type": "object",
+      "properties": {
+        "countries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "threatActors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "cves": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "orgs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "hits": {
+      "type": "object",
+      "properties": {
+        "detectedLibraries": {
+          "type": "array",
+          "description": "Crawling detected libraries Name",
+          "items": {
+            "type": "string"
+          }
+        },
+        "time": {
+          "type": "string",
+          "description": "Scan time"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud service"
+        },
+        "cloudRegion": {
+          "type": "string",
+          "description": "Cloud region"
+        },
+        "hasMalrep": {
+          "type": "boolean",
+          "description": "has bad reputation"
+        },
+        "maliciousReputation": {
+          "type": "array",
+          "description": "Malicious reputation",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasCVE": {
+          "type": "boolean",
+          "description": "has a CVE"
+        },
+        "cves": {
+          "type": "array",
+          "description": "List of CVEs associated",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxCVSS": {
+          "type": "number",
+          "description": "Max CVSS in the CVEs"
+        },
+        "cvss": {
+          "type": "array",
+          "description": "List of CVSS",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deviceType": {
+          "type": "array",
+          "description": "Device Type",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasRansomware": {
+          "type": "boolean",
+          "description": "has ransomware"
+        },
+        "ransomwareVictims": {
+          "type": "array",
+          "description": "Ransomware",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ransomwareGroups": {
+          "type": "array",
+          "description": "Ransomware groups",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasSSLCert": {
+          "type": "boolean",
+          "description": "has a SSL certificate"
+        },
+        "ports": {
+          "type": "array",
+          "description": "Open ports",
+          "items": {
+            "type": "string"
+          }
+        },
+        "services": {
+          "type": "array",
+          "description": "Services running",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minGrade": {
+          "type": "string",
+          "description": "Minimum Scorecard Grade"
+        },
+        "hostnames": {
+          "type": "array",
+          "description": "Hostnames associated with this IP",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasScorecard": {
+          "type": "boolean",
+          "description": "has a Scorecard associated"
+        },
+        "products": {
+          "type": "array",
+          "description": "Products running on this host",
+          "items": {
+            "type": "string"
+          }
+        },
+        "country": {
+          "type": "string",
+          "description": "Country"
+        },
+        "organizations": {
+          "type": "array",
+          "description": "Organizations associated to this IP",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasCVEExploited": {
+          "type": "boolean",
+          "description": "has a CVE exploited"
+        },
+        "ips": {
+          "type": "array",
+          "description": "IPs associated to this host",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sslValid": {
+          "type": "boolean",
+          "description": "SSL Certificate Chain is Valid"
+        },
+        "hasThreatActor": {
+          "type": "boolean",
+          "description": "has a Threat Actor Campaign associated"
+        },
+        "threatActors": {
+          "type": "array",
+          "description": "IPs associated to this host",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasInfection": {
+          "type": "boolean",
+          "description": "has a infection"
+        },
+        "infections": {
+          "type": "array",
+          "description": "Active infections",
+          "items": {
+            "type": "string"
+          }
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "Country Code"
+        },
+        "industries": {
+          "type": "array",
+          "description": "Industries associated",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cpe": {
+          "type": "string",
+          "description": "cpe"
+        },
+        "dnsRecords": {
+          "type": "array",
+          "description": "Crawling DNS Records Types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "grade": {
+          "type": "string",
+          "description": "Current Scorecard Grade"
+        },
+        "mainAttribution": {
+          "type": "array",
+          "description": "Primary Attribution details",
+          "items": {
+            "type": "string"
+          }
+        },
+        "detectedLibraryVersion": {
+          "type": "string",
+          "description": "Crawling detected library version"
+        },
+        "domains": {
+          "type": "array",
+          "description": "Attributed domains",
+          "items": {
+            "type": "string"
+          }
+        },
+        "osTypes": {
+          "type": "array",
+          "description": "Types of Operating Systems",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "IP"
+        }
+      }
+    },
+    "found": {
+      "type": "number",
+      "description": "Amount of documents found"
+    },
+    "isError": {
+      "type": "boolean",
+      "description": "True if error, false otherwise"
+    },
+    "errorType": {
+      "type": "string",
+      "description": "Type of error"
+    },
+    "errorMessage": {
+      "type": "string",
+      "description": "Error message"
+    },
+    "errorCode": {
+      "type": "number",
+      "description": "HTTP status code of error if error is True"
+    },
+    "cursor": {
+      "type": "string",
+      "description": "Cursor identifier to paginate over more than 10K results"
+    }
+  }
+}

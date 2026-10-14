@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-portfolio-batch-request-schema.json",
+  "title": "PortfolioBatchRequest",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-multiscores-api-openapi.yml#/components/schemas/PortfolioBatchRequest",
+  "type": "object",
+  "properties": {
+    "portfolioIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of portfolio IDs to retrieve multiscores for"
+    },
+    "multiscoreType": {
+      "type": "string",
+      "description": "Filter by specific multi-score type. Valid values: breach_likelihood, ransomware, scoring_v3"
+    },
+    "scoreMin": {
+      "type": "number",
+      "description": "Minimum score filter"
+    },
+    "scoreMax": {
+      "type": "number",
+      "description": "Maximum score filter"
+    },
+    "offset": {
+      "type": "number",
+      "description": "Offset for pagination"
+    },
+    "limit": {
+      "type": "number",
+      "description": "Limit for pagination"
+    },
+    "sortBy": {
+      "type": "string",
+      "description": "Field to sort by. Valid values: scorecard_id, score"
+    },
+    "sortOrder": {
+      "type": "string",
+      "description": "Sort order. Valid values: asc, desc"
+    }
+  },
+  "required": [
+    "portfolioIds"
+  ]
+}

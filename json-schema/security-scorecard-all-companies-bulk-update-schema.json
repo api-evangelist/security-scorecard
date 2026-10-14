@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-all-companies-bulk-update-schema.json",
+  "title": "AllCompaniesBulkUpdate",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/AllCompaniesBulkUpdate",
+  "allOf": [
+    {
+      "title": "AllCompaniesBulkUpdateSchema",
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "business_impact": {
+          "type": "string"
+        },
+        "lifecycle_status": {
+          "type": "string"
+        },
+        "data_types_shared": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "risk": {
+          "type": "string"
+        },
+        "business_unit": {
+          "type": "string"
+        },
+        "contract_end_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "vendor_id": {
+          "type": "string"
+        },
+        "internal_contact": {
+          "type": "string",
+          "format": "email",
+          "pattern": "^.+@.+$"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-breaches-list-schema.json",
+  "title": "BreachesList",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-securityscorecard-openapi.yml#/components/schemas/BreachesList",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "vendor_id": {
+                "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                "description": "vendor identifier",
+                "type": "string"
+              },
+              "vendor_domain": {
+                "type": "string",
+                "description": "domain of the vendor"
+              },
+              "vendor_name": {
+                "type": "string",
+                "description": "name of the vendor"
+              },
+              "customers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                      "description": "id of the customer",
+                      "type": "string"
+                    },
+                    "domain": {
+                      "type": "string",
+                      "description": "domain of the customer"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "name of the customer"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "domain",
+                    "name"
+                  ]
+                }
+              },
+              "report": {
+                "type": "boolean",
+                "description": "is reported"
+              },
+              "triaged": {
+                "type": "boolean",
+                "description": "is triaged"
+              },
+              "is_active_breach": {
+                "type": "boolean",
+                "description": "vendor has breach"
+              },
+              "edited_at": {
+                "type": "string",
+                "pattern": "^(?:\\d{4}-\\d{2}-\\d{2}[T ]\\d{2}:\\d{2}:\\d{2}\\.{0,1}\\d*Z)?$",
+                "description": "last edition of report or trigger fields"
+              }
+            },
+            "required": [
+              "vendor_id",
+              "vendor_domain",
+              "vendor_name",
+              "customers",
+              "report",
+              "triaged",
+              "is_active_breach",
+              "edited_at"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "breach_id": {
+                "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                "description": "breach identifier",
+                "type": "string"
+              },
+              "description": {
+                "type": "string",
+                "description": "description of the breach"
+              },
+              "link": {
+                "type": "string",
+                "description": "source URL of the breach"
+              },
+              "published_date": {
+                "type": "string",
+                "format": "date",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                "description": "published date of the breach"
+              }
+            },
+            "required": [
+              "breach_id",
+              "description",
+              "link",
+              "published_date"
+            ]
+          }
+        ]
+      }
+    },
+    "size": {
+      "description": "The number of records to be returned per page",
+      "type": "integer"
+    },
+    "page": {
+      "description": "The page number to be returned",
+      "type": "integer"
+    },
+    "total": {
+      "description": "The total number of records matching the given query",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "entries",
+    "size",
+    "page",
+    "total"
+  ]
+}

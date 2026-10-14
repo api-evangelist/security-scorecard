@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json",
+  "title": "deleteCustomScorecardFilters",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/deleteCustomScorecardFilters",
+  "type": "object",
+  "properties": {
+    "filters": {
+      "type": "object",
+      "properties": {
+        "includes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "number",
+                "description": "index of the filter"
+              },
+              "include": {
+                "type": "array",
+                "description": "list of footprint filters to include, only one filter type is allowed, ips or domains or countries or footprint tags, over a condition (no more than one)",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "index": {
+                      "type": "number",
+                      "description": "index of the filter"
+                    },
+                    "condition": {
+                      "type": "string",
+                      "enum": [
+                        "is",
+                        "is not",
+                        "not",
+                        "includes_all"
+                      ],
+                      "description": "condition to apply to the filter"
+                    },
+                    "ip": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint ips filters to add. "
+                    },
+                    "domain": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint domains filters to add"
+                    },
+                    "country": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint countries filters to add"
+                    },
+                    "footprint_tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint tags filters to add"
+                    },
+                    "associated_assets": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "condition to apply to the filter"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "custom scorecard filter condition"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "list of include filters to include"
+        },
+        "excludes": {
+          "type": "array",
+          "description": "list of footprint filters to exclude, only one filter type is allowed, ips or domains or countries or footprint tags, over a condition (no more than one)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "number",
+                "description": "index of the filter"
+              },
+              "condition": {
+                "type": "string",
+                "enum": [
+                  "is",
+                  "is not",
+                  "not",
+                  "includes_all"
+                ],
+                "description": "condition to apply to the filter"
+              },
+              "ip": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint ips filters to add. "
+              },
+              "domain": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint domains filters to add"
+              },
+              "country": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint countries filters to add"
+              },
+              "footprint_tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint tags filters to add"
+              },
+              "associated_assets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "condition to apply to the filter"
+              }
+            },
+            "additionalProperties": false,
+            "description": "custom scorecard filter condition"
+          }
+        },
+        "issues": {
+          "type": "object",
+          "properties": {
+            "include": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "list of issues to filter"
+            },
+            "exclude": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "list of issues to filter"
+            }
+          },
+          "additionalProperties": false,
+          "description": "list of issues to filter"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "filters"
+  ]
+}

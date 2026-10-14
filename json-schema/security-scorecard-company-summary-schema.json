@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-company-summary-schema.json",
+  "title": "CompanySummary",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/CompanySummary",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string",
+      "description": "primary domain of the company"
+    },
+    "grade": {
+      "type": "string",
+      "description": "a security scorecard grade (A to F), or '?' if it's calculating.",
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F",
+        "?"
+      ]
+    },
+    "grade_url": {
+      "type": "string",
+      "description": "url to an image depicting the grade"
+    },
+    "score": {
+      "type": "integer",
+      "description": "security score from 0 to 100. this property is undefined if score is still being calculated."
+    },
+    "industry": {
+      "type": "string",
+      "description": "industry (unique identifier). 'unknown' if this wasn't yet determined."
+    },
+    "size": {
+      "type": "string",
+      "description": "a company described based on number of employees",
+      "enum": [
+        "unknown",
+        "size_1_to_10",
+        "size_11_to_50",
+        "size_51_to_200",
+        "size_201_to_500",
+        "size_501_to_1000",
+        "size_1001_to_5000",
+        "size_5001_to_10000",
+        "size_more_than_10000"
+      ]
+    },
+    "uuid": {
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+      "description": "Identifier",
+      "type": "string"
+    },
+    "last30day_score_change": {
+      "type": "integer",
+      "description": "The delta score in 30 days",
+      "default": 0
+    },
+    "is_custom": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Is custom scorecard",
+      "default": null
+    },
+    "is_entity": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Is an entity",
+      "deprecated": true,
+      "default": null
+    },
+    "is_un_published": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Is unpublished",
+      "deprecated": true,
+      "default": null
+    },
+    "created_at": {
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}[T ]\\d{2}:\\d{2}:\\d{2}\\.{0,1}[0-9]*Z$",
+      "description": "created date",
+      "default": null
+    },
+    "disputed": {
+      "type": "boolean",
+      "description": "Is disputed",
+      "deprecated": true
+    },
+    "provisional": {
+      "type": "boolean",
+      "description": "Indicates if the score is provisional, it is included if with_provisional_status is true"
+    },
+    "description": {
+      "type": "string",
+      "description": "description"
+    },
+    "factors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "factor name/id"
+          },
+          "score": {
+            "type": "integer",
+            "description": "security score from 0 to 100"
+          },
+          "grade": {
+            "type": "string",
+            "description": "a security scorecard grade (A to F), or '?' if it's calculating.",
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "F",
+              "?"
+            ]
+          },
+          "grade_url": {
+            "type": "string",
+            "description": "url to an image depicting the grade"
+          },
+          "issue_summary": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "severity": {
+                  "description": "severity of this type of issue",
+                  "type": "string",
+                  "enum": [
+                    "positive",
+                    "info",
+                    "low",
+                    "medium",
+                    "high"
+                  ]
+                },
+                "type": {
+                  "description": "issue type (permanent key)",
+                  "type": "string"
+                },
+                "count": {
+                  "description": "total findings of this issue type on this company",
+                  "type": "integer"
+                },
+                "detail_url": {
+                  "description": "api endpoint to get the issue findings detail of this issue type",
+                  "type": "string"
+                },
+                "total_score_impact": {
+                  "description": "score impact of all issue findings of this type to the scorecard's overall score",
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "name",
+    "domain",
+    "grade",
+    "score",
+    "industry",
+    "size"
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-company-by-domain-response-schema.json",
+  "title": "CompanyByDomainResponse",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/CompanyByDomainResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+      "description": "Identifier",
+      "type": "string"
+    },
+    "domain": {
+      "type": "string",
+      "description": "primary domain of the company"
+    },
+    "name": {
+      "type": "string"
+    },
+    "added_date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "last_logged_in": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Last time a user belonging to this company logged in to SecurityScorecard. Returned as an empty string when the company has never logged in. Reflects the company's own platform activity, not your relationship with it."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "description": "Identifier",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "portfolios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "description": "Identifier",
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "human-readable name"
+          }
+        }
+      }
+    },
+    "monitored": {
+      "type": "boolean",
+      "description": "true or false",
+      "default": false
+    },
+    "business_impact": {
+      "type": "string"
+    },
+    "lifecycle_status": {
+      "type": "string"
+    },
+    "data_types_shared": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risk": {
+      "type": "string"
+    },
+    "inherent_risk": {
+      "type": "string",
+      "description": "Risk tier assigned at intake submission time: 'low' | 'medium' | 'high' | 'critical'. Absent for vendors not onboarded through intake."
+    },
+    "business_unit": {
+      "type": "string"
+    },
+    "contract_end_date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "vendor_id": {
+      "type": "string",
+      "description": "Customer internal ID assigned to the company"
+    },
+    "external_vendor_id": {
+      "type": "string",
+      "description": "External vendor ID assigned to the company"
+    },
+    "internal_contact": {
+      "type": "string",
+      "format": "email",
+      "pattern": "^.+@.+$",
+      "description": "Customer internal user email who maintains the relationship with the company"
+    }
+  }
+}

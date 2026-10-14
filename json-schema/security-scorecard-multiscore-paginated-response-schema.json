@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-multiscore-paginated-response-schema.json",
+  "title": "MultiscorePaginatedResponse",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-multiscores-api-openapi.yml#/components/schemas/MultiscorePaginatedResponse",
+  "type": "object",
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/MultiscoreEntry"
+      }
+    },
+    "size": {
+      "default": 20,
+      "minimum": 20,
+      "maximum": 100,
+      "description": "Number of entries per page",
+      "type": "number"
+    },
+    "page": {
+      "default": 1,
+      "minimum": 1,
+      "description": "Page number, starting from 1",
+      "type": "number"
+    },
+    "total": {
+      "default": 0,
+      "minimum": 0,
+      "description": "Total number of entries",
+      "type": "number"
+    }
+  },
+  "required": [
+    "entries",
+    "size",
+    "page",
+    "total"
+  ],
+  "$defs": {
+    "MultiscoreEntry": {
+      "type": "object",
+      "properties": {
+        "scorecardId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Scorecard ID (uuid_company_id_key)"
+        },
+        "multiscoreType": {
+          "type": "string",
+          "description": "The type of multiscore"
+        },
+        "score": {
+          "type": "number",
+          "description": "The multiscore value"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date when this score became effective"
+        },
+        "riskLevel": {
+          "type": "string",
+          "description": "The risk level associated with the score"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "enoughData": {
+              "type": "boolean",
+              "description": "Indicates whether there is enough data for the score calculation"
+            }
+          },
+          "description": "Additional metadata about the multiscore"
+        }
+      },
+      "required": [
+        "scorecardId",
+        "multiscoreType",
+        "score",
+        "effectiveDate",
+        "riskLevel",
+        "metadata"
+      ],
+      "title": "MultiscoreEntry"
+    }
+  }
+}

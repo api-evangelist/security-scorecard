@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-reports-schema-schema.json",
+  "title": "ReportsSchema",
+  "description": "Represents a report for managed services",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-securityscorecard-openapi.yml#/components/schemas/ReportsSchema",
+  "type": "object",
+  "properties": {
+    "entries": {
+      "type": "array",
+      "description": "Array of report objects",
+      "items": {
+        "type": "object",
+        "description": "Represents a report for managed services",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the report"
+          },
+          "name": {
+            "description": "Name of the report",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the report",
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "Identifier of the user who created the report"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}[T ]\\d{2}:\\d{2}:\\d{2}\\.{0,1}[0-9]*Z$",
+            "description": "Timestamp when the report was created"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}[T ]\\d{2}:\\d{2}:\\d{2}\\.{0,1}[0-9]*Z$",
+            "description": "Timestamp when the report was last updated"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "Identifier of the user who last updated the report"
+          },
+          "vendor": {
+            "type": "string",
+            "description": "Vendor associated with the report"
+          },
+          "customer": {
+            "type": "string",
+            "description": "Customer associated with the report"
+          },
+          "vendor_name": {
+            "type": "string",
+            "description": "Name of the vendor"
+          },
+          "business_impact": {
+            "type": "string",
+            "description": "Business impact rating of the report"
+          },
+          "incident_likelihood": {
+            "type": "string",
+            "description": "Incident likelihood rating of the report"
+          },
+          "customer_name": {
+            "type": "string",
+            "description": "Name of the customer"
+          },
+          "is_published": {
+            "type": "boolean",
+            "description": "Indicates whether the report is published"
+          },
+          "published_at": {
+            "format": "date-time",
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}[T ]\\d{2}:\\d{2}:\\d{2}\\.{0,1}[0-9]*Z$",
+            "description": "Timestamp when the report was published"
+          },
+          "published_by": {
+            "type": "string",
+            "description": "Identifier of the user who published the report"
+          }
+        },
+        "required": [
+          "id",
+          "created_by",
+          "created_at",
+          "updated_at",
+          "updated_by",
+          "vendor",
+          "customer",
+          "vendor_name",
+          "customer_name"
+        ]
+      }
+    },
+    "page": {
+      "type": "integer",
+      "description": "The page number to be returned"
+    },
+    "size": {
+      "type": "integer",
+      "description": "The number of all records"
+    }
+  },
+  "required": [
+    "entries",
+    "page",
+    "size"
+  ]
+}

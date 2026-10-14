@@ -1,0 +1,1017 @@
+{
+  "@context": {
+    "@vocab": "https://securityscorecard.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "security": "https://securityscorecard.com/schema#",
+    "AllCompaniesResponse": "security:AllCompaniesResponse",
+    "entries": {
+      "@id": "security:entries",
+      "@container": "@list"
+    },
+    "size": {
+      "@id": "security:size",
+      "@type": "xsd:integer"
+    },
+    "page": {
+      "@id": "security:page",
+      "@type": "xsd:integer"
+    },
+    "total": {
+      "@id": "security:total",
+      "@type": "xsd:integer"
+    },
+    "ErrorUnauthorized": "security:ErrorUnauthorized",
+    "error": {
+      "@id": "security:error"
+    },
+    "CompanyByDomainResponse": "security:CompanyByDomainResponse",
+    "id": {
+      "@id": "security:id",
+      "@type": "xsd:string"
+    },
+    "domain": {
+      "@id": "security:domain",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "security:name",
+      "@type": "xsd:string"
+    },
+    "added_date": {
+      "@id": "security:added_date",
+      "@type": "xsd:date"
+    },
+    "last_logged_in": {
+      "@id": "security:last_logged_in",
+      "@type": "xsd:dateTime"
+    },
+    "tags": {
+      "@id": "security:tags",
+      "@container": "@list"
+    },
+    "portfolios": {
+      "@id": "security:portfolios",
+      "@container": "@list"
+    },
+    "monitored": {
+      "@id": "security:monitored",
+      "@type": "xsd:boolean"
+    },
+    "business_impact": {
+      "@id": "security:business_impact",
+      "@type": "xsd:string"
+    },
+    "lifecycle_status": {
+      "@id": "security:lifecycle_status",
+      "@type": "xsd:string"
+    },
+    "data_types_shared": {
+      "@id": "security:data_types_shared",
+      "@container": "@list"
+    },
+    "risk": {
+      "@id": "security:risk",
+      "@type": "xsd:string"
+    },
+    "inherent_risk": {
+      "@id": "security:inherent_risk",
+      "@type": "xsd:string"
+    },
+    "business_unit": {
+      "@id": "security:business_unit",
+      "@type": "xsd:string"
+    },
+    "contract_end_date": {
+      "@id": "security:contract_end_date",
+      "@type": "xsd:date"
+    },
+    "vendor_id": {
+      "@id": "security:vendor_id",
+      "@type": "xsd:string"
+    },
+    "external_vendor_id": {
+      "@id": "security:external_vendor_id",
+      "@type": "xsd:string"
+    },
+    "internal_contact": {
+      "@id": "security:internal_contact",
+      "@type": "xsd:string"
+    },
+    "ErrorNotFound": "security:ErrorNotFound",
+    "ErrorBadRequest": "security:ErrorBadRequest",
+    "updateCompanyFields": "security:updateCompanyFields",
+    "updateCompanyFieldsByDomain": "security:updateCompanyFieldsByDomain",
+    "AllCompaniesBulkUpdateResponse": "security:AllCompaniesBulkUpdateResponse",
+    "count": {
+      "@id": "security:count",
+      "@type": "xsd:decimal"
+    },
+    "ErrorForbidden": "security:ErrorForbidden",
+    "AllCompaniesBulkDeleteResponse": "security:AllCompaniesBulkDeleteResponse",
+    "Note": "security:Note",
+    "note": {
+      "@id": "security:note",
+      "@type": "xsd:string"
+    },
+    "created_at": {
+      "@id": "security:created_at",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "security:updated_at",
+      "@type": "xsd:dateTime"
+    },
+    "created_by": {
+      "@id": "security:created_by"
+    },
+    "updated_by": {
+      "@id": "security:updated_by"
+    },
+    "asiSearchRequest": "security:asiSearchRequest",
+    "query": {
+      "@id": "security:query",
+      "@type": "xsd:string"
+    },
+    "sort": {
+      "@id": "security:sort",
+      "@type": "xsd:string"
+    },
+    "sortDir": {
+      "@id": "security:sortDir",
+      "@type": "xsd:string"
+    },
+    "index": {
+      "@id": "security:index",
+      "@type": "xsd:string"
+    },
+    "parser": {
+      "@id": "security:parser",
+      "@type": "xsd:string"
+    },
+    "cursor": {
+      "@id": "security:cursor",
+      "@type": "xsd:string"
+    },
+    "asiSearchResponse": "security:asiSearchResponse",
+    "facets": {
+      "@id": "security:facets"
+    },
+    "hits": {
+      "@id": "security:hits"
+    },
+    "found": {
+      "@id": "security:found",
+      "@type": "xsd:decimal"
+    },
+    "isError": {
+      "@id": "security:isError",
+      "@type": "xsd:boolean"
+    },
+    "errorType": {
+      "@id": "security:errorType",
+      "@type": "xsd:string"
+    },
+    "errorMessage": {
+      "@id": "security:errorMessage",
+      "@type": "xsd:string"
+    },
+    "errorCode": {
+      "@id": "security:errorCode",
+      "@type": "xsd:decimal"
+    },
+    "asiFacetsRequest": "security:asiFacetsRequest",
+    "names": {
+      "@id": "security:names",
+      "@container": "@list"
+    },
+    "asiFacetsResponse": "security:asiFacetsResponse",
+    "getAsiAssetIpResponse": "security:getAsiAssetIpResponse",
+    "location": {
+      "@id": "security:location"
+    },
+    "attribution": {
+      "@id": "security:attribution"
+    },
+    "malrep": {
+      "@id": "security:malrep"
+    },
+    "ports": {
+      "@id": "security:ports"
+    },
+    "ransomware": {
+      "@id": "security:ransomware"
+    },
+    "threat_actors": {
+      "@id": "security:threat_actors"
+    },
+    "certs": {
+      "@id": "security:certs"
+    },
+    "cves": {
+      "@id": "security:cves"
+    },
+    "infections": {
+      "@id": "security:infections"
+    },
+    "getAsiAssetPortResponse": "security:getAsiAssetPortResponse",
+    "title": {
+      "@id": "security:title",
+      "@type": "xsd:string"
+    },
+    "port": {
+      "@id": "security:port",
+      "@type": "xsd:decimal"
+    },
+    "service": {
+      "@id": "security:service",
+      "@type": "xsd:string"
+    },
+    "product": {
+      "@id": "security:product",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "security:version",
+      "@type": "xsd:string"
+    },
+    "scripts": {
+      "@id": "security:scripts",
+      "@type": "xsd:string"
+    },
+    "firstSeen": {
+      "@id": "security:firstSeen",
+      "@type": "xsd:string"
+    },
+    "lastSeen": {
+      "@id": "security:lastSeen",
+      "@type": "xsd:string"
+    },
+    "device": {
+      "@id": "security:device",
+      "@type": "xsd:string"
+    },
+    "os": {
+      "@id": "security:os",
+      "@type": "xsd:string"
+    },
+    "cpe": {
+      "@id": "security:cpe",
+      "@container": "@list"
+    },
+    "getCveResponse": "security:getCveResponse",
+    "threatActors": {
+      "@id": "security:threatActors",
+      "@container": "@list"
+    },
+    "weaponized": {
+      "@id": "security:weaponized",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "security:description",
+      "@type": "xsd:string"
+    },
+    "cvss3": {
+      "@id": "security:cvss3",
+      "@type": "xsd:decimal"
+    },
+    "cwe": {
+      "@id": "security:cwe",
+      "@type": "xsd:string"
+    },
+    "published": {
+      "@id": "security:published",
+      "@type": "xsd:string"
+    },
+    "modified": {
+      "@id": "security:modified",
+      "@type": "xsd:string"
+    },
+    "getAsiThreatActorsResponse": "security:getAsiThreatActorsResponse",
+    "origin": {
+      "@id": "security:origin",
+      "@type": "xsd:string"
+    },
+    "aka": {
+      "@id": "security:aka",
+      "@container": "@list"
+    },
+    "insights": {
+      "@id": "security:insights",
+      "@container": "@list"
+    },
+    "industries": {
+      "@id": "security:industries",
+      "@container": "@list"
+    },
+    "entities": {
+      "@id": "security:entities",
+      "@container": "@list"
+    },
+    "iocs": {
+      "@id": "security:iocs",
+      "@container": "@list"
+    },
+    "getAsiRansomwareResponse": "security:getAsiRansomwareResponse",
+    "victims": {
+      "@id": "security:victims",
+      "@type": "xsd:string"
+    },
+    "victimsNumber": {
+      "@id": "security:victimsNumber",
+      "@type": "xsd:decimal"
+    },
+    "globalCases": {
+      "@id": "security:globalCases",
+      "@type": "xsd:decimal"
+    },
+    "getAsiActiveInfectionFamilyResponse": "security:getAsiActiveInfectionFamilyResponse",
+    "domains": {
+      "@id": "security:domains",
+      "@container": "@list"
+    },
+    "quantityOfRequests": {
+      "@id": "security:quantityOfRequests",
+      "@type": "xsd:decimal"
+    },
+    "family": {
+      "@id": "security:family",
+      "@type": "xsd:string"
+    },
+    "category": {
+      "@id": "security:category",
+      "@type": "xsd:string"
+    },
+    "observed": {
+      "@id": "security:observed",
+      "@type": "xsd:string"
+    },
+    "MultiscoreEntry": "security:MultiscoreEntry",
+    "scorecardId": {
+      "@id": "security:scorecardId",
+      "@type": "xsd:string"
+    },
+    "multiscoreType": {
+      "@id": "security:multiscoreType",
+      "@type": "xsd:string"
+    },
+    "score": {
+      "@id": "security:score",
+      "@type": "xsd:decimal"
+    },
+    "effectiveDate": {
+      "@id": "security:effectiveDate",
+      "@type": "xsd:date"
+    },
+    "riskLevel": {
+      "@id": "security:riskLevel",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "security:metadata"
+    },
+    "PortfolioBatchRequest": "security:PortfolioBatchRequest",
+    "portfolioIds": {
+      "@id": "security:portfolioIds",
+      "@container": "@list"
+    },
+    "scoreMin": {
+      "@id": "security:scoreMin",
+      "@type": "xsd:decimal"
+    },
+    "scoreMax": {
+      "@id": "security:scoreMax",
+      "@type": "xsd:decimal"
+    },
+    "offset": {
+      "@id": "security:offset",
+      "@type": "xsd:decimal"
+    },
+    "limit": {
+      "@id": "security:limit",
+      "@type": "xsd:decimal"
+    },
+    "sortBy": {
+      "@id": "security:sortBy",
+      "@type": "xsd:string"
+    },
+    "sortOrder": {
+      "@id": "security:sortOrder",
+      "@type": "xsd:string"
+    },
+    "PortfolioBatchResponse": "security:PortfolioBatchResponse",
+    "totalCount": {
+      "@id": "security:totalCount",
+      "@type": "xsd:decimal"
+    },
+    "hasMore": {
+      "@id": "security:hasMore",
+      "@type": "xsd:boolean"
+    },
+    "MultiscorePaginatedResponse": "security:MultiscorePaginatedResponse",
+    "Multiscore": "security:Multiscore",
+    "ScorecardMultiscoresResponse": "security:ScorecardMultiscoresResponse",
+    "multiscores": {
+      "@id": "security:multiscores",
+      "@container": "@list"
+    },
+    "getPortfolio": "security:getPortfolio",
+    "PortfolioCreate": "security:PortfolioCreate",
+    "privacy": {
+      "@id": "security:privacy",
+      "@type": "xsd:string"
+    },
+    "team_id": {
+      "@id": "security:team_id",
+      "@type": "xsd:string"
+    },
+    "Portfolio": "security:Portfolio",
+    "tag_type": {
+      "@id": "security:tag_type",
+      "@type": "xsd:string"
+    },
+    "PortfolioEdit": "security:PortfolioEdit",
+    "GetPortfolioCompanies": "security:GetPortfolioCompanies",
+    "ErrorLevelData": "security:ErrorLevelData",
+    "ErrorRateLimit": "security:ErrorRateLimit",
+    "PortfolioCompany": "security:PortfolioCompany",
+    "grade": {
+      "@id": "security:grade",
+      "@type": "xsd:string"
+    },
+    "grade_url": {
+      "@id": "security:grade_url",
+      "@type": "xsd:string"
+    },
+    "industry": {
+      "@id": "security:industry",
+      "@type": "xsd:string"
+    },
+    "last30days_score_change": {
+      "@id": "security:last30days_score_change",
+      "@type": "xsd:decimal"
+    },
+    "AddCompaniesBulk": "security:AddCompaniesBulk",
+    "companies": {
+      "@id": "security:companies",
+      "@container": "@list"
+    },
+    "bulkInvite": {
+      "@id": "security:bulkInvite",
+      "@type": "xsd:boolean"
+    },
+    "tagType": {
+      "@id": "security:tagType",
+      "@type": "xsd:string"
+    },
+    "AddCompaniesBulkResponse": "security:AddCompaniesBulkResponse",
+    "errors": {
+      "@id": "security:errors",
+      "@container": "@list"
+    },
+    "no_of_added_companies": {
+      "@id": "security:no_of_added_companies",
+      "@type": "xsd:decimal"
+    },
+    "added_companies": {
+      "@id": "security:added_companies",
+      "@container": "@list"
+    },
+    "no_of_new_added_companies": {
+      "@id": "security:no_of_new_added_companies",
+      "@type": "xsd:decimal"
+    },
+    "new_added_companies": {
+      "@id": "security:new_added_companies",
+      "@container": "@list"
+    },
+    "companies_already_using_slot": {
+      "@id": "security:companies_already_using_slot",
+      "@container": "@list"
+    },
+    "available_slots": {
+      "@id": "security:available_slots",
+      "@type": "xsd:decimal"
+    },
+    "not_found_report_data": {
+      "@id": "security:not_found_report_data",
+      "@container": "@list"
+    },
+    "ScorecardTagsResponse": "security:ScorecardTagsResponse",
+    "ScorecardTagRequest": "security:ScorecardTagRequest",
+    "ScorecardTagResponse": "security:ScorecardTagResponse",
+    "ScorecardUpdateTagResponse": "security:ScorecardUpdateTagResponse",
+    "BulkDeleteScorecardTagsRequest": "security:BulkDeleteScorecardTagsRequest",
+    "ids": {
+      "@id": "security:ids",
+      "@container": "@list"
+    },
+    "public_tags": {
+      "@id": "security:public_tags",
+      "@type": "xsd:boolean"
+    },
+    "CompaniesInScorecardTag": "security:CompaniesInScorecardTag",
+    "EmptyEntriesWithTotalSchema": "security:EmptyEntriesWithTotalSchema",
+    "addScorecardTagToCompanySchemaResponse": "security:addScorecardTagToCompanySchemaResponse",
+    "ScorecardTagGroupsResponse": "security:ScorecardTagGroupsResponse",
+    "ScorecardTagGroupRequest": "security:ScorecardTagGroupRequest",
+    "ScorecardTagGroupResponse": "security:ScorecardTagGroupResponse",
+    "BulkSearchResultsSchema": "security:BulkSearchResultsSchema",
+    "scorecards": {
+      "@id": "security:scorecards",
+      "@container": "@list"
+    },
+    "not_found": {
+      "@id": "security:not_found",
+      "@container": "@list"
+    },
+    "repeated_domains": {
+      "@id": "security:repeated_domains",
+      "@container": "@list"
+    },
+    "scorecards_repeated": {
+      "@id": "security:scorecards_repeated",
+      "@container": "@list"
+    },
+    "not_found_repeated": {
+      "@id": "security:not_found_repeated",
+      "@container": "@list"
+    },
+    "SearchCompaniesInBulkRequestSchema": "security:SearchCompaniesInBulkRequestSchema",
+    "searches": {
+      "@id": "security:searches",
+      "@container": "@list"
+    },
+    "maxSearches": {
+      "@id": "security:maxSearches",
+      "@type": "xsd:integer"
+    },
+    "CompanySummary": "security:CompanySummary",
+    "uuid": {
+      "@id": "security:uuid",
+      "@type": "xsd:string"
+    },
+    "last30day_score_change": {
+      "@id": "security:last30day_score_change",
+      "@type": "xsd:integer"
+    },
+    "is_custom": {
+      "@id": "security:is_custom",
+      "@type": "xsd:boolean"
+    },
+    "is_entity": {
+      "@id": "security:is_entity",
+      "@type": "xsd:boolean"
+    },
+    "is_un_published": {
+      "@id": "security:is_un_published",
+      "@type": "xsd:boolean"
+    },
+    "disputed": {
+      "@id": "security:disputed",
+      "@type": "xsd:boolean"
+    },
+    "provisional": {
+      "@id": "security:provisional",
+      "@type": "xsd:boolean"
+    },
+    "factors": {
+      "@id": "security:factors",
+      "@container": "@list"
+    },
+    "CompanyFactors": "security:CompanyFactors",
+    "CompanyHistoricalScoresSchema": "security:CompanyHistoricalScoresSchema",
+    "HistoricalFactorScoresByCompanySchema": "security:HistoricalFactorScoresByCompanySchema",
+    "ExpandedRiskSchema": "security:ExpandedRiskSchema",
+    "ScorePlanItem": "security:ScorePlanItem",
+    "issue_type": {
+      "@id": "security:issue_type",
+      "@type": "xsd:string"
+    },
+    "findings": {
+      "@id": "security:findings",
+      "@type": "xsd:integer"
+    },
+    "remediations": {
+      "@id": "security:remediations",
+      "@type": "xsd:integer"
+    },
+    "factor": {
+      "@id": "security:factor",
+      "@type": "xsd:string"
+    },
+    "severity": {
+      "@id": "security:severity",
+      "@type": "xsd:string"
+    },
+    "ScorePlan": "security:ScorePlan",
+    "projected_total_score": {
+      "@id": "security:projected_total_score",
+      "@type": "xsd:decimal"
+    },
+    "ScoreEntry": "security:ScoreEntry",
+    "effective_date": {
+      "@id": "security:effective_date",
+      "@type": "xsd:date"
+    },
+    "value": {
+      "@id": "security:value",
+      "@type": "@id"
+    },
+    "ScoreValue": "security:ScoreValue",
+    "score_type": {
+      "@id": "security:score_type",
+      "@type": "xsd:string"
+    },
+    "risk_level": {
+      "@id": "security:risk_level",
+      "@type": "xsd:string"
+    },
+    "score_metadata": {
+      "@id": "security:score_metadata",
+      "@type": "@id"
+    },
+    "ScoreMetadata": "security:ScoreMetadata",
+    "enough_data": {
+      "@id": "security:enough_data",
+      "@type": "xsd:boolean"
+    },
+    "ScoreByIndustrySchema": "security:ScoreByIndustrySchema",
+    "avg_score": {
+      "@id": "security:avg_score",
+      "@type": "xsd:integer"
+    },
+    "avg_grade": {
+      "@id": "security:avg_grade",
+      "@type": "xsd:string"
+    },
+    "HistoricalScoreByIndustrySchema": "security:HistoricalScoreByIndustrySchema",
+    "FactorScoresByIndustrySchema": "security:FactorScoresByIndustrySchema",
+    "HistoricalFactorScoresByIndustrySchema": "security:HistoricalFactorScoresByIndustrySchema",
+    "CompanyHistoricalEventsSchema": "security:CompanyHistoricalEventsSchema",
+    "CompanyHistoricalBreachesEventsSchema": "security:CompanyHistoricalBreachesEventsSchema",
+    "IssueContext": "security:IssueContext",
+    "company_incidence_percentage": {
+      "@id": "security:company_incidence_percentage",
+      "@type": "xsd:decimal"
+    },
+    "findings_count_average": {
+      "@id": "security:findings_count_average",
+      "@type": "xsd:decimal"
+    },
+    "getNotificationsLatest7daysSchemaResponse": "security:getNotificationsLatest7daysSchemaResponse",
+    "processed_by": {
+      "@id": "security:processed_by"
+    },
+    "feedbackValidationRequestRequest": "security:feedbackValidationRequestRequest",
+    "issue_ids": {
+      "@id": "security:issue_ids",
+      "@container": "@list"
+    },
+    "feedback_type": {
+      "@id": "security:feedback_type",
+      "@type": "xsd:string"
+    },
+    "comment": {
+      "@id": "security:comment",
+      "@type": "xsd:string"
+    },
+    "feedbackValidationRequestRequestResponse": "security:feedbackValidationRequestRequestResponse",
+    "complianceResponseSchema": "security:complianceResponseSchema",
+    "complianceFrameworkResponseSchema": "security:complianceFrameworkResponseSchema",
+    "standard": {
+      "@id": "security:standard",
+      "@type": "xsd:string"
+    },
+    "sections": {
+      "@id": "security:sections",
+      "@container": "@list"
+    },
+    "InvitationReponseSchema": "security:InvitationReponseSchema",
+    "createInvitationRequestSchema": "security:createInvitationRequestSchema",
+    "email": {
+      "@id": "security:email",
+      "@type": "xsd:string"
+    },
+    "first_name": {
+      "@id": "security:first_name",
+      "@type": "xsd:string"
+    },
+    "last_name": {
+      "@id": "security:last_name",
+      "@type": "xsd:string"
+    },
+    "target_url": {
+      "@id": "security:target_url",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "security:message",
+      "@type": "xsd:string"
+    },
+    "branding_url": {
+      "@id": "security:branding_url",
+      "@type": "xsd:string"
+    },
+    "grade_to_maintain": {
+      "@id": "security:grade_to_maintain",
+      "@type": "xsd:string"
+    },
+    "days_to_resolve_issue": {
+      "@id": "security:days_to_resolve_issue",
+      "@type": "xsd:integer"
+    },
+    "sendme_copy": {
+      "@id": "security:sendme_copy",
+      "@type": "xsd:boolean"
+    },
+    "cc_requester": {
+      "@id": "security:cc_requester",
+      "@type": "xsd:boolean"
+    },
+    "sender_email": {
+      "@id": "security:sender_email",
+      "@type": "xsd:string"
+    },
+    "sender_domain": {
+      "@id": "security:sender_domain",
+      "@type": "xsd:string"
+    },
+    "CollectionResponse": "security:CollectionResponse",
+    "Error": "security:Error",
+    "statusCode": {
+      "@id": "security:statusCode",
+      "@type": "xsd:integer"
+    },
+    "data": {
+      "@id": "security:data"
+    },
+    "key": {
+      "@id": "security:key",
+      "@type": "xsd:string"
+    },
+    "ErrorResponse": "security:ErrorResponse",
+    "PortfolioVendor": "security:PortfolioVendor",
+    "company": {
+      "@id": "security:company",
+      "@type": "xsd:string"
+    },
+    "thirty_day_change": {
+      "@id": "security:thirty_day_change",
+      "@type": "xsd:integer"
+    },
+    "products_used": {
+      "@id": "security:products_used",
+      "@type": "xsd:integer"
+    },
+    "connections_count": {
+      "@id": "security:connections_count",
+      "@type": "xsd:integer"
+    },
+    "connections_percent": {
+      "@id": "security:connections_percent",
+      "@type": "xsd:integer"
+    },
+    "PortfolioVendors": "security:PortfolioVendors",
+    "VendorsResponseSchema": "security:VendorsResponseSchema",
+    "ProductsResponseSchema": "security:ProductsResponseSchema",
+    "SupplyChainRiskResponseSchema": "security:SupplyChainRiskResponseSchema",
+    "risk_score": {
+      "@id": "security:risk_score",
+      "@type": "xsd:decimal"
+    },
+    "ReportRecentResponseSchema": "security:ReportRecentResponseSchema",
+    "PortfolioReportCreation": "security:PortfolioReportCreation",
+    "format": {
+      "@id": "security:format",
+      "@type": "xsd:string"
+    },
+    "portfolio_id": {
+      "@id": "security:portfolio_id",
+      "@type": "xsd:string"
+    },
+    "ReportCreated": "security:ReportCreated",
+    "CreateReportEventJson": "security:CreateReportEventJson",
+    "scorecard_identifier": {
+      "@id": "security:scorecard_identifier",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "security:date",
+      "@type": "xsd:date"
+    },
+    "ReportEventJsonResponseSchema": "security:ReportEventJsonResponseSchema",
+    "params": {
+      "@id": "security:params"
+    },
+    "report_type": {
+      "@id": "security:report_type",
+      "@type": "xsd:string"
+    },
+    "is_new": {
+      "@id": "security:is_new",
+      "@type": "xsd:boolean"
+    },
+    "CreateReportDetailed": "security:CreateReportDetailed",
+    "branding": {
+      "@id": "security:branding",
+      "@type": "xsd:string"
+    },
+    "ReportResponseSchema": "security:ReportResponseSchema",
+    "CreateReportComplianceCsvExport": "security:CreateReportComplianceCsvExport",
+    "metricId": {
+      "@id": "security:metricId",
+      "@type": "xsd:string"
+    },
+    "CreateReportIssues": "security:CreateReportIssues",
+    "ReportCreatedIssuesResponseSchema": "security:ReportCreatedIssuesResponseSchema",
+    "CreateReportPartnership": "security:CreateReportPartnership",
+    "ReportCreatedPartnershipResponseSchema": "security:ReportCreatedPartnershipResponseSchema",
+    "CreateReportSummary": "security:CreateReportSummary",
+    "CreateReportFootprintDomains": "security:CreateReportFootprintDomains",
+    "assets": {
+      "@id": "security:assets",
+      "@type": "xsd:string"
+    },
+    "ReportCreatedFootprintDomainsResponseSchema": "security:ReportCreatedFootprintDomainsResponseSchema",
+    "CreateReportFootprintIps": "security:CreateReportFootprintIps",
+    "CreateReportScorecardFootprintDetailed": "security:CreateReportScorecardFootprintDetailed",
+    "ips": {
+      "@id": "security:ips",
+      "@container": "@list"
+    },
+    "subdomains": {
+      "@id": "security:subdomains",
+      "@container": "@list"
+    },
+    "countries": {
+      "@id": "security:countries",
+      "@container": "@list"
+    },
+    "ReportCreatedScorecardFootprintResponseSchema": "security:ReportCreatedScorecardFootprintResponseSchema",
+    "EmptyEntriesSizeSchema": "security:EmptyEntriesSizeSchema",
+    "getAttributionLogByParentDomainResponseSchema": "security:getAttributionLogByParentDomainResponseSchema",
+    "FactorsResponseSchema": "security:FactorsResponseSchema",
+    "MetadataIssueTypeResponseSchema": "security:MetadataIssueTypeResponseSchema",
+    "MetadataIssueTypeDetailedResponseSchema": "security:MetadataIssueTypeDetailedResponseSchema",
+    "short_description": {
+      "@id": "security:short_description",
+      "@type": "xsd:string"
+    },
+    "long_description": {
+      "@id": "security:long_description",
+      "@type": "xsd:string"
+    },
+    "recommendation": {
+      "@id": "security:recommendation",
+      "@type": "xsd:string"
+    },
+    "CompanyActiveIssuesResponseSchema": "security:CompanyActiveIssuesResponseSchema",
+    "issue_types": {
+      "@id": "security:issue_types",
+      "@container": "@list"
+    },
+    "total_active_issues": {
+      "@id": "security:total_active_issues",
+      "@type": "xsd:integer"
+    },
+    "createAppJob": "security:createAppJob",
+    "max_concurrency": {
+      "@id": "security:max_concurrency",
+      "@type": "xsd:decimal"
+    },
+    "hours_since_last_completion": {
+      "@id": "security:hours_since_last_completion",
+      "@type": "xsd:decimal"
+    },
+    "createAppJobResponse": "security:createAppJobResponse",
+    "started_at": {
+      "@id": "security:started_at",
+      "@type": "xsd:dateTime"
+    },
+    "status": {
+      "@id": "security:status",
+      "@type": "xsd:string"
+    },
+    "updateAppJob": "security:updateAppJob",
+    "log": {
+      "@id": "security:log",
+      "@type": "xsd:string"
+    },
+    "updateAppJobResponse": "security:updateAppJobResponse",
+    "completed_at": {
+      "@id": "security:completed_at",
+      "@type": "xsd:dateTime"
+    },
+    "ActionPlanList": "security:ActionPlanList",
+    "EmptyEntriesPaginationSchema": "security:EmptyEntriesPaginationSchema",
+    "getActionPlanByIdSchemaResponse": "security:getActionPlanByIdSchemaResponse",
+    "remediation_version": {
+      "@id": "security:remediation_version",
+      "@type": "xsd:string"
+    },
+    "roles": {
+      "@id": "security:roles",
+      "@container": "@list"
+    },
+    "due_date": {
+      "@id": "security:due_date"
+    },
+    "scorecard": {
+      "@id": "security:scorecard",
+      "@type": "xsd:string"
+    },
+    "guests": {
+      "@id": "security:guests",
+      "@container": "@list"
+    },
+    "editors": {
+      "@id": "security:editors",
+      "@container": "@list"
+    },
+    "type": {
+      "@id": "security:type",
+      "@type": "xsd:string"
+    },
+    "organization_domain": {
+      "@id": "security:organization_domain",
+      "@type": "xsd:string"
+    },
+    "archived_at": {
+      "@id": "security:archived_at"
+    },
+    "synchronized_at": {
+      "@id": "security:synchronized_at"
+    },
+    "is_custom_scorecard": {
+      "@id": "security:is_custom_scorecard",
+      "@type": "xsd:boolean"
+    },
+    "company_name": {
+      "@id": "security:company_name",
+      "@type": "xsd:string"
+    },
+    "company_score": {
+      "@id": "security:company_score",
+      "@type": "xsd:integer"
+    },
+    "factor_scores": {
+      "@id": "security:factor_scores",
+      "@container": "@list"
+    },
+    "target": {
+      "@id": "security:target"
+    },
+    "criteria": {
+      "@id": "security:criteria"
+    },
+    "is_managed": {
+      "@id": "security:is_managed",
+      "@type": "xsd:boolean"
+    },
+    "is_published": {
+      "@id": "security:is_published",
+      "@type": "xsd:boolean"
+    },
+    "managed_scorecard": {
+      "@id": "security:managed_scorecard",
+      "@type": "xsd:string"
+    },
+    "total_issues": {
+      "@id": "security:total_issues",
+      "@type": "xsd:decimal"
+    },
+    "closed_issues": {
+      "@id": "security:closed_issues",
+      "@type": "xsd:decimal"
+    },
+    "progress": {
+      "@id": "security:progress",
+      "@type": "xsd:decimal"
+    },
+    "items": {
+      "@id": "security:items",
+      "@container": "@list"
+    },
+    "ImproveFactorScoreActionPlan": "security:ImproveFactorScoreActionPlan",
+    "createActionPlanResponseSchema": "security:createActionPlanResponseSchema",
+    "IssueResolutionActionPlan": "security:IssueResolutionActionPlan",
+    "ImproveOverallScoreActionPlan": "security:ImproveOverallScoreActionPlan",
+    "DeleteItemsFromActionPlan": "security:DeleteItemsFromActionPlan",
+    "AddGuestsToActionPlan": "security:AddGuestsToActionPlan",
+    "MessageResponseSchema": "security:MessageResponseSchema"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "SecurityScorecard API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects SecurityScorecard's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-14) from openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml, openapi/security-scorecard-asi-internal-service-openapi.yml, openapi/security-scorecard-multiscores-api-openapi.yml.",
+  "dcterms:created": "2026-10-14",
+  "dcterms:source": [
+    "openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml",
+    "openapi/security-scorecard-asi-internal-service-openapi.yml",
+    "openapi/security-scorecard-multiscores-api-openapi.yml",
+    "openapi/security-scorecard-securityscorecard-api-openapi.yml",
+    "openapi/security-scorecard-securityscorecard-openapi.yml"
+  ]
+}

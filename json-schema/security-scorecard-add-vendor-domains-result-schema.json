@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-add-vendor-domains-result-schema.json",
+  "title": "AddVendorDomainsResult",
+  "description": "Vendor risk profiles for uploaded domains",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-securityscorecard-openapi.yml#/components/schemas/AddVendorDomainsResult",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+      "description": "Identifier",
+      "type": "string"
+    },
+    "managed_portfolio_id": {
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+      "description": "Identifier",
+      "type": "string"
+    },
+    "local_portfolio_ids": {
+      "type": "array",
+      "items": {
+        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+        "description": "Identifier",
+        "type": "string"
+      }
+    },
+    "added_vendors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Vendor risk profile information",
+        "properties": {
+          "domain": {
+            "type": "string"
+          },
+          "company_name": {
+            "type": "string"
+          },
+          "business_impact": {
+            "type": "string",
+            "description": "The effect a vendor breach would have on the organization."
+          },
+          "tier": {
+            "type": "string",
+            "description": "The level of service provided for the vendor."
+          },
+          "custom_tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Extra tags to label and organize the vendor."
+          },
+          "incident_likelihood": {
+            "type": "string",
+            "description": "The chance of the vendor having a breach."
+          },
+          "engagement": {
+            "type": "string",
+            "description": "The status of the latest score or factor changes of the vendor."
+          },
+          "assessment_scheduled_at": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "The date of the next vendor assessment."
+          }
+        },
+        "required": [
+          "domain",
+          "company_name"
+        ]
+      }
+    },
+    "updated_vendors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Vendor risk profile information",
+        "properties": {
+          "domain": {
+            "type": "string"
+          },
+          "company_name": {
+            "type": "string"
+          },
+          "business_impact": {
+            "type": "string",
+            "description": "The effect a vendor breach would have on the organization."
+          },
+          "tier": {
+            "type": "string",
+            "description": "The level of service provided for the vendor."
+          },
+          "custom_tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Extra tags to label and organize the vendor."
+          },
+          "incident_likelihood": {
+            "type": "string",
+            "description": "The chance of the vendor having a breach."
+          },
+          "engagement": {
+            "type": "string",
+            "description": "The status of the latest score or factor changes of the vendor."
+          },
+          "assessment_scheduled_at": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "The date of the next vendor assessment."
+          }
+        },
+        "required": [
+          "domain",
+          "company_name"
+        ]
+      }
+    },
+    "ignored_domains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string"
+          },
+          "index": {
+            "type": "number"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "index",
+          "errors"
+        ]
+      }
+    }
+  },
+  "required": [
+    "customer_id",
+    "managed_portfolio_id",
+    "added_vendors",
+    "updated_vendors"
+  ]
+}

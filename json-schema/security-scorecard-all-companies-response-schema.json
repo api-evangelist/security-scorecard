@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-all-companies-response-schema.json",
+  "title": "AllCompaniesResponse",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml#/components/schemas/AllCompaniesResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "description": "Identifier",
+            "type": "string"
+          },
+          "domain": {
+            "type": "string",
+            "description": "primary domain of the company"
+          },
+          "name": {
+            "type": "string"
+          },
+          "added_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "last_logged_in": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "Last time a user belonging to this company logged in to SecurityScorecard. Omitted by this endpoint when the company has never logged in. Reflects the company's own platform activity, not your relationship with it."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                  "description": "Identifier",
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "portfolios": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                  "description": "Identifier",
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "human-readable name"
+                }
+              }
+            }
+          },
+          "monitored": {
+            "type": "boolean",
+            "description": "true or false",
+            "default": false
+          },
+          "business_impact": {
+            "type": "string"
+          },
+          "lifecycle_status": {
+            "type": "string",
+            "description": "Status of the company in the company lifecycle. One of new, assess, respond, monitor, active, inactive, under_review, offboarding, n_a.",
+            "enum": [
+              "new",
+              "assess",
+              "respond",
+              "monitor",
+              "active",
+              "inactive",
+              "under_review",
+              "offboarding",
+              "n_a"
+            ]
+          },
+          "data_types_shared": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risk": {
+            "type": "string"
+          },
+          "business_unit": {
+            "type": "string"
+          },
+          "contract_end_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "vendor_id": {
+            "type": "string",
+            "description": "Customer internal ID assigned to the company"
+          },
+          "external_vendor_id": {
+            "type": "string",
+            "description": "External vendor ID assigned to the company"
+          },
+          "internal_contact": {
+            "type": "string",
+            "format": "email",
+            "pattern": "^.+@.+$",
+            "description": "Customer internal user email who maintains the relationship with the company"
+          },
+          "score": {
+            "type": "number",
+            "description": "Company score"
+          },
+          "grade": {
+            "type": "string",
+            "description": "Company grade"
+          },
+          "last30Days_breach_count": {
+            "type": "number",
+            "description": "Last 30 days breach count"
+          },
+          "last_month_score_change": {
+            "type": "number",
+            "description": "Last month score change"
+          }
+        }
+      }
+    },
+    "size": {
+      "description": "The number of records to be returned per page",
+      "type": "integer"
+    },
+    "page": {
+      "description": "The page number to be returned",
+      "type": "integer"
+    },
+    "total": {
+      "description": "The total number of records matching the given query",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "entries",
+    "size",
+    "page",
+    "total"
+  ]
+}

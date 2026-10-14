@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-scorecard-multiscores-response-schema.json",
+  "title": "ScorecardMultiscoresResponse",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-multiscores-api-openapi.yml#/components/schemas/ScorecardMultiscoresResponse",
+  "type": "object",
+  "properties": {
+    "scorecardId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Scorecard ID (uuid_company_id_key)"
+    },
+    "multiscores": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Multiscore"
+      },
+      "description": "Array of multiscores for this scorecard"
+    }
+  },
+  "required": [
+    "scorecardId",
+    "multiscores"
+  ],
+  "$defs": {
+    "Multiscore": {
+      "type": "object",
+      "properties": {
+        "multiscoreType": {
+          "type": "string",
+          "description": "The type of multiscore"
+        },
+        "score": {
+          "type": "number",
+          "description": "The multiscore value"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date when this score became effective"
+        },
+        "riskLevel": {
+          "type": "string",
+          "description": "The risk level associated with the score"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "enoughData": {
+              "type": "boolean",
+              "description": "Indicates whether there is enough data for the score calculation"
+            }
+          },
+          "description": "Additional metadata about the multiscore"
+        }
+      },
+      "required": [
+        "multiscoreType",
+        "score",
+        "effectiveDate",
+        "riskLevel",
+        "metadata"
+      ],
+      "title": "Multiscore"
+    }
+  }
+}

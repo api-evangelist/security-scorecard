@@ -1,0 +1,916 @@
+openapi: 3.0.0
+info:
+  title: All Companies & VSOR Customer API - OpenAPI 2.0
+  description: API Definition for All Companies & VSOR Customer Facing API
+  version: 1.0.0
+security:
+- Token: []
+servers:
+- url: https://api.securityscorecard.io
+paths:
+  /all-companies:
+    get:
+      tags:
+      - all-companies
+      summary: Find followed companies
+      description: Searches followed companies by any of the allowed fields. Results are paginated.
+      operationId: findFollowedCompanies
+      parameters:
+      - in: query
+        name: domain
+        required: true
+        example: example.com
+        schema:
+          type: string
+        description: primary domain identifying a company
+      - in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        description: Filter by company name
+      - in: query
+        name: tags
+        required: false
+        schema:
+          type: string
+        description: Filter by custom tag name
+      - in: query
+        name: tags_criteria
+        required: false
+        schema:
+          type: string
+        description: Filter criteria when filtering by tags field
+      - in: query
+        name: portfolios
+        required: false
+        schema:
+          type: string
+        description: Filter by portfolio id, comma separated to match several
+      - in: query
+        name: portfolios_criteria
+        required: false
+        schema:
+          type: string
+        description: Filter criteria when filtering by the portfolios field, AND or OR
+      - in: query
+        name: monitored
+        required: false
+        schema:
+          type: boolean
+        description: Filter by monitored/non-monitored only
+      - in: query
+        name: business_impact
+        required: false
+        schema:
+          type: string
+        description: Filter by business impact
+      - in: query
+        name: lifecycle_status
+        required: false
+        schema:
+          type: string
+          enum:
+          - new
+          - assess
+          - respond
+          - monitor
+          - active
+          - inactive
+          - under_review
+          - offboarding
+          - n_a
+        description: Filter by lifecycle status. Status of the company in the company lifecycle. One of new, assess, respond, monitor, active, inactive, under_review, offboarding, n_a.
+      - in: query
+        name: data_types_shared
+        required: false
+        schema:
+          type: string
+        description: Filter by data types shared
+      - in: query
+        name: risk
+        required: false
+        schema:
+          type: string
+        description: Filter by risk
+      - in: query
+        name: business_unit
+        required: false
+        schema:
+          type: string
+        description: Filter by business unit
+      - in: query
+        name: contract_end_date_from
+        required: false
+        schema:
+          type: string
+        description: Filter by contract end date from YYYY-MM-DD
+      - in: query
+        name: contract_end_date_to
+        required: false
+        schema:
+          type: string
+        description: Filter by contract end date to YYYY-MM-DD
+      - in: query
+        name: internal_contact
+        required: false
+        schema:
+          type: string
+          pattern: ^.+@.+$
+        description: Filter by internal contact email.
+      - in: query
+        name: external_vendor_id
+        required: false
+        example: 123e4567-e89b-12d3-a456-426614174000,123e4567-e89b-12d3-a456-426614174001
+        schema:
+          type: string
+          pattern: ^[^,]+(\s*,\s*[^,]+)*$
+        description: Filter by external vendor ID (comma-separated UUID for multiple)
+      - in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        description: Sort field and direction.
+      - in: query
+        name: page
+        required: false
+        schema:
+          type: number
+        description: page number, first page is 0
+      - in: query
+        name: size
+        required: false
+        schema:
+          type: number
+        description: size of the pages in the paginated result, from 10 to 100. Values outside that range are clamped rather than rejected. Takes precedence over page_size when both are sent.
+      - in: query
+        name: page_size
+        required: false
+        schema:
+          type: number
+        description: Alias for size, applied only when size is absent from the query string. Values outside 10 to 100 are clamped rather than rejected.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllCompaniesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorUnauthorized'
+      x-internal: false
+  /all-companies/bulk-delete:
+    post:
+      tags:
+      - all-companies
+      summary: Execute bulk delete operation on followed companies
+      description: Performs a bulk delete operation on followed companies.
+      operationId: executeFollowedCompaniesBulkDeleteOperation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkDeleteAllCompaniesSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllCompaniesBulkDeleteResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+      parameters: []
+  /all-companies/bulk-update:
+    post:
+      tags:
+      - all-companies
+      summary: Execute bulk update operation on followed companies
+      description: Performs a bulk update operation on followed companies
+      operationId: executeFollowedCompaniesBulkUpdateOperation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllCompaniesBulkUpdate'
+        required: true
+      responses:
+        '200':
+          description: Result of the bulk update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllCompaniesBulkUpdateResponse'
+      parameters: []
+  /all-companies/{domain}:
+    get:
+      tags:
+      - all-companies
+      summary: Get followed company by domain
+      description: Fetch a company by its domain
+      operationId: getFollowedCompanyByDomain
+      parameters:
+      - in: path
+        name: domain
+        required: true
+        example: example.com
+        schema:
+          type: string
+        description: primary domain identifying a company
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyByDomainResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+    patch:
+      tags:
+      - all-companies
+      summary: Update followed company by domain
+      description: Updates any of the followed company allowed fields.
+      operationId: updateFollowedCompanyByDomain
+      parameters:
+      - in: path
+        name: domain
+        required: true
+        example: example.com
+        schema:
+          type: string
+        description: primary domain identifying a company
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateCompanyFieldsByDomain'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateCompanyFields'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+    delete:
+      tags:
+      - all-companies
+      summary: Delete followed company by domain
+      description: Removes the company from portfolios and watchlists and deletes the associated data.
+      operationId: deleteFollowedCompanyByDomain
+      parameters:
+      - in: path
+        name: domain
+        required: true
+        example: example.com
+        schema:
+          type: string
+        description: primary domain identifying a company
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorForbidden'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+  /scorecard-notes/{domain}:
+    get:
+      tags:
+      - scorecard-notes
+      summary: Find scorecard notes
+      description: Searches scorecard notes by any of the allowed fields. Results are paginated.
+      operationId: findScorecardNotes
+      parameters:
+      - name: domain
+        in: path
+        description: Filter by followed company domain
+        required: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Sort by any of the allowed fields. Use "-" for DESC order. Default sort by created_at DESC.
+        schema:
+          type: string
+          enum:
+          - created_at
+          - -created_at
+          - updated_at
+          - -updated_at
+          - created_by
+          - -created_by
+          - updated_by
+          - -updated_by
+      - name: page
+        in: query
+        description: Current page (zero-based)
+        schema:
+          type: integer
+          default: 0
+      - name: page_size
+        in: query
+        description: Results per page
+        schema:
+          type: integer
+          minimum: 10
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Note'
+                  page:
+                    type: integer
+                    description: Current page (zero-based)
+                  size:
+                    type: integer
+                    description: Total number of records
+        '400':
+          description: Bad request
+  /scorecard-tags/all-companies/bulk-create:
+    post:
+      tags:
+      - scorecard-tags
+      summary: Associates the given tag ids to the given companies
+      description: Associates the given tag ids to the given companies
+      operationId: executeCustomTagsFollowedCompaniesBulkCreateOperation
+      requestBody:
+        $ref: '#/components/requestBodies/executeCustomTagsFollowedCompaniesBulkCreateOperationPayload'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Count of custom tags affected.
+        '400':
+          description: Bad request
+  /scorecard-tags/all-companies/bulk-delete:
+    post:
+      tags:
+      - scorecard-tags
+      summary: Removes the given tags from the given companies
+      description: Removes the given tags from the given companies.
+      operationId: executeCustomTagsFollowedCompaniesBulkDeleteOperation
+      requestBody:
+        $ref: '#/components/requestBodies/executeCustomTagsFollowedCompaniesBulkCreateOperationPayload'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Count of domains affected.
+        '400':
+          description: Bad request
+components:
+  requestBodies:
+    executeCustomTagsFollowedCompaniesBulkCreateOperationPayload:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              domains:
+                type: array
+                items:
+                  type: string
+                  description: Domain of the followed company
+                  example: example.com
+              tag_ids:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+      description: List of domains of followed companies and list of tag ids
+  securitySchemes:
+    Token:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'SecurityScorecard API endpoints require an authentication token to be passed\nin an authorization header in order to return data. If you do not already\nhave a token, you can create one by going to the API Access area in your\n[Settings page](https://platform.securityscorecard.io/#/settings/api) and then\nclicking Generate New Token. Please note this tokens have no expiration\nso they can be used until manually revoked. If you have a token and generate\na new one, the previous token will be revoked and can no longer be used.\n\nAdministrators can also revoke API tokens for any user in their account.\n\nOnce you have your token you can pass it in using the `Authorization` http header like this:\n\n```\ncurl -X GET \\\n  https://api.securityscorecard.io/portfolios \\\n  -H ''authorization: Token \u003Cyour token\u003E''\n```'
+  schemas:
+    AllCompaniesResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        entries:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              id:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                description: Identifier
+                type: string
+              domain:
+                example: example.com
+                type: string
+                description: primary domain of the company
+              name:
+                example: Example Ltd.
+                type: string
+              added_date:
+                type: string
+                format: date-time
+              last_logged_in:
+                type: string
+                format: date-time
+                description: Last time a user belonging to this company logged in to SecurityScorecard. Omitted by this endpoint when the company has never logged in. Reflects the company's own platform activity, not your relationship with it.
+                nullable: true
+              tags:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    id:
+                      example: aea7dae2-370f-4279-a458-4c7cb9661778
+                      pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                      description: Identifier
+                      type: string
+                    name:
+                      example: Example tag.
+                      type: string
+              portfolios:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    id:
+                      example: aea7dae2-370f-4279-a458-4c7cb9661778
+                      pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                      description: Identifier
+                      type: string
+                    name:
+                      type: string
+                      description: human-readable name
+                      example: Our Vendors
+              monitored:
+                type: boolean
+                description: true or false
+                default: false
+              business_impact:
+                type: string
+              lifecycle_status:
+                type: string
+                description: Status of the company in the company lifecycle. One of new, assess, respond, monitor, active, inactive, under_review, offboarding, n_a.
+                enum:
+                - new
+                - assess
+                - respond
+                - monitor
+                - active
+                - inactive
+                - under_review
+                - offboarding
+                - n_a
+              data_types_shared:
+                type: array
+                items:
+                  type: string
+              risk:
+                type: string
+              business_unit:
+                type: string
+              contract_end_date:
+                type: string
+                format: date-time
+              vendor_id:
+                type: string
+                description: Customer internal ID assigned to the company
+              external_vendor_id:
+                type: string
+                description: External vendor ID assigned to the company
+              internal_contact:
+                type: string
+                format: email
+                pattern: ^.+@.+$
+                example: john.smith@example.com
+                description: Customer internal user email who maintains the relationship with the company
+              score:
+                type: number
+                description: Company score
+                example: 95
+              grade:
+                type: string
+                description: Company grade
+                example: A
+              last30Days_breach_count:
+                type: number
+                description: Last 30 days breach count
+                example: 0
+              last_month_score_change:
+                type: number
+                description: Last month score change
+                example: 0
+        size:
+          description: The number of records to be returned per page
+          example: 100
+          type: integer
+        page:
+          description: The page number to be returned
+          example: 1
+          type: integer
+        total:
+          description: The total number of records matching the given query
+          example: 999
+          type: integer
+      required:
+      - entries
+      - size
+      - page
+      - total
+    ErrorUnauthorized:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 401
+          required:
+          - message
+          - statusCode
+    CompanyByDomainResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          example: aea7dae2-370f-4279-a458-4c7cb9661778
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          description: Identifier
+          type: string
+        domain:
+          example: example.com
+          type: string
+          description: primary domain of the company
+        name:
+          example: Example Ltd.
+          type: string
+        added_date:
+          type: string
+          format: date
+          example: '2020-01-01'
+          pattern: ^\d{4}-\d{2}-\d{2}$
+        last_logged_in:
+          type: string
+          format: date-time
+          description: Last time a user belonging to this company logged in to SecurityScorecard. Returned as an empty string when the company has never logged in. Reflects the company's own platform activity, not your relationship with it.
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              id:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                description: Identifier
+                type: string
+              name:
+                example: Example tag.
+                type: string
+        portfolios:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              id:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                description: Identifier
+                type: string
+              name:
+                type: string
+                description: human-readable name
+                example: Our Vendors
+        monitored:
+          type: boolean
+          description: true or false
+          default: false
+        business_impact:
+          type: string
+        lifecycle_status:
+          type: string
+        data_types_shared:
+          type: array
+          items:
+            type: string
+        risk:
+          type: string
+        inherent_risk:
+          type: string
+          description: 'Risk tier assigned at intake submission time: ''low'' | ''medium'' | ''high'' | ''critical''. Absent for vendors not onboarded through intake.'
+        business_unit:
+          type: string
+        contract_end_date:
+          type: string
+          format: date
+          example: '2020-01-01'
+          pattern: ^\d{4}-\d{2}-\d{2}$
+        vendor_id:
+          type: string
+          description: Customer internal ID assigned to the company
+        external_vendor_id:
+          type: string
+          description: External vendor ID assigned to the company
+        internal_contact:
+          type: string
+          format: email
+          pattern: ^.+@.+$
+          example: john.smith@example.com
+          description: Customer internal user email who maintains the relationship with the company
+    ErrorNotFound:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 404
+          required:
+          - message
+          - statusCode
+    ErrorBadRequest:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 400
+          required:
+          - message
+          - statusCode
+    updateCompanyFields:
+      type: object
+      additionalProperties: false
+      properties:
+        business_impact:
+          type: string
+        lifecycle_status:
+          type: string
+        data_types_shared:
+          type: array
+          items:
+            type: string
+        risk:
+          type: string
+        business_unit:
+          type: string
+        contract_end_date:
+          type: string
+          format: date
+          example: '2020-01-01'
+          pattern: ^\d{4}-\d{2}-\d{2}$
+        vendor_id:
+          type: string
+          description: Customer internal ID assigned to the company
+        external_vendor_id:
+          type: string
+          description: External vendor ID assigned to the company
+        internal_contact:
+          type: string
+          format: email
+          pattern: ^.+@.+$
+          example: john.smith@example.com
+          description: Customer internal user email who maintains the relationship with the company
+    updateCompanyFieldsByDomain:
+      type: object
+      properties:
+        business_impact:
+          type: string
+        lifecycle_status:
+          type: string
+        data_types_shared:
+          type: array
+          items:
+            type: string
+        risk:
+          type: string
+        business_unit:
+          type: string
+        contract_end_date:
+          type: string
+        vendor_id:
+          type: string
+        internal_contact:
+          type: string
+          format: email
+          pattern: ^.+@.+$
+          example: john.smith@example.com
+        external_vendor_id:
+          type: string
+          pattern: ^[^,]+(\s*,\s*[^,]+)*$
+          example: 123-456,789-012
+      additionalProperties: false
+    AllCompaniesBulkUpdate:
+      allOf:
+      - title: AllCompaniesBulkUpdateSchema
+        type: object
+        properties:
+          domain:
+            type: string
+          business_impact:
+            type: string
+          lifecycle_status:
+            type: string
+          data_types_shared:
+            type: array
+            items:
+              type: string
+          risk:
+            type: string
+          business_unit:
+            type: string
+          contract_end_date:
+            type: string
+            format: date-time
+          vendor_id:
+            type: string
+          internal_contact:
+            type: string
+            format: email
+            pattern: ^.+@.+$
+            example: john.smith@example.com
+    AllCompaniesBulkUpdateResponse:
+      type: object
+      properties:
+        count:
+          type: number
+          description: Number of records updated.
+      additionalProperties: false
+    ErrorForbidden:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 403
+          required:
+          - message
+          - statusCode
+    AllCompaniesBulkDeleteResponse:
+      type: object
+      properties:
+        count:
+          type: number
+          description: Count of followed companies affected.
+      additionalProperties: false
+    BulkDeleteAllCompaniesSchema:
+      type: array
+      items:
+        type: string
+      additionalProperties: false
+    Note:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        note:
+          type: string
+          example: Example note description
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        created_by:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            first_name:
+              type: string
+              example: John
+            last_name:
+              type: string
+              example: Doe
+            username:
+              type: string
+              example: john_doe
+        updated_by:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            first_name:
+              type: string
+              example: John
+            last_name:
+              type: string
+              example: Doe
+            username:
+              type: string
+              example: john_doe
+tags:
+- name: scorecard-tags
+  description: Operations about scorecard tags
+- name: all-companies
+  description: Operations about all followed companies
+- name: scorecard-notes
+  description: Operations about scorecard notes
+x-provenance:
+  method: searched
+  source: https://securityscorecard.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://securityscorecard.readme.io/reference/deletefollowedcompanybydomain.md
+  - https://securityscorecard.readme.io/reference/executecustomtagsfollowedcompaniesbulkcreateoperation.md
+  - https://securityscorecard.readme.io/reference/executecustomtagsfollowedcompaniesbulkdeleteoperation.md
+  - https://securityscorecard.readme.io/reference/executefollowedcompaniesbulkdeleteoperation.md
+  - https://securityscorecard.readme.io/reference/executefollowedcompaniesbulkupdateoperation.md
+  - https://securityscorecard.readme.io/reference/findfollowedcompanies.md
+  - https://securityscorecard.readme.io/reference/findscorecardnotes.md
+  - https://securityscorecard.readme.io/reference/getfollowedcompanybydomain.md
+  - https://securityscorecard.readme.io/reference/updatefollowedcompanybydomain.md
+  merge:
+    pages: 9
+    deduped: 13
+    conflicts_kept_first: 0

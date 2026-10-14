@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-create-custom-scorecard-request-schema.json",
+  "title": "createCustomScorecardRequest",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-securityscorecard-api-openapi.yml#/components/schemas/createCustomScorecardRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "name of the custom scorecard"
+    },
+    "description": {
+      "type": "string",
+      "description": "description of the custom scorecard"
+    },
+    "managed_by": {
+      "type": "string",
+      "description": "specify edit access levels of private (me only), team, or company"
+    },
+    "share_with": {
+      "type": "string",
+      "description": "specify who can access this scorecard, if company wide or public to anyone in the platform"
+    },
+    "visibility_level": {
+      "type": "string",
+      "description": "specify who can see this scorecard, if private, company or public in the platform"
+    },
+    "team_id": {
+      "type": "string",
+      "description": "unique identifier of the team that manages a custom scorecard"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Source Scorecards list"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "includes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "number",
+                "description": "index of the filter"
+              },
+              "include": {
+                "type": "array",
+                "description": "list of footprint filters to include, only one filter type is allowed, ips or domains or countries or footprint tags, over a condition (no more than one)",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "index": {
+                      "type": "number",
+                      "description": "index of the filter"
+                    },
+                    "condition": {
+                      "type": "string",
+                      "enum": [
+                        "is",
+                        "is not",
+                        "not",
+                        "includes_all"
+                      ],
+                      "description": "condition to apply to the filter"
+                    },
+                    "ip": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint ips filters to add. "
+                    },
+                    "domain": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint domains filters to add"
+                    },
+                    "country": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint countries filters to add"
+                    },
+                    "footprint_tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "list of footprint tags filters to add"
+                    },
+                    "associated_assets": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "condition to apply to the filter"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "custom scorecard filter condition"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "list of include filters to include"
+        },
+        "excludes": {
+          "type": "array",
+          "description": "list of footprint filters to exclude, only one filter type is allowed, ips or domains or countries or footprint tags, over a condition (no more than one)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "number",
+                "description": "index of the filter"
+              },
+              "condition": {
+                "type": "string",
+                "enum": [
+                  "is",
+                  "is not",
+                  "not",
+                  "includes_all"
+                ],
+                "description": "condition to apply to the filter"
+              },
+              "ip": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint ips filters to add. "
+              },
+              "domain": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint domains filters to add"
+              },
+              "country": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint countries filters to add"
+              },
+              "footprint_tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "list of footprint tags filters to add"
+              },
+              "associated_assets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "condition to apply to the filter"
+              }
+            },
+            "additionalProperties": false,
+            "description": "custom scorecard filter condition"
+          }
+        },
+        "issues": {
+          "type": "object",
+          "properties": {
+            "include": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "list of issues to filter"
+            },
+            "exclude": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "list of issues to filter"
+            }
+          },
+          "additionalProperties": false,
+          "description": "list of issues to filter"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "sources",
+    "filters"
+  ]
+}

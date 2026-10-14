@@ -1,0 +1,301 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/security-scorecard/main/json-schema/security-scorecard-get-asi-asset-ip-response-schema.json",
+  "title": "getAsiAssetIpResponse",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/security-scorecard-asi-internal-service-openapi.yml#/components/schemas/getAsiAssetIpResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "location": {
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "type": "string"
+        },
+        "country_name": {
+          "type": "string",
+          "description": "Country"
+        },
+        "country_code": {
+          "type": "string",
+          "description": "Country Code"
+        },
+        "city_name": {
+          "type": "string",
+          "description": "City"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud provider"
+        },
+        "region": {
+          "type": "string",
+          "description": "Cloud region"
+        },
+        "cidr": {
+          "type": "string",
+          "description": "CIDR"
+        }
+      }
+    },
+    "attribution": {
+      "type": "object",
+      "properties": {
+        "companies": {
+          "type": "array",
+          "description": "List of companies attributed to this asset",
+          "items": {
+            "type": "object",
+            "properties": {
+              "company": {
+                "type": "string",
+                "description": "Company name"
+              },
+              "domain": {
+                "type": "string",
+                "description": "domain"
+              },
+              "scorecard": {
+                "type": "string",
+                "description": "Scorecard id"
+              },
+              "score": {
+                "type": "number",
+                "description": "SSC score"
+              },
+              "industry": {
+                "type": "string",
+                "description": "industry"
+              },
+              "libraries": {
+                "type": "number",
+                "description": "Libraries Count"
+              }
+            }
+          }
+        }
+      }
+    },
+    "malrep": {
+      "type": "object",
+      "properties": {
+        "maliciousReputation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "info": {
+                "type": "string",
+                "description": "Name of malicious reputation"
+              },
+              "last_seen": {
+                "type": "string",
+                "description": "Last time observed"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ports": {
+      "type": "object",
+      "properties": {
+        "ports": {
+          "type": "array",
+          "description": "list of open ports in the asset",
+          "items": {
+            "type": "object",
+            "properties": {
+              "last_seen": {
+                "type": "string",
+                "description": "scan time"
+              },
+              "port": {
+                "type": "string",
+                "description": "port number"
+              },
+              "product": {
+                "type": "string",
+                "description": "product running on the port"
+              },
+              "service": {
+                "type": "string",
+                "description": "service detected on port"
+              },
+              "device_type": {
+                "type": "string",
+                "description": "Device type"
+              },
+              "os_type": {
+                "type": "string",
+                "description": "Os type"
+              },
+              "cep": {
+                "type": "array",
+                "description": "CPEs",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ransomware": {
+      "type": "object",
+      "properties": {
+        "ransomwareList": {
+          "type": "array",
+          "description": "Ransomware list",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Ransomware name"
+              },
+              "victim_name": {
+                "type": "string",
+                "description": "Victim name"
+              },
+              "victim_posted_domain": {
+                "type": "string",
+                "description": "Domain associated to victim"
+              },
+              "last_seen": {
+                "type": "string",
+                "description": "Time when ransomware was detected"
+              }
+            }
+          }
+        }
+      }
+    },
+    "threat_actors": {
+      "type": "object",
+      "properties": {
+        "actors": {
+          "type": "array",
+          "description": "Threat actors associated to this asset",
+          "items": {
+            "type": "object",
+            "properties": {
+              "actor": {
+                "type": "string",
+                "description": "Threat Actor name"
+              },
+              "origin": {
+                "type": "string",
+                "description": "Origin"
+              },
+              "link_type": {
+                "type": "string",
+                "description": "link type (cve, malware... etc)"
+              },
+              "link": {
+                "type": "string",
+                "description": "Vulnerabilities associated to this threat actor"
+              },
+              "last_seen": {
+                "type": "string",
+                "description": "Last detection"
+              }
+            }
+          }
+        }
+      }
+    },
+    "certs": {
+      "type": "object",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "hash": {
+                "type": "string",
+                "description": "Certificate Hash"
+              },
+              "status": {
+                "type": "string",
+                "description": "Certificate Status"
+              },
+              "domain": {
+                "type": "string",
+                "description": "Domain associated"
+              }
+            }
+          }
+        }
+      }
+    },
+    "cves": {
+      "type": "object",
+      "properties": {
+        "cves": {
+          "type": "array",
+          "description": "List of CVEs",
+          "items": {
+            "type": "object",
+            "properties": {
+              "cvss": {
+                "type": "number",
+                "description": "CVSS score"
+              },
+              "cve": {
+                "type": "string",
+                "description": "CVE id"
+              },
+              "maturity": {
+                "type": "string",
+                "description": "Exploit Maturity"
+              },
+              "actor": {
+                "type": "string",
+                "description": "Threat actors using this CVE"
+              },
+              "port": {
+                "type": "number",
+                "description": "Port associated with the CVE"
+              },
+              "last_seen": {
+                "type": "string",
+                "description": "Last detection time"
+              }
+            }
+          }
+        }
+      }
+    },
+    "infections": {
+      "type": "object",
+      "properties": {
+        "activeInfections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "family": {
+                "type": "string",
+                "description": "Infection family"
+              },
+              "category": {
+                "type": "string",
+                "description": "Infection category"
+              },
+              "last_seen": {
+                "type": "string",
+                "description": "Last time observed"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
