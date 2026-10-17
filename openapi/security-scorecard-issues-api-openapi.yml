@@ -1,0 +1,719 @@
+openapi: 3.2.0
+info:
+  title: SecurityScorecard Issues API
+  version: 1.9.73
+  contact:
+    name: SecurityScorecard Support
+    email: support@securityscorecard.io
+  description: 'SecurityScorecard enables users to instantly rate and understand the security
+
+    risk of any company.'
+  x-logo:
+    url: https://platform.securityscorecard.io/images/ssc-logo-white-stacked.svg
+    backgroundColor: '#222830'
+servers:
+- url: https://api.securityscorecard.io
+security:
+- Token: []
+tags:
+- name: Issues
+paths:
+  /companies/{scorecard_identifier}/active-issues:
+    get:
+      summary: Get a company's active issues
+      tags:
+      - Issues
+      parameters:
+      - in: path
+        name: scorecard_identifier
+        required: true
+        example: example.com
+        schema:
+          type: string
+        description: primary identifier of a company or scorecard
+      - in: query
+        name: issue_types
+        required: true
+        example: tlscert_weak_signature, tlscert_self_signed
+        schema:
+          type: string
+        description: List of issue types to filter by (e.g., tlscert_weak_signature, tlscert_self_signed)
+      responses:
+        '200':
+          description: Company's active issues
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyActiveIssuesResponseSchema'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorUnauthorized'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorForbidden'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+      operationId: getCompaniesByScorecardIdentifierActiveIssues
+      x-operation-id-source: derived
+components:
+  schemas:
+    ErrorForbidden:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 403
+          required:
+          - message
+          - statusCode
+    CompanyActiveIssuesResponseSchema:
+      type: object
+      additionalProperties: false
+      properties:
+        issue_types:
+          type: array
+          items:
+            type: object
+            description: a scorecard tag
+            additionalProperties: false
+            properties:
+              name:
+                description: issue type (permanent key)
+                type: string
+                example: cookie_secure_flag
+              issues:
+                type: array
+                description: list of active issues of this type on this company
+                items:
+                  type: object
+                  properties:
+                    issue_id:
+                      type: string
+                      description: issue id
+                    issue_count:
+                      type: number
+                      description: total number of findings of this issue on this company
+                    domain:
+                      type: string
+                      example: example.com
+                    last_seen_time:
+                      type: string
+                      description: last seen time of this issue
+                    first_seen_time:
+                      type: string
+                      description: first seen time of this issue
+                    group_status:
+                      type: string
+                      description: group status of this issue
+                      example: active
+                    sources:
+                      type: array
+                      items:
+                        type: string
+                    scheme:
+                      type: string
+                      example: https
+                    analysis:
+                      type: string
+                      example: csp_unsafe_policy
+                    observations:
+                      type: array
+                      description: array of observations. its structure depends on the issue type
+                      items: {}
+              issues_count:
+                type: integer
+                example: 3
+                description: total active issues of this type on this company
+            required:
+            - name
+            - issues
+            - issues_count
+        total_active_issues:
+          type: integer
+          example: 12
+          description: total number of active issues
+      required:
+      - issue_types
+      - total_active_issues
+    ErrorBadRequest:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 400
+          required:
+          - message
+          - statusCode
+    ErrorUnauthorized:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 401
+          required:
+          - message
+          - statusCode
+    ErrorNotFound:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 404
+          required:
+          - message
+          - statusCode
+  securitySchemes:
+    Token:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: "SecurityScorecard API endpoints require an authentication token to be passed\nin an authorization header in order to return data. If you do not already\nhave a token, you can create one by going to the API Access area in your\n[Settings page](https://platform.securityscorecard.io/#/settings/api) and then\nclicking Generate New Token. Please note this tokens have no expiration\nso they can be used until manually revoked. If you have a token and generate\na new one, the previous token will be revoked and can no longer be used.\n\nAdministrators can also revoke API tokens for any user in their account.\n\nOnce you have your token you can pass it in using the `Authorization` http header like this:\n\n```\ncurl -X GET \\\n  https://api.securityscorecard.io/portfolios \\\n  -H 'authorization: Token <your token>'\n```\n"
+x-provenance:
+  method: searched
+  source: https://securityscorecard.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://securityscorecard.readme.io/reference/delete_custom-scorecards-id-filters.md
+  - https://securityscorecard.readme.io/reference/delete_custom-scorecards-id-sources.md
+  - https://securityscorecard.readme.io/reference/delete_custom-scorecards-id.md
+  - https://securityscorecard.readme.io/reference/delete_portfolios-portfolio-id-companies-all.md
+  - https://securityscorecard.readme.io/reference/delete_portfolios-portfolio-id-companies-domain.md
+  - https://securityscorecard.readme.io/reference/delete_portfolios-portfolio-id.md
+  - https://securityscorecard.readme.io/reference/delete_scorecard-tags-groups-id.md
+  - https://securityscorecard.readme.io/reference/delete_scorecard-tags-id-companies-domain.md
+  - https://securityscorecard.readme.io/reference/delete_scorecard-tags-id.md
+  - https://securityscorecard.readme.io/reference/delete_scorecard-tags-tag-id-groups-tag-group-id.md
+  - https://securityscorecard.readme.io/reference/deleteapibyparentdomaindomainbydomainassociatetagsbytagid.md
+  - https://securityscorecard.readme.io/reference/deleteapibyparentdomainipbyipassociatetagsbytagid.md
+  - https://securityscorecard.readme.io/reference/deleteapibytagid.md
+  - https://securityscorecard.readme.io/reference/deleteapigroupsbytaggroupidassociationbytagid.md
+  - https://securityscorecard.readme.io/reference/deleteapitaggroupsbyid.md
+  - https://securityscorecard.readme.io/reference/deleteplansbyid.md
+  - https://securityscorecard.readme.io/reference/deleteplansbyidguests.md
+  - https://securityscorecard.readme.io/reference/deleteplansbyiditems.md
+  - https://securityscorecard.readme.io/reference/get_companies-domain-history-events-breaches.md
+  - https://securityscorecard.readme.io/reference/get_companies-domain-issue-context-issue-type.md
+  - https://securityscorecard.readme.io/reference/get_companies-domain-score-plans-by-target-score.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-active-issues.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-expanded-risk.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-factors.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-active-cve-exploitation-attempted-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-adware-installation-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-adware-installation-trail-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-alleged-breach-incident-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-attack-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-attempted-information-leak-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-browser-logs-contain-debug-message-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-cdn-hosting-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-cobalt-strike-c2-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-cobalt-strike-c2-service-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-communication-server-with-expired-cert-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-communication-with-server-certificate-issued-by-blacklisted-country-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-compromised-by-information-stealer.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-compromised-credentials-found.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-contact-information-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-cookie-missing-http-only-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-cookie-missing-secure-attribute-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-csp-no-policy-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-csp-too-broad-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-csp-unsafe-policy-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-cve-in-use-by-threat-actor-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-data-leak-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-dmarc-contains-none.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-dmarc-record-missing.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-domain-missing-https-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-dos-attack-attempt-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-exploit-attempt-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-exploited-product-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-exposed-cisco-web-ui.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-exposed-embedded-iot-web-server-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-exposed-mac-airport-device-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-exposed-network-attached-storage-device-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-exposed-personal-information-info-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-exposed-printer-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-fail-to-load-page-components-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-general-scan-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-historical-compromised-credentials-found.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-hosted-on-object-storage-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-hsts-incorrect-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-industrial-control-device-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-infected-by-targeted-attack.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-insecure-ftp-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-insecure-https-redirect-pattern-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-insecure-server-certificate-key-size-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-insecure-telnet-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-iot-camera-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-ip-black-list-due-malicious-activity-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-known-compromised-or-hostile-host-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-leaked-credentials-info-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-links-to-insecure-website-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-local-file-path-exposed-via-url-scheme-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-mail-server-unusual-port-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-malicious-botnet-c-and-c-server-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-malicious-scan-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-malicious-tor-exit-node-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-malicious-tor-relay-router-node-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-malicious-user-agent-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-malware-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-malware-infection-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-malware-infection-trail-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-microsoft-exchange-0-day-vulnerability-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-microsoft-exchange-http-api-vulnerability-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-minecraft-server-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-mirai-botnet-traffic-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-mysql-server-empty-password-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-open-port.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-openssl-critical-vulnerability-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-outdated-browser-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-outdated-os-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-patching-analysis-high-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-patching-analysis-low-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-patching-analysis-medium-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-patching-cadence-high-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-patching-cadence-low-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-patching-cadence-medium-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-patching-cadence-v3-critical.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-patching-cadence-v3-high.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-patching-cadence-v3-low.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-patching-cadence-v3-medium.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-payment-provider-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-potentially-vulnerable-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-potentially-vulnerable-cisco-rv-320-325.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-potentially-vulnerable-cve-2023-33246.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-potentially-vulnerable-cve-2023-34362.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-potentially-vulnerable-cve-2023-3519.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-potentially-vulnerable-cve-2023-37582.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-potentially-vulnerable-cve-2023-37979.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-potentially-vulnerable-cve-2023-38035.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-potentially-vulnerable-cve-2023-46747.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-potentially-vulnerable-cve-2024-21887.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-potentially-vulnerable-cve-2024-46805.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-product-exploited-by-ransomware-actors.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-product-uses-vulnerable-log4j-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-pva-installation-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-pva-installation-trail-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-ransomware-association-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-ransomware-infection-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-ransomware-infection-trail-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-ransomware-victim-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-redirect-chain-contains-http-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-redirect-to-insecure-website-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-references-object-storage-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-remote-access-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-sensitive-data-exposure-through-insecure-channel-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-server-error-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-cassandra-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-cloud-provider-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-couchdb-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-dns-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-elasticsearch-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-end-of-life-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-end-of-service-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-ftp-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-http-proxy-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-imap-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-ldap-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-ldap-anonymous-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-microsoft-sql-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-mongodb-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-mysql-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-networking-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-open-vpn-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-oracle-db-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-pop3-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-postgresql-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-pptp-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-pulse-vpn-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-rdp-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-redis-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-rsync-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-smb-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-soap-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-socks-proxy-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-telnet-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-vnc-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-vuln-host-high-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-vuln-host-low-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-vuln-host-medium-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-vuln-host-v3-critical.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-vuln-host-v3-high.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-vuln-host-v3-low.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-service-vuln-host-v3-medium.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-site-emits-browser-log-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-site-requests-data-over-insecure-channel-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-spa-browser-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-spf-record-malformed-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-spf-record-missing-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-spf-record-softfail-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-spf-record-wildcard-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-sql-payload-using-tor-proxy-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-ssh-weak-cipher-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-ssh-weak-mac-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-ssh-weak-protocol-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-subdomain-dmarc-contains-none.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-targeted-by-threat-actor-group.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-telephony-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-threat-actor-hosting-infrastructure-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-tls-ocsp-stapling-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-tls-weak-cipher-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-tls-weak-protocol-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-tlscert-excessive-expiration-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-tlscert-expired-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-tlscert-no-revocation-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-tlscert-revoked-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-tlscert-self-signed-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-tlscert-weak-signature-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-tor-server-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-tor-traffic-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-typosquat.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-uce-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-unsafe-sri-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-upnp-accessible-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-uses-go-daddy-infrastructure-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-uses-go-daddy-managed-wordpress-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-waf-detected-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-web-vuln-host-high-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-web-vuln-host-low-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-web-vuln-host-medium-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-web-vuln-host-v3-critical.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-web-vuln-host-v3-high.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-web-vuln-host-v3-low.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-web-vuln-host-v3-medium.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-webapp-vulnerable-to-spring4shell-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-website-copyright-expired-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-website-copyright-up-to-date-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-websocket-receives-data-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-websocket-requests-contain-sensitive-fields-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-websocket-sends-data-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-x-content-type-options-incorrect-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-x-frame-options-incorrect-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-x-xss-protection-incorrect-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events-effective-date-issues-xss-payload-using-tor-proxy-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-events.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-factors-score.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-history-score.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-active-cve-exploitation-attempted.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-adware-installation-trail.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-adware-installation.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-alleged-breach-incident.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-attack-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-attempted-information-leak.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-browser-logs-contain-debug-message.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-cdn-hosting.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-cobalt-strike-c2-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-cobalt-strike-c2-service.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-communication-server-with-expired-cert.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-communication-with-server-certificate-issued-by-blacklisted-country.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-compromised-by-information-stealer.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-compromised-credentials-found.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-contact-information-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-cookie-missing-http-only.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-cookie-missing-secure-attribute.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-csp-no-policy-v2.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-csp-too-broad-v2.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-csp-unsafe-policy-v2.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-cve-in-use-by-threat-actor.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-data-leak-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-dmarc-contains-none.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-dmarc-record-missing.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-domain-missing-https-v2.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-dos-attack-attempt-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-exploit-attempt-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-exploited-product.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-exposed-cisco-web-ui.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-exposed-embedded-iot-web-server.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-exposed-mac-airport-device.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-exposed-network-attached-storage-device.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-exposed-personal-information-info.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-exposed-printer.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-fail-to-load-page-components.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-general-scan-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-historical-compromised-credentials-found.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-hosted-on-object-storage-v2.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-hsts-incorrect-v2.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-industrial-control-device.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-infected-by-targeted-attack.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-insecure-ftp.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-insecure-https-redirect-pattern-v2.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-insecure-server-certificate-key-size.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-insecure-telnet.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-iot-camera.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-ip-black-list-due-malicious-activity.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-known-compromised-or-hostile-host.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-leaked-credentials-info.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-links-to-insecure-website.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-local-file-path-exposed-via-url-scheme.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-mail-server-unusual-port.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-malicious-botnet-c-and-c-server-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-malicious-scan-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-malicious-tor-exit-node-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-malicious-tor-relay-router-node-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-malicious-user-agent-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-malware-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-malware-infection-trail.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-malware-infection.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-microsoft-exchange-0-day-vulnerability.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-microsoft-exchange-http-api-vulnerability.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-minecraft-server-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-mirai-botnet-traffic-detected-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-mysql-server-empty-password-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-open-port.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-openssl-critical-vulnerability-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-outdated-browser-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-outdated-os-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-patching-analysis-high-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-patching-analysis-low-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-patching-analysis-medium-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-patching-cadence-high-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-patching-cadence-low-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-patching-cadence-medium-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-patching-cadence-v3-critical.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-patching-cadence-v3-high.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-patching-cadence-v3-low.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-patching-cadence-v3-medium.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-payment-provider-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-potentially-vulnerable-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-potentially-vulnerable-cisco-rv-320-325.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-potentially-vulnerable-cve-2023-33246.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-potentially-vulnerable-cve-2023-34362.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-potentially-vulnerable-cve-2023-3519.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-potentially-vulnerable-cve-2023-37582.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-potentially-vulnerable-cve-2023-37979.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-potentially-vulnerable-cve-2023-38035.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-potentially-vulnerable-cve-2023-46747.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-potentially-vulnerable-cve-2024-21887.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-potentially-vulnerable-cve-2024-46805.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-product-exploited-by-ransomware-actors.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-product-uses-vulnerable-log4j-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-pva-installation-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-pva-installation-trail-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-ransomware-association-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-ransomware-infection-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-ransomware-infection-trail-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-ransomware-victim-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-redirect-chain-contains-http-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-redirect-to-insecure-website-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-references-object-storage-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-remote-access-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-sensitive-data-exposure-through-insecure-channel-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-server-error-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-cassandra-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-cloud-provider-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-couchdb-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-dns-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-elasticsearch-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-end-of-life-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-end-of-service-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-ftp-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-http-proxy-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-imap-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-ldap-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-ldap-anonymous-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-microsoft-sql-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-mongodb-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-mysql-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-networking-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-open-vpn-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-oracle-db-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-pop3-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-postgresql-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-pptp-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-pulse-vpn-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-rdp-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-redis-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-rsync-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-smb-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-soap-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-socks-proxy-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-telnet-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-vnc-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-vuln-host-high-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-vuln-host-low-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-vuln-host-medium-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-vuln-host-v3-critical.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-vuln-host-v3-high.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-vuln-host-v3-low.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-service-vuln-host-v3-medium.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-site-emits-browser-log-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-site-requests-data-over-insecure-channel-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-spa-browser-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-spf-record-malformed-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-spf-record-missing-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-spf-record-softfail-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-spf-record-wildcard-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-sql-payload-using-tor-proxy-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-ssh-weak-cipher-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-ssh-weak-mac-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-ssh-weak-protocol-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-subdomain-dmarc-contains-none.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-targeted-by-threat-actor-group.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-telephony-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-threat-actor-hosting-infrastructure-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-tls-ocsp-stapling-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-tls-weak-cipher-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-tls-weak-protocol-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-tlscert-excessive-expiration-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-tlscert-expired-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-tlscert-no-revocation-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-tlscert-revoked-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-tlscert-self-signed-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-tlscert-weak-signature-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-tor-server-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-tor-traffic-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-typosquat.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-uce-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-unsafe-sri-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-upnp-accessible-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-uses-go-daddy-infrastructure-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-uses-go-daddy-managed-wordpress-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-waf-detected-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-web-vuln-host-high-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-web-vuln-host-low-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-web-vuln-host-medium-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-web-vuln-host-v3-critical.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-web-vuln-host-v3-high.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-web-vuln-host-v3-low.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-web-vuln-host-v3-medium.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-webapp-vulnerable-to-spring4shell-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-website-copyright-expired-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-website-copyright-up-to-date-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-websocket-receives-data-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-websocket-requests-contain-sensitive-fields-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-websocket-sends-data-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-x-content-type-options-incorrect-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-x-frame-options-incorrect-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-x-xss-protection-incorrect-v2-1.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-issues-xss-payload-using-tor-proxy-detected.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier-summary-factors.md
+  - https://securityscorecard.readme.io/reference/get_companies-scorecard-identifier.md
+  - https://securityscorecard.readme.io/reference/get_compliance-frameworks-1.md
+  - https://securityscorecard.readme.io/reference/get_compliance-frameworks-key-1.md
+  - https://securityscorecard.readme.io/reference/get_custom-scorecards-id.md
+  - https://securityscorecard.readme.io/reference/get_industries-industry-factors.md
+  - https://securityscorecard.readme.io/reference/get_industries-industry-history-factors.md
+  - https://securityscorecard.readme.io/reference/get_industries-industry-history-score-1.md
+  - https://securityscorecard.readme.io/reference/get_industries-industry-score.md
+  - https://securityscorecard.readme.io/reference/get_metadata-factors-1.md
+  - https://securityscorecard.readme.io/reference/get_metadata-issue-types-1.md
+  - https://securityscorecard.readme.io/reference/get_metadata-issue-types-type-1.md
+  - https://securityscorecard.readme.io/reference/get_portfolios-portfolio-id-companies.md
+  - https://securityscorecard.readme.io/reference/get_portfolios-portfolio-id-expanded-risk.md
+  - https://securityscorecard.readme.io/reference/get_portfolios.md
+  - https://securityscorecard.readme.io/reference/get_reports-files-file-path-1.md
+  - https://securityscorecard.readme.io/reference/get_reports-recent-1.md
+  - https://securityscorecard.readme.io/reference/get_scorecard-tags-groups-id.md
+  - https://securityscorecard.readme.io/reference/get_scorecard-tags-groups.md
+  - https://securityscorecard.readme.io/reference/get_scorecard-tags-id-companies.md
+  - https://securityscorecard.readme.io/reference/get_scorecard-tags.md
+  - https://securityscorecard.readme.io/reference/get_users-by-username-username-notifications-recent-1.md
+  - https://securityscorecard.readme.io/reference/get_v1-saml-metadata-service-provider-1.md
+  - https://securityscorecard.readme.io/reference/get_vendor-detection-domain-fourth-party.md
+  - https://securityscorecard.readme.io/reference/get_vendor-detection-domain-products.md
+  - https://securityscorecard.readme.io/reference/get_vendor-detection-domain-risk.md
+  - https://securityscorecard.readme.io/reference/get_vendor-detection-domain-third-party.md
+  - https://securityscorecard.readme.io/reference/get_vendor-detection-portfolios-portfolioid.md
+  - https://securityscorecard.readme.io/reference/getapi.md
+  - https://securityscorecard.readme.io/reference/getapibyparentdomaindomainrelatedtags.md
+  - https://securityscorecard.readme.io/reference/getapibyparentdomainiprelatedtags.md
+  - https://securityscorecard.readme.io/reference/getapitaggroupsbyid.md
+  - https://securityscorecard.readme.io/reference/getbyparentdomainattributionlog.md
+  - https://securityscorecard.readme.io/reference/getbyparentdomaintaggroups.md
+  - https://securityscorecard.readme.io/reference/getcompanyscorebytype.md
+  - https://securityscorecard.readme.io/reference/getplans.md
+  - https://securityscorecard.readme.io/reference/getplansmanagedservices.md
+  - https://securityscorecard.readme.io/reference/patch_custom-scorecards-id-filters.md
+  - https://securityscorecard.readme.io/reference/patch_custom-scorecards-id-sources.md
+  - https://securityscorecard.readme.io/reference/patchplansfactorscoreimprovementbyid.md
+  - https://securityscorecard.readme.io/reference/patchplansissueresolutionbyid.md
+  - https://securityscorecard.readme.io/reference/patchplansoverallscoreimprovementbyid.md
+  - https://securityscorecard.readme.io/reference/post_companies-bulk-searches.md
+  - https://securityscorecard.readme.io/reference/post_companies-domain-issues-type-feedback-1.md
+  - https://securityscorecard.readme.io/reference/post_companies-domain-issues-type-feedback-validation-request.md
+  - https://securityscorecard.readme.io/reference/post_custom-scorecards.md
+  - https://securityscorecard.readme.io/reference/post_invitations-1.md
+  - https://securityscorecard.readme.io/reference/post_portfolios.md
+  - https://securityscorecard.readme.io/reference/post_reports-compliance-csv-export.md
+  - https://securityscorecard.readme.io/reference/post_reports-detailed-1.md
+  - https://securityscorecard.readme.io/reference/post_reports-events-json-1.md
+  - https://securityscorecard.readme.io/reference/post_reports-footprint-domains-1.md
+  - https://securityscorecard.readme.io/reference/post_reports-footprint-ips-1.md
+  - https://securityscorecard.readme.io/reference/post_reports-full-scorecard-json-1.md
+  - https://securityscorecard.readme.io/reference/post_reports-issues-1.md
+  - https://securityscorecard.readme.io/reference/post_reports-partnership-1.md
+  - https://securityscorecard.readme.io/reference/post_reports-portfolio-1.md
+  - https://securityscorecard.readme.io/reference/post_reports-scorecard-footprint-1.md
+  - https://securityscorecard.readme.io/reference/post_reports-summary-1.md
+  - https://securityscorecard.readme.io/reference/post_scorecard-tags-bulk-delete.md
+  - https://securityscorecard.readme.io/reference/post_scorecard-tags-groups.md
+  - https://securityscorecard.readme.io/reference/post_scorecard-tags-id-companies-domain.md
+  - https://securityscorecard.readme.io/reference/post_scorecard-tags-tag-id-groups-tag-group-id.md
+  - https://securityscorecard.readme.io/reference/post_scorecard-tags.md
+  - https://securityscorecard.readme.io/reference/postapi.md
+  - https://securityscorecard.readme.io/reference/postapibyparentdomaindomainbydomainassociatetagsbytagid.md
+  - https://securityscorecard.readme.io/reference/postapibyparentdomainipbyipassociatetagsbytagid.md
+  - https://securityscorecard.readme.io/reference/postapigroupsbytaggroupidassociationbytagid.md
+  - https://securityscorecard.readme.io/reference/postapitaggroups.md
+  - https://securityscorecard.readme.io/reference/postappsbyappidjobs.md
+  - https://securityscorecard.readme.io/reference/postbyparentdomainassetsdomains.md
+  - https://securityscorecard.readme.io/reference/postbyparentdomainassetsips.md
+  - https://securityscorecard.readme.io/reference/postplansarchive.md
+  - https://securityscorecard.readme.io/reference/postplansbyidguests.md
+  - https://securityscorecard.readme.io/reference/postplansfactorscoreimprovement.md
+  - https://securityscorecard.readme.io/reference/postplansissueresolution.md
+  - https://securityscorecard.readme.io/reference/postplansoverallscoreimprovement.md
+  - https://securityscorecard.readme.io/reference/postplansunarchive.md
+  - https://securityscorecard.readme.io/reference/put_custom-scorecards-id.md
+  - https://securityscorecard.readme.io/reference/put_portfolios-companies-bulk-upload.md
+  - https://securityscorecard.readme.io/reference/put_portfolios-portfolio-id-companies-domain.md
+  - https://securityscorecard.readme.io/reference/put_portfolios-portfolio-id.md
+  - https://securityscorecard.readme.io/reference/put_scorecard-tags-groups-id.md
+  - https://securityscorecard.readme.io/reference/put_scorecard-tags-id.md
+  - https://securityscorecard.readme.io/reference/putapibytagid.md
+  - https://securityscorecard.readme.io/reference/putapitaggroupsbyid.md
+  - https://securityscorecard.readme.io/reference/putappsbyappidjobsbyjobid.md
+  merge:
+    pages: 498
+    deduped: 740
+    conflicts_kept_first: 0

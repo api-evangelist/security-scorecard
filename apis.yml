@@ -168,8 +168,9 @@ common:
 
 apis:
 - name: SecurityScorecard API
-  description: REST API for security ratings, portfolios, scorecards, factor and issue data, historical scores, industry benchmarks, reporting,
-    and webhook Rules.
+  description: >-
+    REST API for security ratings, portfolios, scorecards, factor and issue data, historical scores, industry
+    benchmarks, reporting, and webhook Rules.
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   properties:
@@ -190,53 +191,10 @@ apis:
   - type: Webhooks
     url: asyncapi/security-scorecard-webhooks.yml
   aid: security-scorecard:securityscorecard-api
-- aid: security-scorecard:security-scorecard-all-companies-vsor-customer-api-openapi-2-0
-  name: SecurityScorecard Scorecard Tags API
-  description: Operations about scorecard tags
-  humanURL: https://securityscorecard.readme.io/reference/introduction
-  baseURL: https://api.securityscorecard.io
-  tags:
-  - scorecard-tags
-  properties:
-  - type: OpenAPI
-    url: openapi/security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml
-  - type: JSONSchema
-    url: json-schema/security-scorecard-all-companies-response-schema.json
-  - type: JSONSchema
-    url: json-schema/security-scorecard-company-by-domain-response-schema.json
-  - type: JSONSchema
-    url: json-schema/security-scorecard-update-company-fields-schema.json
-  - type: JSONSchema
-    url: json-schema/security-scorecard-note-schema.json
-  - type: JSONSchema
-    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
-  - type: JSONSchema
-    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
-- aid: security-scorecard:security-scorecard-asi-internal-service
-  name: SecurityScorecard Search API
-  description: Search endpoint
-  humanURL: https://securityscorecard.readme.io/reference/introduction
-  baseURL: https://api.securityscorecard.io
-  tags:
-  - search
-  properties:
-  - type: OpenAPI
-    url: openapi/security-scorecard-asi-internal-service-openapi.yml
-  - type: JSONSchema
-    url: json-schema/security-scorecard-asi-search-response-schema.json
-  - type: JSONSchema
-    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
-  - type: JSONSchema
-    url: json-schema/security-scorecard-asi-search-request-schema.json
-  - type: JSONSchema
-    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
-  - type: JSONSchema
-    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
-  - type: JSONSchema
-    url: json-schema/security-scorecard-get-cve-response-schema.json
 - aid: security-scorecard:security-scorecard-multiscores-api
   name: SecurityScorecard Scorecard Multiscores API
-  description: The Scorecard Multiscores API from SecurityScorecard — 4 operation(s) for scorecard multiscores.
+  description: >-
+    The Scorecard Multiscores API from SecurityScorecard — 4 operation(s) for scorecard multiscores.
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
@@ -252,16 +210,40 @@ apis:
     url: json-schema/security-scorecard-multiscore-paginated-response-schema.json
   - type: JSONSchema
     url: json-schema/security-scorecard-scorecard-multiscores-response-schema.json
-- aid: security-scorecard:security-scorecard-securityscorecard-api
-  name: SecurityScorecard Scorecard Securityscorecard API
-  description: The Scorecard Securityscorecard API from SecurityScorecard — 474 operation(s) for scorecard securityscorecard.
+- aid: security-scorecard:security-scorecard-action-plans-api
+  name: SecurityScorecard action plans API
+  description: The action plans API from SecurityScorecard — 12 operation(s) for action plans.
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
-  - Scorecard Securityscorecard
+  - action plans
   properties:
   - type: OpenAPI
-    url: openapi/security-scorecard-securityscorecard-api-openapi.yml
+    url: openapi/security-scorecard-action-plans-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
   - type: JSONSchema
     url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
   - type: JSONSchema
@@ -274,16 +256,6 @@ apis:
     url: json-schema/security-scorecard-company-summary-schema.json
   - type: JSONSchema
     url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
-- aid: security-scorecard:security-scorecard-securityscorecard
-  name: SecurityScorecard Scorecard Securityscorecard Openapi.Yml API
-  description: The Scorecard Securityscorecard Openapi.Yml API from SecurityScorecard — 47 operation(s) for scorecard securityscorecard openapi.yml.
-  humanURL: https://securityscorecard.readme.io/reference/introduction
-  baseURL: https://api.securityscorecard.io
-  tags:
-  - Scorecard Securityscorecard Openapi.Yml
-  properties:
-  - type: OpenAPI
-    url: openapi/security-scorecard-securityscorecard-openapi.yml
   - type: JSONSchema
     url: json-schema/security-scorecard-findings-list-schema.json
   - type: JSONSchema
@@ -296,7 +268,1689 @@ apis:
     url: json-schema/security-scorecard-breaches-list-schema.json
   - type: JSONSchema
     url: json-schema/security-scorecard-reports-schema-schema.json
-
+- aid: security-scorecard:security-scorecard-active-findings-api
+  name: SecurityScorecard active findings API
+  description: The active findings API from SecurityScorecard — 193 operation(s) for active findings.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - active findings
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-active-findings-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-active-infections-api
+  name: SecurityScorecard Active Infections API
+  description: Active Infections
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - active-infections
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-active-infections-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-alerts-api
+  name: SecurityScorecard Alerts API
+  description: The alerts API from SecurityScorecard — 1 operation(s) for alerts.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-alerts-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-all-companies-api
+  name: SecurityScorecard All Companies API
+  description: Operations about all followed companies
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - all-companies
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-all-companies-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-apps-api
+  name: SecurityScorecard Apps API
+  description: The Apps API from SecurityScorecard — 2 operation(s) for apps.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - Apps
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-apps-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-asset-api
+  name: SecurityScorecard Asset API
+  description: asset behind the IP address
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - asset
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-asset-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-compliance-api
+  name: SecurityScorecard Compliance API
+  description: The compliance API from SecurityScorecard — 2 operation(s) for compliance.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - compliance
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-compliance-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-custom-scorecards-api
+  name: SecurityScorecard custom scorecards API
+  description: The custom scorecards API from SecurityScorecard — 4 operation(s) for custom scorecards.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - custom scorecards
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-custom-scorecards-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-customer-api
+  name: SecurityScorecard Customer API
+  description: The customer API from SecurityScorecard — 10 operation(s) for customer.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - customer
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-customer-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-cve-api
+  name: SecurityScorecard Cve API
+  description: Vulnerabilities
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - cve
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-cve-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-event-log-api
+  name: SecurityScorecard event log API
+  description: The event log API from SecurityScorecard — 2 operation(s) for event log.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - event log
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-event-log-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-feedback-api
+  name: SecurityScorecard Feedback API
+  description: The feedback API from SecurityScorecard — 2 operation(s) for feedback.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-feedback-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-footprint-api
+  name: SecurityScorecard Footprint API
+  description: The footprint API from SecurityScorecard — 1 operation(s) for footprint.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - footprint
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-footprint-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-historical-findings-api
+  name: SecurityScorecard historical findings API
+  description: >-
+    The historical findings API from SecurityScorecard — 192 operation(s) for historical findings.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - historical findings
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-historical-findings-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-invites-api
+  name: SecurityScorecard Invites API
+  description: The invites API from SecurityScorecard — 1 operation(s) for invites.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - invites
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-invites-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-ip-domain-tags-api
+  name: SecurityScorecard Ip Domain Tags API
+  description: The ip-domain-tags API from SecurityScorecard — 11 operation(s) for ip-domain-tags.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - ip-domain-tags
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-ip-domain-tags-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-issues-api
+  name: SecurityScorecard Issues API
+  description: The issues API from SecurityScorecard — 1 operation(s) for issues.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - issues
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-issues-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-metadata-api
+  name: SecurityScorecard Metadata API
+  description: The metadata API from SecurityScorecard — 3 operation(s) for metadata.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-metadata-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-partner-api
+  name: SecurityScorecard Partner API
+  description: The partner API from SecurityScorecard — 35 operation(s) for partner.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - partner
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-partner-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-portfolios-api
+  name: SecurityScorecard Portfolios API
+  description: The portfolios API from SecurityScorecard — 8 operation(s) for portfolios.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - portfolios
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-portfolios-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-ransomware-api
+  name: SecurityScorecard Ransomware API
+  description: Ransomware
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - ransomware
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-ransomware-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-reports-api
+  name: SecurityScorecard Reports API
+  description: The reports API from SecurityScorecard — 13 operation(s) for reports.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - reports
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-reports-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-saml-api
+  name: SecurityScorecard SAML API
+  description: The SAML API from SecurityScorecard — 1 operation(s) for saml.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - SAML
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-saml-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-scorecard-notes-api
+  name: SecurityScorecard Scorecard Notes API
+  description: Operations about scorecard notes
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - scorecard-notes
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-scorecard-notes-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-scorecard-tags-api
+  name: SecurityScorecard Scorecard Tags API
+  description: Operations about scorecard tags
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - scorecard-tags
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-scorecard-tags-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-scores-api
+  name: SecurityScorecard Scores API
+  description: The scores API from SecurityScorecard — 13 operation(s) for scores.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - scores
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-scores-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-search-api
+  name: SecurityScorecard Search API
+  description: Search endpoint
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - search
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-search-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-threat-actors-api
+  name: SecurityScorecard Threat Actors API
+  description: Threat-actors
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - threat-actors
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-threat-actors-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
+- aid: security-scorecard:security-scorecard-vendor-detection-api
+  name: SecurityScorecard Vendor Detection API
+  description: The vendor-detection API from SecurityScorecard — 5 operation(s) for vendor-detection.
+  humanURL: https://securityscorecard.readme.io/reference/introduction
+  baseURL: https://api.securityscorecard.io
+  tags:
+  - vendor-detection
+  properties:
+  - type: OpenAPI
+    url: openapi/security-scorecard-vendor-detection-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-by-domain-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-note-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-update-company-fields-by-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-all-companies-bulk-update-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-ip-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-asi-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-threat-actors-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-asi-asset-port-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-cve-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-custom-scorecard-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-get-action-plan-by-id-schema-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plan-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-create-custom-scorecard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-company-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-delete-custom-scorecard-filters-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-findings-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-action-plans-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-likelihood-assessment-v2-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-add-vendor-domains-result-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-breaches-list-schema.json
+  - type: JSONSchema
+    url: json-schema/security-scorecard-reports-schema-schema.json
 x-enrichment:
   date: '2026-07-21'
   status: enriched

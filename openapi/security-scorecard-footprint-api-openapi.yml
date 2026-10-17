@@ -1,0 +1,322 @@
+openapi: 3.2.0
+info:
+  title: SecurityScorecard Footprint API
+  version: 0.0.1
+  contact:
+    name: SecurityScorecard Support
+    email: support@securityscorecard.io
+  description: 'For onboarding instructions and details on how SecurityScorecard API works,
+
+    please see our Readme guide: https://securityscorecard.readme.io/docs
+
+
+    For technical support please contact us at
+
+    support@securityscorecard.io. We typically
+
+    respond in 48 hours and operate Monday thru Friday 9am - 5pm EST (excluding
+
+    US federal holidays).'
+  x-logo:
+    url: https://platform.securityscorecard.io/images/ssc-logo-white-stacked.svg
+    backgroundColor: '#222830'
+servers:
+- url: https://api.securityscorecard.io
+security:
+- Token: []
+tags:
+- name: footprint
+paths:
+  /footprint/{parentDomain}/attribution-log:
+    get:
+      summary: Get all the domain tags of the parent domain
+      description: ''
+      tags:
+      - footprint
+      parameters:
+      - in: path
+        name: parentDomain
+        required: true
+        example: securityscorecard.com
+        schema:
+          type: string
+        description: parent domain
+      - in: query
+        name: date-from
+        required: false
+        schema:
+          type: string
+        description: start date time range
+      - in: query
+        name: date-to
+        required: false
+        schema:
+          type: string
+        description: end date time range
+      - in: query
+        name: sort-field
+        required: false
+        schema:
+          type: string
+        description: sort field
+      - in: query
+        name: filters
+        required: false
+        schema:
+          type: string
+        description: filters field
+      - in: query
+        name: filter-operator
+        required: false
+        schema:
+          type: string
+        description: 'filter operation, expected values: and | or'
+      - in: query
+        name: page
+        required: false
+        schema:
+          type: number
+        description: required page number, first page is 0
+      - in: query
+        name: page-size
+        required: false
+        schema:
+          type: number
+        description: size of the pages in the paginated result
+      responses:
+        '200':
+          description: Get attribution logs of the parent domain
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/getAttributionLogByParentDomainResponseSchema'
+                - $ref: '#/components/schemas/EmptyEntriesSizeSchema'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorUnauthorized'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorForbidden'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+      operationId: getFootprintByParentDomainAttributionLog
+      x-operation-id-source: derived
+components:
+  schemas:
+    ErrorForbidden:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 403
+          required:
+          - message
+          - statusCode
+    getAttributionLogByParentDomainResponseSchema:
+      type: object
+      additionalProperties: false
+      properties:
+        entries:
+          type: array
+          items:
+            type: object
+            description: a scorecard tag
+            additionalProperties: false
+            properties:
+              id:
+                type: string
+                description: id of the observation asset
+              date:
+                type: string
+                description: attribution log asset date
+              impact:
+                type: number
+                description: sum impact of issue findings associated with the asset
+              asset_value:
+                type: string
+                description: domain or ip attributed
+              unique_id:
+                type: string
+                description: id of the observation
+              change:
+                type: string
+                description: description of the change
+              latest_date:
+                type: string
+                description: date of the latest observation of the given asset
+              latest_change:
+                type: string
+                description: description of the latest change of the given asset
+              reason:
+                type: string
+                description: reason of the change
+            required:
+            - id
+            - date
+            - asset_value
+            - unique_id
+            - change
+            - latest_date
+            - latest_change
+    EmptyEntriesSizeSchema:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            type: object
+        size:
+          description: The number of records to be returned per page
+          example: 100
+          type: integer
+      additionalProperties: false
+      required:
+      - entries
+      - size
+      description: Empty entries array
+    ErrorBadRequest:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 400
+          required:
+          - message
+          - statusCode
+    ErrorUnauthorized:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 401
+          required:
+          - message
+          - statusCode
+    ErrorNotFound:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 404
+          required:
+          - message
+          - statusCode
+  securitySchemes:
+    Token:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: "SecurityScorecard API endpoints require an authentication token to be passed\nin an authorization header in order to return data. If you do not already\nhave a token, you can create one by going to the API Access area in your\n[Settings page](https://platform.securityscorecard.io/#/settings/api) and then\nclicking Generate New Token. Please note this tokens have no expiration\nso they can be used until manually revoked. If you have a token and generate\na new one, the previous token will be revoked and can no longer be used.\n\nAdministrators can also revoke API tokens for any user in their account.\n\nOnce you have your token you can pass it in using the `Authorization` http header like this:\n\n```\ncurl -X GET \\\n  https://api.securityscorecard.io/portfolios \\\n  -H 'authorization: Token <your token>'\n```"
+x-provenance:
+  method: searched
+  source: https://securityscorecard.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://securityscorecard.readme.io/reference/delete_max-partner-documents.md
+  - https://securityscorecard.readme.io/reference/delete_max-partner-managed-customers-customer-id-updates.md
+  - https://securityscorecard.readme.io/reference/delete_max-partner-managed-customers-customer-id-vendors-updates.md
+  - https://securityscorecard.readme.io/reference/delete_max-partner-managed-customers-customer-id.md
+  - https://securityscorecard.readme.io/reference/delete_max-partner-reports-bulk-delete.md
+  - https://securityscorecard.readme.io/reference/delete_max-partner-vendors.md
+  - https://securityscorecard.readme.io/reference/get_footprint-parentdomain-attribution-log.md
+  - https://securityscorecard.readme.io/reference/get_max-customer-breaches.md
+  - https://securityscorecard.readme.io/reference/get_max-customer-documents-id.md
+  - https://securityscorecard.readme.io/reference/get_max-customer-documents.md
+  - https://securityscorecard.readme.io/reference/get_max-customer-findings.md
+  - https://securityscorecard.readme.io/reference/get_max-customer-reports-remediation-plans.md
+  - https://securityscorecard.readme.io/reference/get_max-customer-updates.md
+  - https://securityscorecard.readme.io/reference/get_max-customer-users-access.md
+  - https://securityscorecard.readme.io/reference/get_max-customer-vendors-improvements.md
+  - https://securityscorecard.readme.io/reference/get_max-customer-vendors-updates.md
+  - https://securityscorecard.readme.io/reference/get_max-customer-vendors.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-breaches.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-customer-id-vendors-improvements.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-documents-id.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-findings-report-id.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-findings.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-indicators-exclusion.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-indicators.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-managed-customers-customer-domain-vendor-vendor-domain-reports-likelihood-assessments-date.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-managed-customers-customer-id-documents.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-managed-customers-customer-id-managed-portfolios.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-managed-customers-customer-id-updates.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-managed-customers-customer-id-vendors-domain.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-managed-customers-customer-id-vendors-updates.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-managed-customers-customer-id.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-managed-customers-id-access.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-managed-customers-id-users.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-managed-customers.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-reports-likelihood-assessments-logs.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-reports-managed-customers.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-reports-remediation-plans.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-reports-vendors.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-reports.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-unmanaged-customers.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-vendors-domain-managed-customers.md
+  - https://securityscorecard.readme.io/reference/get_max-partner-vendors.md
+  - https://securityscorecard.readme.io/reference/get_v2-portfolios-portfolio-id-companies.md
+  - https://securityscorecard.readme.io/reference/post_max-customer-documents.md
+  - https://securityscorecard.readme.io/reference/post_max-partner-documents.md
+  - https://securityscorecard.readme.io/reference/post_max-partner-managed-customers-customer-id-updates.md
+  - https://securityscorecard.readme.io/reference/post_max-partner-managed-customers-customer-id-vendors-domain-updates.md
+  - https://securityscorecard.readme.io/reference/post_max-partner-managed-customers-id-access.md
+  - https://securityscorecard.readme.io/reference/post_max-partner-management-requests.md
+  - https://securityscorecard.readme.io/reference/post_max-partner-reports-likelihood-assessments.md
+  - https://securityscorecard.readme.io/reference/post_max-partner-vendor-onboarding-add-vendor-domains-domain-or-portfolio-id.md
+  - https://securityscorecard.readme.io/reference/post_max-partner-vendor-onboarding-negotiate-vendor-list.md
+  - https://securityscorecard.readme.io/reference/put_max-customer-documents.md
+  - https://securityscorecard.readme.io/reference/put_max-partner-breaches.md
+  - https://securityscorecard.readme.io/reference/put_max-partner-documents.md
+  - https://securityscorecard.readme.io/reference/put_max-partner-findings.md
+  - https://securityscorecard.readme.io/reference/put_max-partner-managed-customers-updates-id.md
+  - https://securityscorecard.readme.io/reference/put_max-partner-vendor-onboarding-add-vendor-domains-domain-or-portfolio-id.md
+  - https://securityscorecard.readme.io/reference/put_max-partner-vendor-onboarding-negotiate-vendor-list.md
+  - https://securityscorecard.readme.io/reference/put_max-partner-vendors-statuses.md
+  - https://securityscorecard.readme.io/reference/put_max-partner-vendors-updates-id.md
+  merge:
+    pages: 61
+    deduped: 371
+    conflicts_kept_first: 0

@@ -1,0 +1,982 @@
+openapi: 3.2.0
+info:
+  title: Security Scorecard Scorecard Tags API
+  x-refined-note:
+  - x-logo differs across the merged source definitions and was not carried
+  version: '1.0'
+  description: 'Operations tagged scorecard-tags across 2 of this provider''s published API definitions: security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml, security-scorecard-securityscorecard-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.securityscorecard.io
+security:
+- Token: []
+tags:
+- name: scorecard-tags
+  description: Operations about scorecard tags
+paths:
+  /scorecard-tags/all-companies/bulk-create:
+    post:
+      tags:
+      - scorecard-tags
+      summary: Associates the given tag ids to the given companies
+      operationId: executeCustomTagsFollowedCompaniesBulkCreateOperation
+      requestBody:
+        $ref: '#/components/requestBodies/executeCustomTagsFollowedCompaniesBulkCreateOperationPayload'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Count of custom tags affected.
+        '400':
+          description: Bad request
+    servers:
+    - url: https://api.securityscorecard.io
+  /scorecard-tags/all-companies/bulk-delete:
+    post:
+      tags:
+      - scorecard-tags
+      summary: Removes the given tags from the given companies
+      description: Removes the given tags from the given companies.
+      operationId: executeCustomTagsFollowedCompaniesBulkDeleteOperation
+      requestBody:
+        $ref: '#/components/requestBodies/executeCustomTagsFollowedCompaniesBulkCreateOperationPayload'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Count of domains affected.
+        '400':
+          description: Bad request
+    servers:
+    - url: https://api.securityscorecard.io
+  /scorecard-tags:
+    get:
+      responses:
+        '200':
+          description: Get all scorecard tags
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScorecardTagsResponse'
+      tags:
+      - scorecard-tags
+      summary: Get all scorecard tags
+      parameters: []
+      operationId: getScorecardTags
+      x-operation-id-source: derived
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScorecardTagRequest'
+        required: true
+      responses:
+        '200':
+          description: Create a scorecard tag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScorecardTagResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+      tags:
+      - scorecard-tags
+      summary: Create a scorecard tag
+      parameters: []
+      operationId: postScorecardTags
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /scorecard-tags/bulk-delete:
+    post:
+      description: Deletes a list of tags by the given ids in a single request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkDeleteScorecardTagsRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorForbidden'
+      tags:
+      - scorecard-tags
+      summary: Deletes a list of tags by the given ids in a singl
+      parameters: []
+      operationId: postScorecardTagsBulkDelete
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /scorecard-tags/groups:
+    get:
+      responses:
+        '200':
+          description: A list of Scorecard Tag Groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScorecardTagGroupsResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorForbidden'
+      tags:
+      - scorecard-tags
+      summary: Get all scorecard tag groups
+      parameters: []
+      operationId: getScorecardTagsGroups
+      x-operation-id-source: derived
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScorecardTagGroupRequest'
+        required: true
+      responses:
+        '200':
+          description: Scorecard Tag Group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScorecardTagGroupResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorForbidden'
+      tags:
+      - scorecard-tags
+      summary: Create a new scorecard tag group
+      parameters: []
+      operationId: postScorecardTagsGroups
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /scorecard-tags/groups/{id}:
+    get:
+      parameters:
+      - name: id
+        description: scorecard tag group id
+        required: true
+        in: path
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[\da-z-]{16,}$
+      responses:
+        '200':
+          description: Scorecard Tag Group
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    pattern: ^[\da-z-]{16,}$
+                    description: the id of the scorecard tag group
+                  name:
+                    type: string
+                    description: scorecard tag group name
+                additionalProperties: false
+                required:
+                - name
+                description: Scorecard Tag Group
+      tags:
+      - scorecard-tags
+      summary: Get a scorecard tag group
+      operationId: getScorecardTagsGroupsById
+      x-operation-id-source: derived
+    put:
+      parameters:
+      - name: id
+        description: tag group id
+        required: true
+        in: path
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[\da-z-]{16,}$
+      requestBody:
+        $ref: '#/components/requestBodies/Scorecardtaggrouppayload'
+      responses:
+        '200':
+          description: Scorecard Tag Group
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    pattern: ^[\da-z-]{16,}$
+                    description: the id of the scorecard tag group
+                  name:
+                    type: string
+                    description: scorecard tag group name
+                additionalProperties: false
+                required:
+                - name
+                description: Scorecard Tag Group
+      tags:
+      - scorecard-tags
+      summary: Edit a scorecard tag group
+      operationId: putScorecardTagsGroupsById
+      x-operation-id-source: derived
+    delete:
+      parameters:
+      - name: id
+        description: tag group id
+        required: true
+        in: path
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[\da-z-]{16,}$
+      responses:
+        '204':
+          description: No response body
+      tags:
+      - scorecard-tags
+      summary: Delete a scorecard tag group
+      operationId: deleteScorecardTagsGroupsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /scorecard-tags/{id}:
+    put:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: scorecard tag id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScorecardTagRequest'
+        required: true
+      responses:
+        '200':
+          description: Updated scorecard tag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScorecardUpdateTagResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorForbidden'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+      tags:
+      - scorecard-tags
+      summary: Update a scorecard tag
+      operationId: putScorecardTagsById
+      x-operation-id-source: derived
+    delete:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: scorecard tag id
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorForbidden'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+      tags:
+      - scorecard-tags
+      summary: Delete a scorecard tag
+      operationId: deleteScorecardTagsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /scorecard-tags/{id}/companies:
+    get:
+      summary: Get all companies associated with a scorecard tag
+      tags:
+      - scorecard-tags
+      parameters:
+      - in: path
+        name: id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: scorecard tag id
+      - in: query
+        name: grade
+        required: false
+        example: A
+        schema:
+          type: string
+        description: company score grade filter
+      - in: query
+        name: industry
+        required: true
+        example: technology
+        schema:
+          type: string
+        description: industry filter
+      - in: query
+        name: vulnerability
+        required: false
+        example: CVE-2016-0800
+        schema:
+          type: string
+        description: CVE vulnerability filter
+      - in: query
+        name: type
+        required: true
+        example: service_vnc
+        schema:
+          type: string
+        description: issue type
+      - in: query
+        name: status
+        required: false
+        example: inactive
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+        description: 'company status.
+
+          Allowed values:
+
+          - `active`: Represent company is active
+
+          - `inactive`: Represents company is inactive.'
+      - in: query
+        name: had_breach_within_last_days
+        required: false
+        example: 15
+        schema:
+          type: number
+        description: companies with breaches in last N days
+      responses:
+        '200':
+          description: List of companies associated with the scorecard tag
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/CompaniesInScorecardTag'
+                - $ref: '#/components/schemas/EmptyEntriesWithTotalSchema'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorForbidden'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+      operationId: getScorecardTagsByIdCompanies
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /scorecard-tags/{id}/companies/{domain}:
+    post:
+      summary: Add a scorecard tag to a company
+      tags:
+      - scorecard-tags
+      parameters:
+      - in: path
+        name: id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: scorecard tag id
+      - in: path
+        name: domain
+        required: true
+        example: example.com
+        schema:
+          type: string
+        description: primary domain identifying a company
+      responses:
+        '200':
+          description: Added company's summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addScorecardTagToCompanySchemaResponse'
+      operationId: postScorecardTagsByIdCompaniesByDomain
+      x-operation-id-source: derived
+    delete:
+      summary: Remove a scorecard tag from a company
+      tags:
+      - scorecard-tags
+      parameters:
+      - in: path
+        name: id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: scorecard tag id
+      - in: path
+        name: domain
+        required: true
+        example: example.com
+        schema:
+          type: string
+        description: primary domain identifying a company
+      responses:
+        '204':
+          description: No Content
+      operationId: deleteScorecardTagsByIdCompaniesByDomain
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /scorecard-tags/{tag_id}/groups/{tag_group_id}:
+    post:
+      parameters:
+      - name: tag_group_id
+        description: tag group id
+        required: true
+        in: path
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[\da-z-]{16,}$
+      - name: tag_id
+        description: tag id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: No response body
+      tags:
+      - scorecard-tags
+      summary: Add scorecard tag to a scorecard tag group
+      operationId: postScorecardTagsByTagIdGroupsByTagGroupId
+      x-operation-id-source: derived
+    delete:
+      parameters:
+      - name: tag_group_id
+        description: tag group id
+        required: true
+        in: path
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[\da-z-]{16,}$
+      - name: tag_id
+        description: tag id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: No response body
+      tags:
+      - scorecard-tags
+      summary: Remove scorecard tag from a scorecard tag group
+      operationId: deleteScorecardTagsByTagIdGroupsByTagGroupId
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+components:
+  requestBodies:
+    executeCustomTagsFollowedCompaniesBulkCreateOperationPayload:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              domains:
+                type: array
+                items:
+                  type: string
+                  description: Domain of the followed company
+                  example: example.com
+              tag_ids:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+      description: List of domains of followed companies and list of tag ids
+    Scorecardtaggrouppayload:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: scorecard tag group name
+            additionalProperties: false
+            required:
+            - name
+            description: Scorecard Tag Group Payload
+      description: tag group payload
+      required: true
+  schemas:
+    ErrorForbidden:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 403
+          required:
+          - message
+          - statusCode
+    ScorecardTagGroupResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          example: aea7dae2-370f-4279-a458-4c7cb9661778
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          description: Identifier
+          type: string
+        name:
+          type: string
+          description: Tag Group Name
+          example: Example Tag Group Name
+      required:
+      - id
+      - name
+      description: Scorecard Tag Group
+    BulkDeleteScorecardTagsRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+          description: ids of tags to delete
+        public_tags:
+          type: boolean
+          description: Indicates if the tags to delete are public
+      required:
+      - ids
+      description: ids of tags
+    addScorecardTagToCompanySchemaResponse:
+      type: object
+      properties:
+        name:
+          example: Example Ltd.
+          type: string
+        domain:
+          example: example.com
+          type: string
+          description: primary domain of the company
+        grade:
+          type: string
+          description: a security scorecard grade (A to F), or '?' if it's calculating.
+          example: A
+          enum:
+          - A
+          - B
+          - C
+          - D
+          - F
+          - '?'
+        grade_url:
+          type: string
+          description: url to an image depicting the grade
+        score:
+          type: integer
+          description: security score from 0 to 100
+          example: 95
+        industry:
+          type: string
+          description: industry (unique identifier). 'unknown' if this wasn't yet determined.
+          example: technology
+        size:
+          type: string
+          description: a company described based on number of employees
+          example: size_501_to_1000
+          enum:
+          - unknown
+          - size_1_to_10
+          - size_11_to_50
+          - size_51_to_200
+          - size_201_to_500
+          - size_501_to_1000
+          - size_1001_to_5000
+          - size_5001_to_10000
+          - size_more_than_10000
+        last30days_score_change:
+          type: number
+          description: delta score change in the last 30 days
+          example: 1
+    ScorecardTagsResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        entries:
+          type: array
+          items:
+            type: object
+            description: a scorecard tag
+            additionalProperties: false
+            properties:
+              id:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                description: Identifier
+                type: string
+              name:
+                type: string
+                example: Example Tag Name
+              description:
+                type: string
+                description: description
+                example: Example description
+            required:
+            - name
+            - id
+        total:
+          description: The total number of records matching the given query
+          example: 999
+          type: integer
+      required:
+      - entries
+      - total
+    ScorecardTagRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Tag Name
+          example: Example Tag Name
+        description:
+          type: string
+          description: description
+          example: Example description
+        id:
+          example: aea7dae2-370f-4279-a458-4c7cb9661778
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          description: Identifier
+          type: string
+        privacy:
+          type: string
+          default: shared
+      required:
+      - name
+      description: a scorecard tag to create
+    ScorecardTagGroupRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Tag Group Name
+          example: Example Tag Group Name
+      required:
+      - name
+      description: Payload for creating a scorecard tag group
+    EmptyEntriesWithTotalSchema:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            type: object
+        total:
+          type: number
+      additionalProperties: false
+      required:
+      - entries
+      - total
+      description: Empty entries array
+    CompaniesInScorecardTag:
+      type: object
+      additionalProperties: false
+      properties:
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                example: Example Ltd.
+                type: string
+              domain:
+                example: example.com
+                type: string
+                description: primary domain of the company
+              grade:
+                type: string
+                description: a security scorecard grade (A to F), or '?' if it's calculating.
+                example: A
+                enum:
+                - A
+                - B
+                - C
+                - D
+                - F
+                - '?'
+              grade_url:
+                type: string
+                description: url to an image depicting the grade
+              score:
+                type: integer
+                description: security score from 0 to 100
+                example: 95
+              industry:
+                type: string
+                description: industry (unique identifier). 'unknown' if this wasn't yet determined.
+                example: technology
+              size:
+                type: string
+                description: a company described based on number of employees
+                example: size_501_to_1000
+                enum:
+                - unknown
+                - size_1_to_10
+                - size_11_to_50
+                - size_51_to_200
+                - size_201_to_500
+                - size_501_to_1000
+                - size_1001_to_5000
+                - size_5001_to_10000
+                - size_more_than_10000
+              last30days_score_change:
+                type: number
+                description: delta score change in the last 30 days
+                example: 1
+        total:
+          description: The total number of records matching the given query
+          example: 999
+          type: integer
+      required:
+      - entries
+      - total
+    ErrorBadRequest:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 400
+          required:
+          - message
+          - statusCode
+    ScorecardTagResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          example: aea7dae2-370f-4279-a458-4c7cb9661778
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          description: Identifier
+          type: string
+        name:
+          type: string
+          description: Tag Name
+          example: Example Tag Name
+        description:
+          type: string
+          description: description
+          example: Example description
+      required:
+      - id
+      - name
+      description: the created scorecard tag
+    ScorecardTagGroupsResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        entries:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              id:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                description: Identifier
+                type: string
+              name:
+                type: string
+                description: Tag Group Name
+                example: Example Tag Group Name
+              tag_ids:
+                type: array
+                items:
+                  example: aea7dae2-370f-4279-a458-4c7cb9661778
+                  pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                  description: the id of a scorecard tag
+                  type: string
+            required:
+            - name
+            description: Scorecard Tag Group
+      required:
+      - entries
+    ScorecardUpdateTagResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Tag Name
+          example: Example Tag Name
+        description:
+          type: string
+          description: description
+          example: Example description
+      required:
+      - name
+      description: Updated scorecard tag
+    ErrorNotFound:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 404
+          required:
+          - message
+          - statusCode
+  securitySchemes:
+    Token:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'SecurityScorecard API endpoints require an authentication token to be passed\nin an authorization header in order to return data. If you do not already\nhave a token, you can create one by going to the API Access area in your\n[Settings page](https://platform.securityscorecard.io/#/settings/api) and then\nclicking Generate New Token. Please note this tokens have no expiration\nso they can be used until manually revoked. If you have a token and generate\na new one, the previous token will be revoked and can no longer be used.\n\nAdministrators can also revoke API tokens for any user in their account.\n\nOnce you have your token you can pass it in using the `Authorization` http header like this:\n\n```\ncurl -X GET \\\n  https://api.securityscorecard.io/portfolios \\\n  -H ''authorization: Token \u003Cyour token\u003E''\n```'
+x-refined-from:
+- security-scorecard-all-companies-vsor-customer-api-openapi-2-0-openapi.yml
+- security-scorecard-securityscorecard-api-openapi.yml
+x-provenance:
+  method: searched
+  source: https://securityscorecard.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://securityscorecard.readme.io/reference/deletefollowedcompanybydomain.md
+  - https://securityscorecard.readme.io/reference/executecustomtagsfollowedcompaniesbulkcreateoperation.md
+  - https://securityscorecard.readme.io/reference/executecustomtagsfollowedcompaniesbulkdeleteoperation.md
+  - https://securityscorecard.readme.io/reference/executefollowedcompaniesbulkdeleteoperation.md
+  - https://securityscorecard.readme.io/reference/executefollowedcompaniesbulkupdateoperation.md
+  - https://securityscorecard.readme.io/reference/findfollowedcompanies.md
+  - https://securityscorecard.readme.io/reference/findscorecardnotes.md
+  - https://securityscorecard.readme.io/reference/getfollowedcompanybydomain.md
+  - https://securityscorecard.readme.io/reference/updatefollowedcompanybydomain.md
+  merge:
+    pages: 9
+    deduped: 13
+    conflicts_kept_first: 0

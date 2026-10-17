@@ -1,0 +1,1157 @@
+openapi: 3.2.0
+info:
+  title: Security Scorecard Portfolios API
+  contact:
+    name: SecurityScorecard Support
+    email: support@securityscorecard.io
+  x-logo:
+    url: https://platform.securityscorecard.io/images/ssc-logo-white-stacked.svg
+    backgroundColor: '#222830'
+  version: '1.0'
+  description: 'Operations tagged portfolios across 2 of this provider''s published API definitions: security-scorecard-securityscorecard-openapi.yml, security-scorecard-securityscorecard-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.securityscorecard.io
+security:
+- Token: []
+tags:
+- name: Portfolios
+paths:
+  /v2/portfolios/{portfolio_id}/companies:
+    get:
+      summary: Get portfolios by portfolio id companies
+      description: Get all companies in a portfolio
+      tags:
+      - Portfolios
+      parameters:
+      - in: path
+        name: portfolio_id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: Unique identifier for the resource
+      - in: query
+        name: grade
+        required: false
+        example: A,B,C
+        schema:
+          type: string
+        description: company score grade filter, accepts a comma separated list
+      - in: query
+        name: industry
+        required: false
+        example: technology
+        schema:
+          type: string
+        description: industry filter, accepts a comma separated list
+      - in: query
+        name: vulnerability
+        required: false
+        example: CVE-2016-0800,CVE-1999-0070
+        schema:
+          type: string
+        description: CVE vulnerability filter, accepts a comma separated list
+      - in: query
+        name: issue_type
+        required: false
+        example: service_vnc,attack_detected
+        schema:
+          type: string
+        description: issue type, accepts a comma separated list
+      - name: score
+        in: query
+        required: false
+        description: security score filter, accepts a comma separated list
+        schema:
+          type: array
+          items:
+            type: integer
+          example:
+          - 99
+        style: form
+        explode: false
+      - in: query
+        name: tags
+        required: false
+        example: tag1,tag2
+        schema:
+          type: string
+        description: tag names to filter by, accepts a comma separated list
+      - in: query
+        name: tags_criteria
+        required: false
+        example: AND
+        schema:
+          type: string
+        description: criteria to filter tags, might be AND or OR, default to OR
+      - in: query
+        name: product
+        required: false
+        example: 1Password,Adobe,Amazon
+        schema:
+          type: string
+        description: product name filter, accepts a comma separated list and the criteria to filter by is OR
+      - in: query
+        name: had_breach_within_last_days
+        required: false
+        example: '30'
+        schema:
+          type: number
+        description: companies with breaches in last N days
+      - in: query
+        name: business_impact
+        required: false
+        example: high,medium,low
+        schema:
+          type: string
+        description: business impact filter, accepts a comma separated list
+      - name: last_month_score_change
+        in: query
+        required: false
+        description: last month score change filter, filters for exact value and accepts a comma separated list
+        schema:
+          type: array
+          items:
+            type: integer
+          example:
+          - -2
+        style: form
+        explode: false
+      - in: query
+        name: page
+        required: false
+        example: 1
+        schema:
+          type: integer
+          minimum: 1
+        description: optionally specify which page of results to return
+      - in: query
+        name: limit
+        required: false
+        example: 100
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5000
+        description: optionally specify how many results to return
+      responses:
+        '200':
+          description: The list of companies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPortfolioCompaniesV2'
+      x-summary-source: derived
+      operationId: getV2PortfoliosByPortfolioIdCompanies
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /portfolios:
+    get:
+      summary: Get all portfolios you have access to
+      tags:
+      - Portfolios
+      responses:
+        '200':
+          description: Get all portfolios
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPortfolio'
+      parameters: []
+      operationId: getPortfolios
+      x-operation-id-source: derived
+    post:
+      summary: Create a new portfolio
+      tags:
+      - Portfolios
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortfolioCreate'
+        required: true
+      responses:
+        '200':
+          description: Create a new portfolio
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio'
+      parameters: []
+      operationId: postPortfolios
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /portfolios/companies/bulk-upload:
+    put:
+      description: Add companies in bulk to portfolios
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCompaniesBulk'
+        required: true
+      responses:
+        '201':
+          description: Result of the bulk upload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCompaniesBulkResponse'
+      tags:
+      - Portfolios
+      summary: Add companies in bulk to a portfolios
+      operationId: putPortfoliosCompaniesBulkUpload
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /portfolios/{portfolio_id}:
+    put:
+      summary: Edit a portfolio
+      tags:
+      - Portfolios
+      parameters:
+      - in: path
+        name: portfolio_id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: Unique identifier for the resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortfolioEdit'
+        required: true
+      responses:
+        '200':
+          description: the edited portfolio
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio'
+      operationId: putPortfoliosByPortfolioId
+      x-operation-id-source: derived
+    delete:
+      summary: Delete a portfolio
+      tags:
+      - Portfolios
+      parameters:
+      - in: path
+        name: portfolio_id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: Unique identifier for the resource
+      responses:
+        '204':
+          description: No Content
+      operationId: deletePortfoliosByPortfolioId
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /portfolios/{portfolio_id}/companies:
+    get:
+      summary: Get all companies in a portfolio
+      tags:
+      - Portfolios
+      parameters:
+      - in: path
+        name: portfolio_id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: Unique identifier for the resource
+      - in: query
+        name: grade
+        required: false
+        example: A
+        schema:
+          type: string
+        description: company score grade filter
+      - in: query
+        name: industry
+        required: false
+        example: technology
+        schema:
+          type: string
+        description: industry filter
+      - in: query
+        name: vulnerability
+        required: false
+        example: CVE-2016-0800
+        schema:
+          type: string
+        description: CVE vulnerability filter
+      - in: query
+        name: type
+        required: false
+        example: service_vnc
+        schema:
+          type: string
+        description: issue type
+      - in: query
+        name: status
+        required: false
+        example: inactive
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+        description: company status
+      - in: query
+        name: had_breach_within_last_days
+        required: false
+        example: '15'
+        schema:
+          type: number
+        description: companies with breaches in last N days
+      - in: query
+        name: show_products
+        required: false
+        example: 'false'
+        schema:
+          type: boolean
+        description: Include the AVD products[] array on each company. Defaults to true (current behavior). Set to false to omit products[] and materially reduce the payload size on large portfolios.
+      responses:
+        '200':
+          description: The list of companies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPortfolioCompanies'
+      operationId: getPortfoliosByPortfolioIdCompanies
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /portfolios/{portfolio_id}/companies/all:
+    delete:
+      parameters:
+      - in: path
+        name: portfolio_id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: Unique identifier for the resource
+      responses:
+        '204':
+          description: No Content
+      tags:
+      - Portfolios
+      summary: Remove all companies from a portfolio
+      operationId: deletePortfoliosByPortfolioIdCompaniesAll
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /portfolios/{portfolio_id}/companies/{domain}:
+    put:
+      summary: Add company to portfolio
+      tags:
+      - Portfolios
+      parameters:
+      - in: path
+        name: portfolio_id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: Unique identifier for the resource
+      - in: path
+        name: domain
+        required: true
+        example: example.com
+        schema:
+          type: string
+        description: primary domain identifying a company
+      responses:
+        '200':
+          description: added company's summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioCompany'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorUnauthorized'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorForbidden'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorRateLimit'
+      operationId: putPortfoliosByPortfolioIdCompaniesByDomain
+      x-operation-id-source: derived
+    delete:
+      summary: Remove company from portfolio
+      tags:
+      - Portfolios
+      parameters:
+      - in: path
+        name: portfolio_id
+        description: id of a portfolio you have write access to
+        required: true
+        example: 55e448c4e4b0c986fd66ff12
+        schema:
+          type: string
+      - in: path
+        name: domain
+        description: company primary domain
+        required: true
+        example: example.com
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No response body
+      operationId: deletePortfoliosByPortfolioIdCompaniesByDomain
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+  /portfolios/{portfolio_id}/expanded-risk:
+    get:
+      summary: Get all expanded risk events in a portfolio
+      tags:
+      - Portfolios
+      parameters:
+      - in: path
+        name: portfolio_id
+        required: true
+        example: aea7dae2-370f-4279-a458-4c7cb9661778
+        schema:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        description: Unique identifier for the resource
+      - in: query
+        name: category
+        required: false
+        example: watchlist
+        schema:
+          type: string
+          enum:
+          - adverse
+          - corruption
+          - financial crime
+          - high risk industry
+          - pep
+          - relative or associate
+          - sanctions
+          - state owned company
+          - terrorism
+          - watchlist
+        description: optionally filter events by category
+      - in: query
+        name: confidence
+        required: false
+        example: high
+        schema:
+          type: string
+          enum:
+          - low
+          - unlikely
+          - medium
+          - high
+        description: optionally filter events by confidence
+      - in: query
+        name: page
+        required: false
+        example: 1
+        schema:
+          type: integer
+          minimum: 1
+        description: optionally specify which page of results to return
+      - in: query
+        name: limit
+        required: false
+        example: 100
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: optionally specify how many results to return per page (max 1000). Larger portfolios must be retrieved by paginating with `page`.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPortfolio'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorUnauthorized'
+        '403':
+          description: Company must be added to a portfolio first
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorLevelData'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+      operationId: getPortfoliosByPortfolioIdExpandedRisk
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.securityscorecard.io
+components:
+  schemas:
+    GetPortfolioCompaniesV2:
+      type: object
+      additionalProperties: false
+      properties:
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                example: Example Ltd.
+                type: string
+              uuid:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                description: Identifier
+                type: string
+              domain:
+                example: example.com
+                type: string
+                description: primary domain of the company
+              grade:
+                type: string
+                description: a security scorecard grade (A to F), or '?' if it's calculating.
+                example: A
+                enum:
+                - A
+                - B
+                - C
+                - D
+                - F
+                - '?'
+              business_impact:
+                type: string
+                example: high
+              score:
+                type: integer
+                description: security score from 0 to 100
+                example: 95
+              industry:
+                type: string
+                description: industry (unique identifier). 'unknown' if this wasn't yet determined.
+                example: technology
+              size:
+                type: string
+                description: a company described based on number of employees
+                example: size_501_to_1000
+                enum:
+                - unknown
+                - size_1_to_10
+                - size_11_to_50
+                - size_51_to_200
+                - size_201_to_500
+                - size_501_to_1000
+                - size_1001_to_5000
+                - size_5001_to_10000
+                - size_more_than_10000
+                default: unknown
+              last_month_score_change:
+                type: number
+                description: delta score change in the last 30 days
+                example: 1
+              status:
+                type: string
+                example: active
+              added_date:
+                example: '2020-01-01T00:00:00.000Z'
+                format: date-time
+                type: string
+                pattern: ^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}\.{0,1}[0-9]*Z$
+                description: created date
+        size:
+          description: The number of records to be returned per page
+          example: 100
+          type: integer
+        page:
+          description: The page number to be returned
+          example: 1
+          type: integer
+        total:
+          description: The total number of records matching the given query
+          example: 999
+          type: integer
+      required:
+      - entries
+      - size
+      - page
+      - total
+    ErrorForbidden:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 403
+          required:
+          - message
+          - statusCode
+    AddCompaniesBulk:
+      type: object
+      properties:
+        portfolios:
+          description: list of portfolio IDs
+          type: array
+          items:
+            type: string
+        companies:
+          description: company domains
+          type: array
+          items:
+            type: string
+        bulkInvite:
+          description: t/f if the upload was created via csv bulk upload
+          type: boolean
+        tagType:
+          type: string
+      additionalProperties: false
+      required:
+      - portfolios
+      - companies
+    getPortfolio:
+      type: object
+      additionalProperties: false
+      properties:
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                description: Identifier
+                type: string
+              name:
+                type: string
+                description: human-readable name
+                example: Our Vendors
+              description:
+                type: string
+                description: description
+                example: Example description
+              privacy:
+                type: string
+                description: 'private: only visible to owner, shared: visible to the entire organization, team: group of users within an organization'
+                example: private
+                enum:
+                - private
+                - shared
+                - team
+              read_only:
+                type: boolean
+                description: true or false
+                default: false
+              created_at:
+                example: '2020-01-01T00:00:00.000Z'
+                format: date-time
+                type: string
+                pattern: ^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}\.{0,1}[0-9]*Z$
+                description: created date
+              is_public:
+                type: boolean
+                description: true or false
+                default: false
+                deprecated: true
+              owner_organization_id:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^(?:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?$
+                description: ID of the organization that owns this portfolio
+                type: string
+                deprecated: true
+              owner_team_id:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^(?:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?$
+                description: ID of the team that owns this portfolio
+                type: string
+                deprecated: true
+              owner_user_id:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^(?:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?$
+                description: ID of the user that owns this portfolio
+                type: string
+                deprecated: true
+              shared_access:
+                type: string
+                deprecated: true
+              visibility:
+                type: string
+                deprecated: true
+              scorecard_id:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                description: Identifier
+                type: string
+              domain:
+                example: example.com
+                type: string
+                description: primary domain of the company
+              source_url:
+                type: string
+              company_name:
+                example: Example Ltd.
+                type: string
+              confidence:
+                type: string
+                example: Low
+              category:
+                type: string
+                example: Financial Crime
+              sub_category:
+                type: string
+                example: 'Enforcement: AntiTrust violations'
+              event:
+                type: string
+                example: Under Investigation for Antitrust Violations
+              event_urls:
+                type: array
+                items:
+                  type: string
+              comments:
+                example: Example comment
+                type: string
+              primary_source:
+                type: string
+              updated_at:
+                example: '2020-01-01T00:00:00.000Z'
+                format: date-time
+                type: string
+                pattern: ^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}\.{0,1}[0-9]*Z$
+                description: created date
+        total:
+          description: The total number of records matching the given query
+          example: 999
+          type: integer
+        size:
+          description: The number of records to be returned per page
+          example: 100
+          type: integer
+      required:
+      - entries
+      - total
+    GetPortfolioCompanies:
+      type: object
+      additionalProperties: false
+      properties:
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                example: Example Ltd.
+                type: string
+              uuid:
+                example: aea7dae2-370f-4279-a458-4c7cb9661778
+                pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                description: Identifier
+                type: string
+              domain:
+                example: example.com
+                type: string
+                description: primary domain of the company
+              grade:
+                type: string
+                description: a security scorecard grade (A to F), or '?' if it's calculating.
+                example: A
+                enum:
+                - A
+                - B
+                - C
+                - D
+                - F
+                - '?'
+              grade_url:
+                type: string
+                description: url to an image depicting the grade
+              score:
+                type: integer
+                description: security score from 0 to 100
+                example: 95
+              industry:
+                type: string
+                description: industry (unique identifier). 'unknown' if this wasn't yet determined.
+                example: technology
+              size:
+                type: string
+                description: a company described based on number of employees
+                example: size_501_to_1000
+                enum:
+                - unknown
+                - size_1_to_10
+                - size_11_to_50
+                - size_51_to_200
+                - size_201_to_500
+                - size_501_to_1000
+                - size_1001_to_5000
+                - size_5001_to_10000
+                - size_more_than_10000
+              last30days_score_change:
+                type: number
+                description: delta score change in the last 30 days
+                example: 1
+              added_date:
+                example: '2020-01-01T00:00:00.000Z'
+                format: date-time
+                type: string
+                pattern: ^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}\.{0,1}[0-9]*Z$
+                description: created date
+              products:
+                type: array
+                description: The list of products
+                items: {}
+              products_count:
+                type: number
+                description: The number of products
+              business_impact:
+                type: object
+                properties:
+                  value:
+                    type: string
+                    example: medium
+        total:
+          description: The total number of records matching the given query
+          example: 999
+          type: integer
+      required:
+      - entries
+      - total
+    PortfolioCompany:
+      type: object
+      properties:
+        name:
+          example: Example Ltd.
+          type: string
+        domain:
+          example: example.com
+          type: string
+          description: primary domain of the company
+        grade:
+          type: string
+          description: a security scorecard grade (A to F), or '?' if it's calculating.
+          example: A
+          enum:
+          - A
+          - B
+          - C
+          - D
+          - F
+          - '?'
+        grade_url:
+          type: string
+          description: url to an image depicting the grade
+        score:
+          type: integer
+          description: security score from 0 to 100
+          example: 95
+        industry:
+          type: string
+          description: industry (unique identifier). 'unknown' if this wasn't yet determined.
+          example: technology
+        size:
+          type: string
+          description: a company described based on number of employees
+          example: size_501_to_1000
+          enum:
+          - unknown
+          - size_1_to_10
+          - size_11_to_50
+          - size_51_to_200
+          - size_201_to_500
+          - size_501_to_1000
+          - size_1001_to_5000
+          - size_5001_to_10000
+          - size_more_than_10000
+        last30days_score_change:
+          type: number
+          description: delta score change in the last 30 days
+          example: 1
+    PortfolioCreate:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: human-readable name
+          example: Our Vendors
+        description:
+          type: string
+          description: human-readable description
+          example: These are all the vendors we monitor for security risk
+        privacy:
+          type: string
+          description: 'private: only visible to owner, shared: visible to the entire organization, team: group of users within an organization'
+          example: private
+          enum:
+          - private
+          - shared
+          - team
+        team_id:
+          example: aea7dae2-370f-4279-a458-4c7cb9661778
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          description: ID of the team that owns this portfolio
+          type: string
+      required:
+      - name
+    AddCompaniesBulkResponse:
+      type: object
+      properties:
+        errors:
+          description: list of error messages in case there were
+          type: array
+          items:
+            type: string
+        size:
+          type: number
+        no_of_added_companies:
+          description: number of companies added
+          type: number
+        added_companies:
+          type: array
+          description: list of added companies ids
+          items:
+            type: string
+        no_of_new_added_companies:
+          description: number of new added companies that consume a slot
+          type: number
+        new_added_companies:
+          description: list of new added companies ids that consume a slot
+          type: array
+          items:
+            type: string
+        companies_already_using_slot:
+          description: list of companies ids that already consume a slot
+          type: array
+          items: {}
+        available_slots:
+          description: number of available slots
+          type: number
+        not_found_report_data:
+          type: array
+          items:
+            type: object
+      additionalProperties: false
+      required:
+      - portfolios
+    ErrorBadRequest:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 400
+          required:
+          - message
+          - statusCode
+    PortfolioEdit:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: human-readable name
+          example: Our Vendors
+        description:
+          type: string
+          description: human-readable description
+          example: These are all the vendors we monitor for security risk
+        privacy:
+          type: string
+          description: 'private: only visible to owner, shared: visible to the entire organization, team: group of users within an organization'
+          example: private
+          enum:
+          - private
+          - shared
+          - team
+      required:
+      - name
+    Portfolio:
+      type: object
+      properties:
+        id:
+          example: aea7dae2-370f-4279-a458-4c7cb9661778
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          description: Identifier
+          type: string
+        name:
+          type: string
+          description: human-readable name
+          example: Our Vendors
+        description:
+          type: string
+          description: human-readable description
+          example: These are all the vendors we monitor for security risk
+        privacy:
+          type: string
+          description: 'private: only visible to owner, shared: visible to the entire organization, team: group of users within an organization'
+          example: private
+          enum:
+          - private
+          - shared
+          - team
+        tag_type:
+          type: string
+          default: PORTFOLIO
+    ErrorLevelData:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+            data:
+              description: The field that is causing the error
+              type: object
+              additionalProperties: true
+            key:
+              description: Some string to be used for further lookup
+              type: string
+          required:
+          - message
+          - statusCode
+    ErrorUnauthorized:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 401
+          required:
+          - message
+          - statusCode
+    ErrorNotFound:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 404
+          required:
+          - message
+          - statusCode
+    ErrorRateLimit:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              description: Human readable message, suitable for showing in some UI
+              type: string
+            statusCode:
+              type: integer
+              default: 429
+          required:
+          - message
+          - statusCode
+  securitySchemes:
+    Token:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: "SecurityScorecard API endpoints require an authentication token to be passed\nin an authorization header in order to return data. If you do not already\nhave a token, you can create one by going to the API Access area in your\n[Settings page](https://platform.securityscorecard.io/#/settings/api) and then\nclicking Generate New Token. Please note this tokens have no expiration\nso they can be used until manually revoked. If you have a token and generate\na new one, the previous token will be revoked and can no longer be used.\n\nAdministrators can also revoke API tokens for any user in their account.\n\nOnce you have your token you can pass it in using the `Authorization` http header like this:\n\n```\ncurl -X GET \\\n  https://api.securityscorecard.io/portfolios \\\n  -H 'authorization: Token <your token>'\n```"
+x-refined-from:
+- security-scorecard-securityscorecard-openapi.yml
+- security-scorecard-securityscorecard-api-openapi.yml
+x-provenance:
+  method: searched
+  source: https://securityscorecard.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://securityscorecard.readme.io/reference/deletefollowedcompanybydomain.md
+  - https://securityscorecard.readme.io/reference/executecustomtagsfollowedcompaniesbulkcreateoperation.md
+  - https://securityscorecard.readme.io/reference/executecustomtagsfollowedcompaniesbulkdeleteoperation.md
+  - https://securityscorecard.readme.io/reference/executefollowedcompaniesbulkdeleteoperation.md
+  - https://securityscorecard.readme.io/reference/executefollowedcompaniesbulkupdateoperation.md
+  - https://securityscorecard.readme.io/reference/findfollowedcompanies.md
+  - https://securityscorecard.readme.io/reference/findscorecardnotes.md
+  - https://securityscorecard.readme.io/reference/getfollowedcompanybydomain.md
+  - https://securityscorecard.readme.io/reference/updatefollowedcompanybydomain.md
+  merge:
+    pages: 9
+    deduped: 13
+    conflicts_kept_first: 0
