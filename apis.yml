@@ -216,6 +216,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Action Plans
+  tags_raw:
   - action plans
   properties:
   - type: OpenAPI
@@ -390,6 +392,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Alerts
+  tags_raw:
   - alerts
   properties:
   - type: OpenAPI
@@ -506,6 +510,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Application
+  tags_raw:
   - Apps
   properties:
   - type: OpenAPI
@@ -564,6 +570,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Asset
+  tags_raw:
   - asset
   properties:
   - type: OpenAPI
@@ -622,6 +630,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Compliance
+  tags_raw:
   - compliance
   properties:
   - type: OpenAPI
@@ -738,6 +748,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Customers
+  tags_raw:
   - customer
   properties:
   - type: OpenAPI
@@ -796,6 +808,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - CVE
+  tags_raw:
   - cve
   properties:
   - type: OpenAPI
@@ -854,6 +868,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Event Log
+  tags_raw:
   - event log
   properties:
   - type: OpenAPI
@@ -912,6 +928,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Feedback
+  tags_raw:
   - feedback
   properties:
   - type: OpenAPI
@@ -1087,6 +1105,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Invites
+  tags_raw:
   - invites
   properties:
   - type: OpenAPI
@@ -1203,6 +1223,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Issues
+  tags_raw:
   - issues
   properties:
   - type: OpenAPI
@@ -1261,6 +1283,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Metadata
+  tags_raw:
   - metadata
   properties:
   - type: OpenAPI
@@ -1319,6 +1343,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Partners
+  tags_raw:
   - partner
   properties:
   - type: OpenAPI
@@ -1377,6 +1403,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Portfolio
+  tags_raw:
   - portfolios
   properties:
   - type: OpenAPI
@@ -1435,6 +1463,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Ransomware
+  tags_raw:
   - ransomware
   properties:
   - type: OpenAPI
@@ -1493,6 +1523,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Reports
+  tags_raw:
   - reports
   properties:
   - type: OpenAPI
@@ -1725,6 +1757,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Scores
+  tags_raw:
   - scores
   properties:
   - type: OpenAPI
@@ -1783,6 +1817,8 @@ apis:
   humanURL: https://securityscorecard.readme.io/reference/introduction
   baseURL: https://api.securityscorecard.io
   tags:
+  - Search
+  tags_raw:
   - search
   properties:
   - type: OpenAPI
